@@ -1,0 +1,119 @@
+div.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+div.col-25 {
+    -ms-flex: 25%;
+    flex: 25%;
+}
+
+div.col-50 {
+    -ms-flex: 50%;
+    flex: 50%;
+}
+
+div.col-75 {
+    -ms-flex: 75%;
+    flex: 75%;
+}
+
+div.col-25,
+div.col-50,
+div.col-75 {
+    padding: 0 16px;
+}
+
+div.main_container {
+    background-color: #f2f2f2; 
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px; 
+}
+
+div.cart-container {
+    background-color: #f2f2f2; 
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+label {
+    margin-top: 10px;
+    display: block;
+}
+
+div.icon-container {
+    width: 35%;      
+    margin-bottom: 15px;
+    padding: 7px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+svg {
+    margin: 2px;
+}
+
+svg.visa-card {
+    background-color: blue;
+}
+
+svg.amexpress-card {
+    background-color: red;
+}
+
+svg.mastercard-card {
+    background-color: yellow;
+}
+
+input.btn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+input.btn:hover {
+    background-color: #3c40c6;
+    color: white;
+}
+
+span.price {
+    float: right;
+    color: grey;
+}
+
+a.item {
+    text-decoration: none;
+} 
+
+/* Responsive layout - when the screen is less than 800px wide,
+ make the two columns stack on top of each other instead of next to each other 
+ (and change the direction - make the "cart" column go on top) */
+ @media (max-width: 800px) {
+    .row {
+      flex-direction: column-reverse;
+    }
+    .col-25 {
+      margin-bottom: 20px;
+    }
+}  

@@ -1,0 +1,2 @@
+# Cart and Categories folders
+Both the cart and the categories folder have their separate `scripts` folder to make their structure more consistent you can also add a `styles` folder in both of them if custom styles are needed. Just make sure to keep the name schema consistent. if the name of the html is `smart_lights.html` the file inside the styles folder will be `smart_lights.css`.

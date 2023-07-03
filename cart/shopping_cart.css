@@ -1,0 +1,40 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+
+}
+
+.btn-lg{
+    display: block;
+    margin: 0 auto;  
+}
+.btn-danger{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    width: 10%;
+    margin: 10px;
+    font-size: x-small;
+    
+}
+
+.clear-cart {
+    width: 10%;
+    align-items: center;
+}
+
+
+@media (max-width: 800px) {
+    .row {
+      flex-direction: column-reverse;
+    }
+    .col-25 {
+      margin-bottom: 20px;
+    }
+} 

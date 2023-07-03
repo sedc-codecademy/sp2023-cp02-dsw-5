@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipfinity</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+
+<body>
+  <!-- HEADER COMPONENT -->
+  <header id="header"></header>
+
+  <!-- PAGE CONTENT -->
+  <main id="main-container">
+    <section id="carousel">
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-wrap="true">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
+          <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
+          <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
+          <li data-bs-target="#carouselExample" data-bs-slide-to="3"></li>
+          <li data-bs-target="#carouselExample" data-bs-slide-to="4"></li>
+        </ol>
+
+        <div class="carousel-inner">
+          <!-- First Image -->
+          <div class="carousel-item active">
+            <img src="/assets/main-carousel-pngimages/smart_lights.png" class="d-block w-100 c-img" alt="Slide 1">
+            <div class="carousel-caption top-0 mt-4">
+              <p class="mt-5 fs-3 text-uppercase">Smart Lights</p>
+              <h1 class="display-1 fw-bolder text-capitalize">Loosen your room with Smart Lights</h1>
+              <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Buy</button>
+            </div>
+          </div>
+          <!-- Second Image -->
+          <div class="carousel-item">
+            <img src="/assets/main-carousel-pngimages/smart_plugs.png" class="d-block w-100 c-img" alt="Slide 2">
+            <div class="carousel-caption top-0 mt-4">
+              <p class="text-uppercase fs-3 mt-5">Smart Plugs</p>
+              <p class="display-1 fw-bolder text-capitalize">Get yourself Smart Plugs, which is easy to use.</p>
+              <button class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
+                data-bs-target="#booking-modal">Buy</button>
+            </div>
+          </div>
+          <!-- Third Image -->
+          <div class="carousel-item">
+            <img src="/assets/main-carousel-pngimages/smart_speakers.png" class="d-block w-100 c-img" alt="Slide 3">
+            <div class="carousel-caption top-0 mt-4">
+              <p class="text-uppercase fs-3 mt-5">Smart Speaker</p>
+              <p class="display-1 fw-bolder text-capitalize">Intelligent devices that respond to voice commands</p>
+              <button class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
+                data-bs-target="#booking-modal">Buy</button>
+            </div>
+          </div>
+          <!-- Fourth Image -->
+          <div class="carousel-item">
+            <img src="/assets/main-carousel-pngimages/smart_thermostat.png" class="d-block w-100 c-img" alt="Slide 4">
+            <div class="carousel-caption top-0 mt-4">
+              <p class="text-uppercase fs-3 mt-5">Smart Thermostat</p>
+              <p class="display-1 fw-bolder text-capitalize">Save energy, manage from your phone</p>
+              <button class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
+                data-bs-target="#booking-modal">Buy</button>
+            </div>
+          </div>
+          <!-- Fifth Image -->
+          <div class="carousel-item">
+            <img src="/assets/main-carousel-pngimages/wifi_extenders.png" class="d-block w-100 c-img" alt="Slide 5">
+            <div class="carousel-caption top-0 mt-4">
+              <p class="text-uppercase fs-3 mt-5">Wifi Extenders</p>
+              <p class="display-1 fw-bolder text-capitalize">Travel everywhere with Wi-Fi Extender</p>
+              <button class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
+                data-bs-target="#booking-modal">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </a>
+      </div>
+
+      <div class="card-carousel" id="debug_id_1">
+        <!-- <button class="button-spin counterclockwise">&lt;</button> -->
+
+        <div class="inner-carousel">
+
+          <div class="card">
+            <div class="card-text">
+              <h4>Smart Lights</h4>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+            <img src="/assets/main-second-carousel-rotating/smart-lightscopy.png" alt="Card Image" class="card-image">
+          </div>
+          <div class="card">
+            <div class="card-text">
+              <h4>Smart Plugs</h4>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+            <img src="/assets/main-second-carousel-rotating/smart-plugs.png" alt="Card Image" class="card-image">
+          </div>
+          <div class="card">
+            <div class="card-text">
+              <h4>Smart Speaker</h4>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+            <img src="/assets/main-second-carousel-rotating/smart-speaker.png" alt="Card Image" class="card-image">
+          </div>
+          <div class="card">
+            <div class="card-text">
+              <h4>Smart Thermostat</h4>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+            <img src="/assets/main-second-carousel-rotating/smart-thermostat.png" alt="Card Image" class="card-image">
+          </div>
+          <div class="card">
+            <div class="card-text">
+              <h4>WiFi Extender</h4>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+            <img src="/assets/main-second-carousel-rotating/wifi-extender.png" alt="Card Image" class="card-image">
+          </div>
+
+  </main>
+
+  <!-- FOOTER COMPONENT -->
+  <footer id="footer"></footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="./main.js" type="module"></script>
+</body>
+
+</html>

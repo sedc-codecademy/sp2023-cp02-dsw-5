@@ -1,0 +1,39 @@
+.btnAddToCard{
+    background-color: green;
+    border-color: green;
+}
+
+.btnAddToCard:hover {
+    background-color: rgb(1, 122, 1);
+}
+
+.btnAddToCard:focus,
+.btnAddToCard:active {
+  background-color: green;
+  box-shadow: none;
+  outline: none;
+  border-color: green;
+}
+
+.btnDetails{
+    margin-left: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.btnDetails:focus,
+.btnDetails:active {
+  box-shadow: none;
+}
+
+.card-img-top{
+    padding-top: 15px;
+}
+
+.card-title,
+.card-text,
+.list-group-item{
+    text-align: center;
+}
+
+  

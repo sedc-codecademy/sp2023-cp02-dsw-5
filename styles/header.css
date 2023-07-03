@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+
+*,
+*::after,
+*::before
+{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+.logo
+{
+   font-size: 27px;
+   font-family: 'Bruno Ace', cursive;
+   margin-top: 10px;
+}
+
+#home{
+    margin-left: 15px;
+}
+
+#sale{
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+#sale{
+    margin-left: 7px;
+}
+
+.shopping-cart-button{
+    margin-right: 10px;
+}
+
+.shopping-cart{
+    width: 30px;
+}
+
+
+
+
+
+
+

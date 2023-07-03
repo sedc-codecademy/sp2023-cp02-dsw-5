@@ -1,0 +1,36 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "Smart Light Bulb",
+        "description": "Control your lights from anywhere with this smart light bulb.",
+        "price": 19.99,
+        "imageUrl": "https://example.com/images/smart-light.jpg",
+        "category": "light"
+      },
+      {
+        "id": 5,
+        "name": "Smart LED Strip",
+        "description": "Add ambiance to any room with this versatile smart LED strip.",
+        "price": 39.99,
+        "imageUrl": "https://example.com/images/smart-led-strip.jpg",
+        "category": "light"
+      },
+      {
+        "id": 10,
+        "name": "Smart Ceiling Light",
+        "description": "Control the brightness and color of this smart ceiling light with your voice or phone.",
+        "price": 79.99,
+        "imageUrl": "https://example.com/images/smart-ceiling-light.jpg",
+        "category": "light"
+      },
+      {
+        "id": 15,
+        "name": "Smart Desk Lamp",
+        "description": "Adjust the brightness and color temperature of this smart desk lamp with your voice or phone.",
+        "price": 49.99,
+        "imageUrl": "https://example.com/images/smart-desk-lamp.jpg",
+        "category": "light"
+      }
+    ]
+  }
