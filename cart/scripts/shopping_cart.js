@@ -89,6 +89,7 @@ function renderProducts(cart) {
   console.log(cart);
   if(cart.length === 0){
     shoppingCart.innerHTML = `<div class="container"><h2 class="display-4">You have no items in your cart</h2></div>`;
+    document.getElementById("proceedToPay").classList.add("disabled");
     return;
   }
   shoppingCart.innerHTML = "";

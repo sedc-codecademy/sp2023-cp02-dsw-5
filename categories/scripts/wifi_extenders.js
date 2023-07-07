@@ -1,5 +1,8 @@
 import headerContainer from '../../components/header.js';
-import footerContainer from '../../components/footer.js'; import productCard from '../../components/productCard.js';
+import footerContainer from '../../components/footer.js'; 
+import productCard from '../../components/productCard.js';
+import { addToCart } from '../../helpers/session_cart.js';
+
 
 document.getElementById("header").appendChild(headerContainer);
 document.getElementById("footer").appendChild(footerContainer);
@@ -44,7 +47,7 @@ function getProducts() {
 };
 
 getProducts().forEach(product => {
-  productsContainer.innerHTML += '';
-  const newProduct = productCard(product);
+  const newProduct = productCard(product).cloneNode(true);
+  newProduct.querySelector(`.btnAddToCard${product.id}`).addEventListener('click', () => addToCart(product));
   productsContainer.appendChild(newProduct);
 });

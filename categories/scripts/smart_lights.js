@@ -9,6 +9,7 @@ document.getElementById("footer").appendChild(footerContainer);
 const productsContainer = document.getElementById("products-container");
 
 function getProducts() {
+  productsContainer.innerHTML = "";
   return [
     {
       "id": 1,
@@ -46,7 +47,8 @@ function getProducts() {
 };
 
 getProducts().forEach(product => {
-  productsContainer.innerHTML += '';
-  const newProduct = productCard(product);
+  // productsContainer.innerHTML += '';
+  const newProduct = productCard(product).cloneNode(true);
+  newProduct.querySelector(`.btnAddToCard${product.id}`).addEventListener('click', () => addToCart(product));
   productsContainer.appendChild(newProduct);
 });
