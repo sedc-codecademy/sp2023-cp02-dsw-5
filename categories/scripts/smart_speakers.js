@@ -45,7 +45,6 @@ function getProducts() {
 };
 
 getProducts().forEach(product => {
-  console.log(product);
   productsContainer.innerHTML += '';
   const newProduct = productCard(product);
   productsContainer.appendChild(newProduct);

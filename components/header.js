@@ -19,7 +19,7 @@ headerContainer.innerHTML = `
             <a class="nav-link" href="${basePath}/sale.html"><h5 id="sale">Sale</h5></a>
           </li>
           <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false"><h5 class="d-inline" id="category">Categories</h5></a>
+          <a class="nav-link dropdown-toggle " href="#" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false"><h5 class="d-inline" id="category">Categories</h5></a>
           <ul class="dropdown-menu" aria-labelledby="dropdown05">
           <li><a class="dropdown-item" href="${basePath}/categories/smart_lights.html">Smart Lights</a></li>
           <li><a class="dropdown-item" href="${basePath}/categories/smart_plugs.html">Smart Plugs</a></li>
@@ -39,7 +39,5 @@ headerContainer.innerHTML = `
         </form>
       </div>
     </div>`;
-
-  
 
 export default headerContainer;

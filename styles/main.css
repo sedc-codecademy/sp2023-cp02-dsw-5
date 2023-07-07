@@ -38,6 +38,17 @@ p {
 }
 
 
+.search-img {
+  max-width: 200px;
+}
+
+.search-card {
+  border: solid 1px rgb(102, 102, 102);
+  padding: 8px;
+  border-radius: 8px;
+
+}
+
 .c-item {
   height: 480px;
 }
@@ -279,18 +290,19 @@ p {
   box-shadow: 0px 5px 8px 3px rgba(0, 54, 90, .10);
 }
 
-
-
-
 /* --------------------------- */
-/* .container {
+main {
+  min-height: 75vh;
+}
+
+.main-container {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-} */
+}
 
 .slider {
   height: 500px;
@@ -342,6 +354,7 @@ p {
 .slider .firstSlide {
   animation: rotateSlider 20s linear infinite;
 }
+
 
 @keyframes rotateSlider {
   0% {

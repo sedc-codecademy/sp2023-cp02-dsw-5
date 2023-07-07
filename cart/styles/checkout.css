@@ -42,7 +42,7 @@ div.cart-container {
     border-radius: 3px;
 }
 
-input[type=text] {
+.input-text {
     width: 100%;
     margin-bottom: 20px;
     padding: 12px;
@@ -56,7 +56,7 @@ label {
 }
 
 div.icon-container {
-    width: 35%;      
+    width: 36%;     
     margin-bottom: 15px;
     padding: 7px 0;
     display: flex;
@@ -80,8 +80,8 @@ svg.mastercard-card {
     background-color: yellow;
 }
 
-input.btn {
-    background-color: #3498db;
+button.btn-submitCheckout {
+    background-color: #0d6efd;
     color: white;
     padding: 12px;
     margin: 10px 0;
@@ -92,7 +92,7 @@ input.btn {
     font-size: 17px;
 }
 
-input.btn:hover {
+button.btn-submitCheckout:hover {
     background-color: #3c40c6;
     color: white;
 }
@@ -116,4 +116,4 @@ a.item {
     .col-25 {
       margin-bottom: 20px;
     }
-}  
+} 

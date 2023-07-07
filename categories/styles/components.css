@@ -1,0 +1,50 @@
+#products-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  #products-container > div {
+    margin: 10px;
+  }
+  
+.card {
+    flex: 0 0 200px; 
+    height: 430px; 
+    margin: 15px;
+    overflow: hidden;
+ }
+  
+.card img {
+    max-width: 350px;
+    max-height: 250px;
+    height: auto;
+  }
+  
+.card-content {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+.list-group-item{
+    max-height: 50px;
+  }
+
+.card-body-productInfo{
+    height: 5px;
+}
+
+.card-body-productInfo h5{
+    margin-top: 20px;
+}
+
+.btnDetails{
+    place-self: end;
+}
+
+  
+  
+  
+  
+  

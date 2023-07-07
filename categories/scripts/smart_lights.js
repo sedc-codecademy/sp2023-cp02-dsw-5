@@ -1,6 +1,7 @@
 import headerContainer from '../../components/header.js';
 import footerContainer from '../../components/footer.js';
 import productCard from '../../components/productCard.js';
+import { addToCart } from '../../helpers/session_cart.js';
 
 document.getElementById("header").appendChild(headerContainer);
 document.getElementById("footer").appendChild(footerContainer);
@@ -45,7 +46,6 @@ function getProducts() {
 };
 
 getProducts().forEach(product => {
-  console.log(product);
   productsContainer.innerHTML += '';
   const newProduct = productCard(product);
   productsContainer.appendChild(newProduct);
