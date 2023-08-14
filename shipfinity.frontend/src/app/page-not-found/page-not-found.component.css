@@ -1,0 +1,5 @@
+.status-code{
+    font-family: var(--font-logo);
+    color: var(--bs-dark);
+    font-size: 9rem;
+}

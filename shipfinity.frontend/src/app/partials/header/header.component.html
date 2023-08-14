@@ -1,0 +1,54 @@
+<header class="">
+  <div id="top-bar">
+    <div class="container pt-1 pb-1">
+      <div class="d-flex justify-content-between">
+        <div class="text-white top-bar-contact-info">
+          <span><i class="bi bi-envelope-fill me-2"></i><a href="mailto:contact@shipfinity.com" class="nav-link d-inline">contact@shipfinity.com</a></span>
+        </div>
+        <div class="text-white text-end d-flex">
+          <a class="nav-link me-3" routerLink="login"><i class="bi bi-person-fill"></i> Log in</a>
+          <a class="nav-link" href="#"><i class="bi bi-shop"></i> Seller's portal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand header-logo" routerLink="/"><img src="/assets/shipfinity_logo_long.svg" alt="logo" class="logo-img"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/sale">Sale</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" routerLinkActive="active">
+                    Categories</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" [routerLink]="['/category', 1]" routerLinkActive="active">Smart Lights</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/category', 2]" routerLinkActive="active">Smart Plugs</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/category', 3]" routerLinkActive="active">Smart Speakers</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/category', 4]" routerLinkActive="active">Smart Thermostats</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/category', 5]" routerLinkActive="active">Wifi Extenders</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <a id="shopping-cart-btn" class="btn btn-outline-success me-3" routerLink="/cart"><i class="bi bi-cart"></i><span *ngIf="cartItems > 0" class="cart-badge">{{cartItems.toString()}}</span></a>
+              <form #sendSearch="ngForm" (ngSubmit)="searchClickEvent(sendSearch)" class="d-flex" id="searchForm" >
+                <input id="searchInput" class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search" ngModel />
+                <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+              </form>
+            </form>
+          </div>
+        </div>
+      </nav>
+</header>

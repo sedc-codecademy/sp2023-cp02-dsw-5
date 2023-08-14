@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.brand-img {
+    font-family: 'Righteous', sans-serif;
+    font-size: 1.6rem;
+}
+
+.brand-image {
+    height: 40px;
+}

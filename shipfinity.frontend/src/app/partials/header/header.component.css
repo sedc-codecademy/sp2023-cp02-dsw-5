@@ -1,0 +1,41 @@
+.header-logo {
+    font-family: var(--font-logo);
+}
+
+.logo-img {
+    width: 150px;
+}
+
+#searchForm{
+    flex-grow: 1;
+}
+
+#searchInput {
+    flex-grow: 1;
+}
+
+#shopping-cart-btn {
+    position: relative;
+}
+
+#top-bar{
+    background-color: #012e70;
+}
+
+.cart-badge {
+    font-size: 12px;
+    color: black;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--bs-warning);
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 768px) {
+    .top-bar-contact-info {
+        display: none;
+    }
+}

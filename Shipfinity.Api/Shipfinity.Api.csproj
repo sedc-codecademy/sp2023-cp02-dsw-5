@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shipfinity.Domain\Shipfinity.Domain.csproj" />
+    <ProjectReference Include="..\Shipfinity.Helpers\Shipfinity.Helpers.csproj" />
+    <ProjectReference Include="..\Shipfinity.Services\Shipfinity.Services.csproj" />
+    <ProjectReference Include="..\Shipfinity.Shared\Shipfinity.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

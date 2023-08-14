@@ -1,0 +1,26 @@
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card" style="min-width: 25vw;">
+        <div class="card-header">
+            <h2 class="display-4">Log in</h2>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="submitLoginForm()">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="username" required [(ngModel)]="loginFormData.username"/>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="password" required [(ngModel)]="loginFormData.password" />
+                </div>
+                <div class="d-flex justify-content-between align-items-end flex-wrap">
+                    <button type="submit" class="btn btn-lg btn-primary">Log in</button>
+                    <div>
+                        <span> Don't have and account?</span>
+                        <a routerLink="/signup" class="btn btn-link">sign up</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

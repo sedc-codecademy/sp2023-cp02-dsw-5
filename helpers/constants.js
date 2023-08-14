@@ -1,3 +1,0 @@
-const basePath = "";
-
-export { basePath };

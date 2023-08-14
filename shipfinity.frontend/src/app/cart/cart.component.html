@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <div class="mb-3">
+        <h1 class="display-4">Your shopping cart</h1>
+        <hr>
+    </div>
+    <div *ngIf="shoppingCartItems.length === 0" class="row">
+        <div class="col-lg mb-3">
+            <div class="p-3 bg-light border border-primary rounded">
+                <h3 class="display-5">No items</h3>
+                <h4>It looks like your shopping cart is empty</h4>
+                <hr class="hr">
+                <h5 class="mt-5">Have a look at our categories of items</h5>
+                <h5>or take a look at what's on <a class="btn btn-primary" routerLink="/sale">Sale</a></h5>
+            </div>
+        </div>
+        <div class="col-lg">
+            <img src="/assets/img/empty_cart.svg" class="img-fluid" alt="empty cart">
+        </div>
+    </div>
+    <div *ngIf="shoppingCartItems.length > 0" class="row">
+        <div class="col-lg mb-3">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of shoppingCartItems">
+                        <td><img src="/assets/img/product/no_img.png" class="img-fluid" width="60px" alt="product Image"></td>
+                        <td class="align-middle"><h5>{{ item.product.name }}</h5></td>
+                        <td class="align-middle">${{ item.product.price.toFixed(2) }}</td>
+                        <td class="align-middle">
+                            <div class="d-flex gap-2 justify-content-end">
+                                <h6>Quantity: </h6>
+                                <input type="number" min="1" max="99" [value]="item.quantity" class="form-control w-50" (change)="changeQuantity($event, item)" />
+                                <button type="button" (click)="removeItem(item)" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="p-3">
+                <hr>
+                <div class="d-flex justify-content-around">
+                    <h4>Total: $<span>{{ totalPrice.toFixed(2) }}</span></h4>
+                    <a routerLink="/checkout" class="btn btn-lg btn-success">Proceed to checkout</a>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
