@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shipfinity.Shared", "Shipfi
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "shipfinity.frontend", "Shipfinity.Frontend\shipfinity.frontend.esproj", "{BBC00A1D-DA77-4EC3-9C53-97A76C9DD918}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipfinity.DTOs", "Shipfinity.DTOs\Shipfinity.DTOs.csproj", "{1EE559C2-A5C2-46A8-81EF-2795BD293ED0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{BBC00A1D-DA77-4EC3-9C53-97A76C9DD918}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBC00A1D-DA77-4EC3-9C53-97A76C9DD918}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBC00A1D-DA77-4EC3-9C53-97A76C9DD918}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1EE559C2-A5C2-46A8-81EF-2795BD293ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EE559C2-A5C2-46A8-81EF-2795BD293ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EE559C2-A5C2-46A8-81EF-2795BD293ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EE559C2-A5C2-46A8-81EF-2795BD293ED0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
