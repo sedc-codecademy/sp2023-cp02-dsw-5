@@ -1,0 +1,41 @@
+<div class="container mt-5">
+    <div class="justify-content-center">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="display-4">Register as a new user</h2>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+                    <div class="row">
+                        <div class="col-lg mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" id="username" class="form-control w-100" placeholder="username" formControlName="username">
+                        </div>
+                        <div class="col-lg mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" id="email" class="form-control w-100" placeholder="example@email.com" formControlName="email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-control w-100" placeholder="********" formControlName="password">
+                        </div>
+                        <div class="col-lg mb-3">
+                            <label for="passwordRe" class="form-label">Repeat password</label>
+                            <input type="password" id="passwordRe" class="form-control w-100" placeholder="********" formControlName="passwordRepeated">
+                        </div>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-lg-3">
+                            <button type="submit" class="btn btn-primary w-100">Sign up</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <p class="card-text">Already have an account? <a routerLink="/login">Log in</a></p>
+            </div>
+        </div>
+    </div>
+</div>
