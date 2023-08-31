@@ -14,6 +14,18 @@ export class AuthService {
     return !!localStorage.getItem("Token");
   }
 
+  public setToken(token: string){
+    localStorage.setItem("Token", token);
+  }
+
+  public getToken(){
+    localStorage.getItem("Token");
+  }
+
+  public deleteToken(){
+    localStorage.removeItem("Token");
+  }
+
   public login(request: ILoginFormData) {
     return this.http.post(`${environment.API_URL}/auth/login`, request);
   }
