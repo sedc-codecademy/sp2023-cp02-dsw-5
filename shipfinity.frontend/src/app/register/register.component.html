@@ -8,11 +8,18 @@
                 <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
                     <div class="row">
                         <div class="col-lg mb-3">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label">Username 
+                                <span *ngIf="registerForm.controls.username.hasError('required') && registerForm.controls.username.touched" class="text-danger">*required </span>
+                                <span *ngIf="registerForm.controls.username.hasError('minlength') && registerForm.controls.username.touched" class="text-danger">Username is too short </span>
+                                <span *ngIf="registerForm.controls.username.hasError('maxlength') && registerForm.controls.username.touched" class="text-danger">Username is too long </span>
+                            </label>
                             <input type="text" id="username" class="form-control w-100" placeholder="username" formControlName="username">
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="email" class="form-label">E-mail</label>
+                            <label for="email" class="form-label">E-mail 
+                                <span *ngIf="registerForm.controls.email.hasError('required') && registerForm.controls.email.touched" class="text-danger">*required </span>
+                                <span *ngIf="registerForm.controls.email.hasError('email') && registerForm.controls.email.touched" class="text-danger">Must be in email format</span>
+                            </label>
                             <input type="email" id="email" class="form-control w-100" placeholder="example@email.com" formControlName="email">
                         </div>
                     </div>
@@ -22,7 +29,10 @@
                             <input type="password" id="password" class="form-control w-100" placeholder="********" formControlName="password">
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="passwordRe" class="form-label">Repeat password</label>
+                            <label for="passwordRe" class="form-label">Repeat password 
+                                <span *ngIf="registerForm.controls.passwordRepeated.hasError('required') && registerForm.controls.passwordRepeated.touched" class="text-danger">*required </span>
+                                <span *ngIf="registerForm.hasError('passwordMismatch') && registerForm.controls.passwordRepeated.touched" class="text-danger">Password does not match </span>
+                            </label>
                             <input type="password" id="passwordRe" class="form-control w-100" placeholder="********" formControlName="passwordRepeated">
                         </div>
                     </div>

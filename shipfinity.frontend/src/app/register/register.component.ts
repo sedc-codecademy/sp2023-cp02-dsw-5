@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { passwordConfirmValidator } from '../shared/validators/password-confirm.validator';
 
 @Component({
   selector: 'app-register',
@@ -12,9 +13,9 @@ export class RegisterComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     passwordRepeated: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(30)])
-  });
+  }, { validators: passwordConfirmValidator() });
 
   onRegisterSubmit() {
-    
+    console.log(this.registerForm);
   }
 }
