@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Shipfinity.DataAccess\Shipfinity.DataAccess.csproj" />
     <ProjectReference Include="..\Shipfinity.Domain\Shipfinity.Domain.csproj" />
+    <ProjectReference Include="..\Shipfinity.DTOs\Shipfinity.DTOs.csproj" />
     <ProjectReference Include="..\Shipfinity.Mappers\Shipfinity.Mappers.csproj" />
     <ProjectReference Include="..\Shipfinity.Shared\Shipfinity.Shared.csproj" />
     <ProjectReference Include="..\Shipfinity.ViewModels\Shipfinity.ViewModels.csproj" />

@@ -39,9 +39,19 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
                 .ToListAsync();
         }
 
+        public Task<List<Product>> GetByCategoryAsync(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Product> GetByIdAsync(int id)
         {
             return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public Task<List<Product>> GetOnSaleAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<List<Product>> GetRangeAsync(int start, int count)
