@@ -44,6 +44,7 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
         }
 
+
         public async Task<List<Product>> GetRangeAsync(int start, int count)
         {
             return await _context.Products
