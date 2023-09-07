@@ -10,6 +10,7 @@ import { SaleComponent } from './sale/sale.component';
 import { SearchComponent } from './search/search.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductComponent },
   { path: 'search', component: SearchComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: RegisterComponent },
 
   // Wildcard
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent, runGuardsAndResolvers: 'always' }
