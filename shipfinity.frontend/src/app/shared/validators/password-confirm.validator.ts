@@ -6,8 +6,7 @@ export function passwordConfirmValidator(): ValidatorFn {
         const password = control.get("password");
         if(value === null)
             return null;
-
-        if(password?.value !== value){
+        if(password?.value !== value.value){
             return { 'passwordMismatch': true };
         }
         return null;

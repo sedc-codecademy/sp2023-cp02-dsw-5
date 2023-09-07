@@ -12,6 +12,7 @@
                                 <span *ngIf="registerForm.controls.username.hasError('required') && registerForm.controls.username.touched" class="text-danger">*required </span>
                                 <span *ngIf="registerForm.controls.username.hasError('minlength') && registerForm.controls.username.touched" class="text-danger">Username is too short </span>
                                 <span *ngIf="registerForm.controls.username.hasError('maxlength') && registerForm.controls.username.touched" class="text-danger">Username is too long </span>
+                                <span *ngIf="usernameTaken" class="text-danger">The username is already in use </span>
                             </label>
                             <input type="text" id="username" class="form-control w-100" placeholder="username" formControlName="username">
                         </div>
@@ -25,7 +26,9 @@
                     </div>
                     <div class="row">
                         <div class="col-lg mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Password
+                                <span *ngIf="registerForm.controls.password.hasError('required') && registerForm.controls.password.touched" class="text-danger">*required </span>
+                            </label>
                             <input type="password" id="password" class="form-control w-100" placeholder="********" formControlName="password">
                         </div>
                         <div class="col-lg mb-3">
