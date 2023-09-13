@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Shipfinity.Domain.Models
 {
-    public class Customer : BaseEntity
+    public class Customer : BaseUser
     {
         [MaxLength(50)]
         public string FirstName { get; set; } = string.Empty;
         [MaxLength(50)]
         public string LastName { get; set; } = string.Empty;
-        [MaxLength(50)]
-        public string Email { get; set; } = string.Empty;
-        public List<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; } = new();
     }
 }
