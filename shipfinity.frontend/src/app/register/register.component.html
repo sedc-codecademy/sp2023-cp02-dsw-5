@@ -26,6 +26,21 @@
                     </div>
                     <div class="row">
                         <div class="col-lg mb-3">
+                            <label for="firstName" class="form-label">First name 
+                                <span *ngIf="registerForm.controls.firstName.hasError('required') && registerForm.controls.username.touched" class="text-danger">*required </span>
+                                <span *ngIf="registerForm.controls.firstName.hasError('maxlength') && registerForm.controls.username.touched" class="text-danger">Username is too long </span>
+                            </label>
+                            <input type="text" id="firstName" class="form-control w-100" placeholder="First Name" formControlName="firstName">
+                        </div>
+                        <div class="col-lg mb-3">
+                            <label for="lastName" class="form-label">Last name 
+                                <span *ngIf="registerForm.controls.lastName.hasError('required') && registerForm.controls.email.touched" class="text-danger">*required </span>
+                            </label>
+                            <input type="text" id="lastName" class="form-control w-100" placeholder="Last Name" formControlName="lastName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg mb-3">
                             <label for="password" class="form-label">Password
                                 <span *ngIf="registerForm.controls.password.hasError('required') && registerForm.controls.password.touched" class="text-danger">*required </span>
                             </label>
