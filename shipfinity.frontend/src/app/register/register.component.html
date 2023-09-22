@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <div class="justify-content-center">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="display-4">Register as a new user</h2>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+                    <div class="row">
+                        <div class="col-lg mb-3">
+                            <label for="username" class="form-label">Username 
+                                <span *ngIf="registerForm.controls.username.hasError('required') && registerForm.controls.username.touched" class="text-danger">*required </span>
+                                <span *ngIf="registerForm.controls.username.hasError('minlength') && registerForm.controls.username.touched" class="text-danger">Username is too short </span>
+                                <span *ngIf="registerForm.controls.username.hasError('maxlength') && registerForm.controls.username.touched" class="text-danger">Username is too long </span>
+                                <span *ngIf="usernameTaken" class="text-danger">The username is already in use </span>
+                            </label>
+                            <input type="text" id="username" class="form-control w-100" placeholder="username" formControlName="username">
+                        </div>
+                        <div class="col-lg mb-3">
+                            <label for="email" class="form-label">E-mail 
+                                <span *ngIf="registerForm.controls.email.hasError('required') && registerForm.controls.email.touched" class="text-danger">*required </span>
+                                <span *ngIf="registerForm.controls.email.hasError('email') && registerForm.controls.email.touched" class="text-danger">Must be in email format</span>
+                            </label>
+                            <input type="email" id="email" class="form-control w-100" placeholder="example@email.com" formControlName="email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg mb-3">
+                            <label for="password" class="form-label">Password
+                                <span *ngIf="registerForm.controls.password.hasError('required') && registerForm.controls.password.touched" class="text-danger">*required </span>
+                            </label>
+                            <input type="password" id="password" class="form-control w-100" placeholder="********" formControlName="password">
+                        </div>
+                        <div class="col-lg mb-3">
+                            <label for="passwordRe" class="form-label">Repeat password 
+                                <span *ngIf="registerForm.controls.passwordRepeated.hasError('required') && registerForm.controls.passwordRepeated.touched" class="text-danger">*required </span>
+                                <span *ngIf="registerForm.hasError('passwordMismatch') && registerForm.controls.passwordRepeated.touched" class="text-danger">Password does not match </span>
+                            </label>
+                            <input type="password" id="passwordRe" class="form-control w-100" placeholder="********" formControlName="passwordRepeated">
+                        </div>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-lg-3">
+                            <button type="submit" class="btn btn-primary w-100">Sign up</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <p class="card-text">Already have an account? <a routerLink="/login">Log in</a></p>
+            </div>
+        </div>
+    </div>
+</div>

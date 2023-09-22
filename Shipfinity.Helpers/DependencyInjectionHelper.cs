@@ -29,6 +29,7 @@ namespace Shipfinity.Helpers
         {
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
     }
 }
