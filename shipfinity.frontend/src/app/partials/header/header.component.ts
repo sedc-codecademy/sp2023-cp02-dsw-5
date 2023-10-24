@@ -21,7 +21,7 @@ export class HeaderComponent {
   searchClickEvent(searchForm:any) {
     let keyword = searchForm.form.controls.search.value;
     searchForm.reset();
-    this.router.navigate(['/search'],
+    this.router.navigate(['/product', 'search'],
     {queryParams: {
       search: keyword
     }});
