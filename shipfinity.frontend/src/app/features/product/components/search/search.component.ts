@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import Product from '../shared/models/product';
+import Product from '../../../../shared/models/product';
 
 @Component({
   selector: 'app-search',

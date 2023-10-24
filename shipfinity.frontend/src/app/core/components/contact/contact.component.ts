@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SendMessageService } from '../shared/services/send-message.service';
+import { SendMessageService } from '../../../shared/services/send-message.service';
 
 @Component({
   selector: 'app-contact',

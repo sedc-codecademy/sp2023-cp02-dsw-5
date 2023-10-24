@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import ProductOrder from '../shared/models/product-order';
-import { ShoppingCartService } from '../shared/services/shopping-cart.service';
+import ProductOrder from '../../../shared/models/product-order';
+import { ShoppingCartService } from '../../../shared/services/shopping-cart.service';
 
 @Component({
   selector: 'app-checkout',
