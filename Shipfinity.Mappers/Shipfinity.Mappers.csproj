@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Shipfinity.Domain\Shipfinity.Domain.csproj" />
     <ProjectReference Include="..\Shipfinity.DTOs\Shipfinity.DTOs.csproj" />
-    <ProjectReference Include="..\Shipfinity.ViewModels\Shipfinity.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

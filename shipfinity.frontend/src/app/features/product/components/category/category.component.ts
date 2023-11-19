@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Category } from '../shared/models/enums';
-import Product from '../shared/models/product';
+import { Category } from '../../../../shared/models/enums';
+import Product from '../../../../shared/models/product';
 
 @Component({
   selector: 'app-category',
