@@ -12,11 +12,13 @@ import IRegisterFormModel from '../shared/models/register-form-data';
 export class RegisterComponent {
   registerForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
+    firstName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    lastName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     passwordRepeated: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(30)])
   }, { validators: passwordConfirmValidator() });
-  usernameTaken = false;
+  usernameTaken: boolean = false;
 
   constructor(private auth: AuthService){}
 
@@ -31,6 +33,8 @@ export class RegisterComponent {
     this.usernameTaken = false;
     const formData : IRegisterFormModel = {
       username: this.registerForm.value.username!,
+      firstName: this.registerForm.value.firstName!,
+      lastName: this.registerForm.value.lastName!,
       email: this.registerForm.value.email!,
       password: this.registerForm.value.password!,
       confirmPassword: this.registerForm.value.passwordRepeated!
