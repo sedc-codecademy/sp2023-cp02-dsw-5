@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shipfinity.Domain\Shipfinity.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

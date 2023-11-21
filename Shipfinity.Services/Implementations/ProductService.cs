@@ -1,12 +1,8 @@
 ﻿using Shipfinity.DataAccess.Repositories.Interfaces;
-using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.ProductDTO_s;
 using Shipfinity.Mappers;
 using Shipfinity.Services.Interfaces;
 using Shipfinity.Shared.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Shipfinity.Services.Implementations
 {
