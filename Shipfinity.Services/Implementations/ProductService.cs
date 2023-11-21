@@ -76,5 +76,9 @@ namespace Shipfinity.Services.Implementations
             var products = await _productRepository.GetRangeAsync(skip, take);
             return products.Select(ProductMapper.MapToReadDto).ToList();
         }
+        public async Task UpdateProductPhotoUrl(int productId, string photoUrl)
+        {
+            await _productRepository.UpdateProductPhotoUrlAsync(productId, photoUrl);
+        }
     }
 }

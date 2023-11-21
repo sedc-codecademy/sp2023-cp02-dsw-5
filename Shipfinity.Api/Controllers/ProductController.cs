@@ -11,11 +11,13 @@ namespace Shipfinity.Api.Controllers
     {
         
         private readonly IProductService _productService;
+        private readonly string _imagesPath;
 
-    
-        public ProductController(IProductService productService)
+
+        public ProductController(IProductService productService, IWebHostEnvironment env)
         {
             _productService = productService;
+            _imagesPath = Path.Combine(env.WebRootPath, "images");
         }
 
         // HTTP GET to get all products
@@ -156,6 +158,43 @@ namespace Shipfinity.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+        
+        [HttpPost("{productId}/UploadPhoto")]
+        public async Task<IActionResult> UploadPhoto(int productId, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            try
+            {
+                // Ensure the images directory exists
+                if (!Directory.Exists(_imagesPath))
+                {
+                    Directory.CreateDirectory(_imagesPath);
+                }
+
+                // Generate a unique file name to avoid overwriting existing files
+                var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(_imagesPath, fileName);
+
+                // Save the file
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Update product's photo URL in the database
+                await _productService.UpdateProductPhotoUrl(productId, "/images/" + fileName);
+
+                return Ok("File uploaded successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
             }
         }
     }

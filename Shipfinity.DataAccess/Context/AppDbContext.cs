@@ -32,7 +32,7 @@ namespace Shipfinity.DataAccess.Context
                 .HasMany(p => p.ProductOrders)
                 .WithOne(p => p.Product)
                 .HasForeignKey(o => o.ProductId);
-
+                
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.Products)
                 .WithOne(p => p.Category)
