@@ -75,5 +75,18 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             _context.Products.Update(entity);
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateProductPhotoUrlAsync(int productId, string photoUrl)
+        {
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null)
+            {
+                throw new ProductNotFoundException(productId);
+            }
+
+            product.ImageUrl = photoUrl;
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
+        }
     }
 }
