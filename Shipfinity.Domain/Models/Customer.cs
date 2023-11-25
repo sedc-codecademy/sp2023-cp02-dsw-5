@@ -9,6 +9,8 @@ namespace Shipfinity.Domain.Models
 {
     public class Customer : BaseUser
     {
+        public Address? Address { get; set; }
+        public int? AddressId { get; set; }
         [MaxLength(50)]
         public string FirstName { get; set; } = string.Empty;
         [MaxLength(50)]
