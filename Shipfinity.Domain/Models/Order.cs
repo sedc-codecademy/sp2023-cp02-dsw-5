@@ -14,6 +14,7 @@ namespace Shipfinity.Domain.Models
         [Required]
         public int CustomerId { get; set; }
         public Address Address { get; set; }
+        [Required]
         public int AddressId { get; set; }
         public DateTime OrderDate { get; set; }
         public OrderStatus Status { get; set; }
