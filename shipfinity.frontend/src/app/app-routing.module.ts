@@ -7,12 +7,13 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) },
-  { path: 'product', loadChildren: () => import('./features/product/product.module').then(m => m.ProductModule) },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
+  { path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) },
+  { path: 'product', loadChildren: () => import('./features/product/product.module').then(m => m.ProductModule) },
+  { path: '', component: HomeComponent },
 
   // Wildcard
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent, runGuardsAndResolvers: 'always' }

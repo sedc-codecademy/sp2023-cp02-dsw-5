@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import ILoginFormData from '../models/login-form-data';
 import { environment } from 'src/environments/environment';
 import IRegisterFormModel from '../models/register-form-data';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(private http: HttpClient) { }
 
   get isLoggedIn() {
