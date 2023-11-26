@@ -56,6 +56,8 @@ namespace Shipfinity.Services.Implementations
             AuthHelper.HashPassword(dto.Password, out byte[] hash, out byte[] salt);
             customer.PasswordHash = hash;
             customer.PasswordSalt = salt;
+
+            await _customerRepository.InsertAsync(customer);
         }
 
         private string GenerateToken(BaseUser user)
