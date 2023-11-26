@@ -12,6 +12,6 @@ namespace Shipfinity.DataAccess.Repositories.Interfaces
         Task<List<Product>> GetAllByCategoryIdAsync(int categoryId);
         Task<List<Product>> GetRangeOrderedByPrice(int price, int start, int count);
         Task UpdateProductPhotoUrlAsync(int productId, string photoUrl);
-        Task AddProductReviewAsync(ReviewProduct reviewProduct);
+        Task<List<Product>> SearchProductsAsync(string keyword);
     }
 }

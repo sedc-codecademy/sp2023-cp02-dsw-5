@@ -205,25 +205,6 @@ namespace Shipfinity.Api.Controllers
             }
         }
 
-        [HttpPost("{productId}/reviews")]
-        public async Task<ActionResult<ReviewProduct>> CreateProductReview(int productId, ReviewProductDto productReviewDto)
-        {
-            try
-            {
-                var review = await _productService.CreateReviewProductAsync(productId, productReviewDto);
-                return CreatedAtAction(nameof(CreateProductReview), new { productId = productId, id = review.Id }, review);
-            }
-            catch (ProductNotFoundException)
-            {
-                return NotFound($"Product with id {productId} not found.");
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, $"An error occurred while creating a review for product with id: {productId}", productId);
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
-            }
-        }
-
         [HttpGet("search/{keyword}")]
         public async Task<ActionResult<List<ProductReadDto>>> SearchProductsByKeyword(string keyword)
         {

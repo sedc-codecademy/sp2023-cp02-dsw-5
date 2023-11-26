@@ -80,27 +80,8 @@ namespace Shipfinity.Services.Implementations
 
         public async Task<List<ProductReadDto>> SearchProductsByKeywordAsync(string keyword)
         {
-            var products = (await _productRepository.GetAllAsync())
-        .Where(p => p.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase)
-                 || p.Description.Contains(keyword, StringComparison.OrdinalIgnoreCase))
-        .ToList();
+            var products = await _productRepository.SearchProductsAsync(keyword);
             return products.Select(ProductMapper.MapToReadDto).ToList();
-        }
-
-        public async Task<ReviewProduct> CreateReviewProductAsync(int productId, ReviewProductDto reviewProductDto)
-        {
-            var product = await _productRepository.GetByIdAsync(productId);
-            if (product == null) throw new ProductNotFoundException(productId);
-
-            var newReview = new ReviewProduct
-            {
-                Comment = reviewProductDto.Comment,
-                Rating = reviewProductDto.Rating,
-                ProductId = productId
-            };
-
-            await _productRepository.AddProductReviewAsync(newReview);
-            return newReview;
         }
     }
 }
