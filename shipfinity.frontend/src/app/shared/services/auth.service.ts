@@ -17,7 +17,7 @@ export class AuthService {
   private router = inject(Router);
   private notificationService = inject(NotificationService);
 
-  public currentUser$ = new BehaviorSubject<User>(
+  public currentUser$ = new BehaviorSubject<User | null>(
     this.getUserFromLocalStorage()
   );
 
@@ -39,22 +39,11 @@ export class AuthService {
     localStorage.removeItem('Token');
   }
 
-  /*
-  public login(request: ILoginFormData) {
-    return this.http.post(`${environment.API_URL}/auth/login`, request);
-  }
-  */
-
   public login(username: string, password: string) {
     this.authApiService.loginUser(username, password).subscribe({
       next: (res) => {
-        console.log(res);
-
         const token = res.headers.get('access-token');
-        console.log(token);
-
         const user = res.body as User;
-        console.log(user);
 
         this.saveUserInLocalStorage(user);
         this.currentUser$.next(user);
@@ -62,7 +51,6 @@ export class AuthService {
         this.notificationService.successMessage('Successfully logged in!');
       },
       error: (error) => {
-        console.log(error);
         this.notificationService.errorMessage(error.error.message);
       },
     });
@@ -82,9 +70,9 @@ export class AuthService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
-  getUserFromLocalStorage(): User {
+  getUserFromLocalStorage(): User | null {
     const stringUserData = localStorage.getItem('currentUser');
 
-    return stringUserData ? JSON.parse(stringUserData) : null;
+    return stringUserData ? (JSON.parse(stringUserData) as User) : null;
   }
 }
