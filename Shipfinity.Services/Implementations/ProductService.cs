@@ -1,4 +1,5 @@
 ﻿using Shipfinity.DataAccess.Repositories.Interfaces;
+using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.ProductDTO_s;
 using Shipfinity.Mappers;
 using Shipfinity.Services.Interfaces;
@@ -84,6 +85,22 @@ namespace Shipfinity.Services.Implementations
                  || p.Description.Contains(keyword, StringComparison.OrdinalIgnoreCase))
         .ToList();
             return products.Select(ProductMapper.MapToReadDto).ToList();
+        }
+
+        public async Task<ReviewProduct> CreateReviewProductAsync(int productId, ReviewProductDto reviewProductDto)
+        {
+            var product = await _productRepository.GetByIdAsync(productId);
+            if (product == null) throw new ProductNotFoundException(productId);
+
+            var newReview = new ReviewProduct
+            {
+                Comment = reviewProductDto.Comment,
+                Rating = reviewProductDto.Rating,
+                ProductId = productId
+            };
+
+            await _productRepository.AddProductReviewAsync(newReview);
+            return newReview;
         }
     }
 }
