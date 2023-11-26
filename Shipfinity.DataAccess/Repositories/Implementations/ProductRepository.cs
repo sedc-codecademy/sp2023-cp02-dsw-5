@@ -14,12 +14,6 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddProductReviewAsync(ReviewProduct reviewProduct)
-        {
-            await _context.ProductReviews.AddAsync(reviewProduct);
-            await _context.SaveChangesAsync();
-        }
-
         public async Task DeleteByIdAsync(int id)
         {
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
