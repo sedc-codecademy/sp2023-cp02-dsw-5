@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using Shipfinity.DTOs.ProductDTO_s;
 using Shipfinity.Services.Interfaces;
 using Shipfinity.Shared.Exceptions;
@@ -200,6 +201,32 @@ namespace Shipfinity.Api.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+
+        [HttpGet("search/{keyword}")]
+        public async Task<ActionResult<List<ProductReadDto>>> SearchProductsByKeyword(string keyword)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(keyword))
+                {
+                    return BadRequest("Keyword cannot be null or whitespace.");
+                }
+
+                var products = await _productService.SearchProductsByKeywordAsync(keyword);
+
+                if (products == null || !products.Any())
+                {
+                    return NotFound($"No products found with keyword: {keyword}");
+                }
+
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
         }
     }
