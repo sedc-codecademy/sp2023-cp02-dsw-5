@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Shipfinity.DTOs.ProductDTO_s;
 using Shipfinity.Services.Interfaces;
+using Shipfinity.Shared.Exceptions;
 
 namespace Shipfinity.Api.Controllers
 {
@@ -9,13 +10,15 @@ namespace Shipfinity.Api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        
-        private readonly IProductService _productService;
 
-    
-        public ProductController(IProductService productService)
+        private readonly IProductService _productService;
+        private readonly string _imagesPath;
+
+
+        public ProductController(IProductService productService, IWebHostEnvironment env)
         {
             _productService = productService;
+            _imagesPath = Path.Combine(env.WebRootPath, "images");
         }
 
         // HTTP GET to get all products
@@ -37,13 +40,13 @@ namespace Shipfinity.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            if (id <= 0) 
-                return BadRequest("Invalid product ID"); 
+            if (id <= 0)
+                return BadRequest("Invalid product ID");
 
             try
             {
                 var product = await _productService.GetProductByIdAsync(id);
-                return Ok(product); 
+                return Ok(product);
             }
             catch (Exception ex)
             {
@@ -56,12 +59,12 @@ namespace Shipfinity.Api.Controllers
         public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDto productCreateDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState); 
+                return BadRequest(ModelState);
 
             try
             {
                 var product = await _productService.CreateProductAsync(productCreateDto);
-                return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product); 
+                return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
             }
             catch (Exception ex)
             {
@@ -73,13 +76,13 @@ namespace Shipfinity.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDto productUpdateDto)
         {
-            if (id <= 0 || !ModelState.IsValid) 
-                return BadRequest("Invalid input"); 
+            if (id <= 0 || !ModelState.IsValid)
+                return BadRequest("Invalid input");
 
             try
             {
                 await _productService.UpdateProductAsync(id, productUpdateDto);
-                return NoContent(); 
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -91,8 +94,8 @@ namespace Shipfinity.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            if (id <= 0) 
-                return BadRequest("Invalid product ID"); 
+            if (id <= 0)
+                return BadRequest("Invalid product ID");
 
             try
             {
@@ -156,6 +159,47 @@ namespace Shipfinity.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("{productId}/UploadPhoto")]
+        public async Task<IActionResult> UploadPhoto(int productId, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            try
+            {
+                // Ensure the images directory exists
+                if (!Directory.Exists(_imagesPath))
+                {
+                    Directory.CreateDirectory(_imagesPath);
+                }
+
+                // Generate a unique file name to avoid overwriting existing files
+                var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(_imagesPath, fileName);
+
+                // Save the file
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Update product's photo URL in the database
+                await _productService.UpdateProductPhotoUrl(productId, "/images/" + fileName);
+
+                return Ok("File uploaded successfully.");
+            }
+            catch (ProductNotFoundException ex)
+            {
+                return BadRequest($"Product with id:{productId} not found.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
             }
         }
     }

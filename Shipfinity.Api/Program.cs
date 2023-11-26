@@ -36,6 +36,8 @@ builder.Services.InjectServices();
 
 var app = builder.Build();
 
+app.Environment.WebRootPath = app.Environment.ContentRootPath + "/wwwroot";
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -48,6 +50,9 @@ if (app.Environment.IsDevelopment())
         builder.AllowAnyMethod();
     });
 }
+app.UseStaticFiles();
+
+app.UseCors("*");
 
 app.UseHttpsRedirection();
 
