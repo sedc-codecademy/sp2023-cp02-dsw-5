@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import Product from 'src/app/shared/models/product';
 
 @Component({
   selector: 'app-product-list',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
-
+  public products: Product[] = [ new Product(1, "test", "Test", 12, 1) ];
 }
