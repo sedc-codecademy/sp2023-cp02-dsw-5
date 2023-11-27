@@ -93,7 +93,8 @@ namespace Shipfinity.Services.Implementations
             {
                 Comment = reviewProductDto.Comment,
                 Rating = reviewProductDto.Rating,
-                ProductId = productId
+                ProductId = productId,
+                CustomerId = reviewProductDto.CustomerId
             };
 
             await _productRepository.AddProductReviewAsync(newReview);

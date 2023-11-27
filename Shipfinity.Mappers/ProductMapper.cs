@@ -14,7 +14,9 @@ namespace Shipfinity.Mappers
                 Description = product.Description,
                 Price = product.Price,
                 CategoryId = product.CategoryId,
-                ImageUrl = product.ImageUrl
+                ImageUrl = product.ImageUrl,
+                AverageRating = product.ProductReviews.Any() ? product.ProductReviews.Average(r => r.Rating) : 0
+
             };
         }
 
@@ -45,7 +47,8 @@ namespace Shipfinity.Mappers
             {
                 Comment = reviewProduct.Comment,
                 Rating = reviewProduct.Rating,
-                ProductId = reviewProduct.ProductId
+                ProductId = reviewProduct.ProductId,
+                CustomerId = reviewProduct.CustomerId
             };
         }
     }
