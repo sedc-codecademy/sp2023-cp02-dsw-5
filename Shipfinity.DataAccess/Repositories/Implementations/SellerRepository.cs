@@ -34,9 +34,20 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             return await _context.Sellers.ToListAsync();
         }
 
+        public async Task<Seller> GetByEmailAsync(string email)
+        {
+            return await _context.Sellers.FirstOrDefaultAsync(c => c.Email == email);
+        }
+
         public async Task<Seller> GetByIdAsync(int id)
         {
             return await _context.Sellers.FirstOrDefaultAsync(s => s.Id == id);
+        }
+
+        public async Task<Seller> GetByUsernameAsync(string username)
+        {
+            return await _context.Sellers.FirstOrDefaultAsync(s => s.Username == username);
+            
         }
 
         public async Task<List<Seller>> GetRangeAsync(int start, int count)
