@@ -38,6 +38,16 @@ namespace Shipfinity.Mappers
             product.CategoryId = productUpdateDto.CategoryId;
             product.ImageUrl = productUpdateDto.ImageUrl;
         }
+
+        public static ReviewProductReadDto MapToReadDto(ReviewProduct reviewProduct)
+        {
+            return new ReviewProductReadDto
+            {
+                Comment = reviewProduct.Comment,
+                Rating = reviewProduct.Rating,
+                ProductId = reviewProduct.ProductId
+            };
+        }
     }
 }
 
