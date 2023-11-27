@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
   private successMessageSubject = new Subject<string>();
   successMessageAction$ = this.successMessageSubject.asObservable();
 
-  constructor() { }
+  constructor() {}
 
-  successMessage(message: string){
+  successMessage(message: string) {
+    this.successMessageSubject.next(message);
+  }
+
+  errorMessage(message: string) {
     this.successMessageSubject.next(message);
   }
 

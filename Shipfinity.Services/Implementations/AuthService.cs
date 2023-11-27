@@ -59,6 +59,8 @@ namespace Shipfinity.Services.Implementations
             AuthHelper.HashPassword(dto.Password, out byte[] hash, out byte[] salt);
             customer.PasswordHash = hash;
             customer.PasswordSalt = salt;
+
+            await _customerRepository.InsertAsync(customer);
         }
 
         public async Task RegisterSeller(SellerRegisterDto dto)

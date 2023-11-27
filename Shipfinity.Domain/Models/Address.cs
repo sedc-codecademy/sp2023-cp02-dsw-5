@@ -1,0 +1,24 @@
+﻿using Shipfinity.Domain.Enums;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Shipfinity.Domain.Models
+{
+    public class Address : BaseEntity
+    {
+        [MaxLength(100)]
+        public string AddressLine { get; set; }
+        [MaxLength(10)]
+        public string ZipCode { get; set; }
+        [MaxLength(50)]
+        public string City { get; set; }
+        [MaxLength(50)]
+        public string Country { get; set; }
+        public List<Order> Orders { get; set; } = new();
+        public List<Customer> Customers { get; set; } = new();
+    }
+}
