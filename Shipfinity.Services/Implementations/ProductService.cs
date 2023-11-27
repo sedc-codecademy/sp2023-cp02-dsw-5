@@ -1,4 +1,5 @@
 ﻿using Shipfinity.DataAccess.Repositories.Interfaces;
+using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.ProductDTO_s;
 using Shipfinity.Mappers;
 using Shipfinity.Services.Interfaces;
@@ -62,7 +63,7 @@ namespace Shipfinity.Services.Implementations
 
         public async Task<List<ProductReadDto>> GetProductsOnSaleAsync()
         {
-         
+
             var products = (await _productRepository.GetAllAsync()).Where(p => p.DiscountPercenrage > 0).ToList();
             return products.Select(ProductMapper.MapToReadDto).ToList();
         }
@@ -75,6 +76,28 @@ namespace Shipfinity.Services.Implementations
         public async Task UpdateProductPhotoUrl(int productId, string photoUrl)
         {
             await _productRepository.UpdateProductPhotoUrlAsync(productId, photoUrl);
+        }
+
+        public async Task<List<ProductReadDto>> SearchProductsByKeywordAsync(string keyword)
+        {
+            var products = await _productRepository.SearchProductsAsync(keyword);
+            return products.Select(ProductMapper.MapToReadDto).ToList();
+        }
+
+        public async Task<ReviewProductReadDto> CreateReviewProductAsync(int productId, ReviewProductDto reviewProductDto)
+        {
+            var product = await _productRepository.GetByIdAsync(productId);
+            if (product == null) throw new ProductNotFoundException(productId);
+
+            var newReview = new ReviewProduct
+            {
+                Comment = reviewProductDto.Comment,
+                Rating = reviewProductDto.Rating,
+                ProductId = productId
+            };
+
+            await _productRepository.AddProductReviewAsync(newReview);
+            return ProductMapper.MapToReadDto(newReview);
         }
     }
 }

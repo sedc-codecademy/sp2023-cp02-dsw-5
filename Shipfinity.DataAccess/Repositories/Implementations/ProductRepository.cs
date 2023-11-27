@@ -70,6 +70,13 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Product>> SearchProductsAsync(string keyword)
+        {
+            return await _context.Products
+                .Where(p => p.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                .ToListAsync();
+        }
+
         public async Task UpdateAsync(Product entity)
         {
             _context.Products.Update(entity);
@@ -86,6 +93,12 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
 
             product.ImageUrl = photoUrl;
             _context.Products.Update(product);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddProductReviewAsync(ReviewProduct reviewProduct)
+        {
+            await _context.ProductReviews.AddAsync(reviewProduct);
             await _context.SaveChangesAsync();
         }
     }
