@@ -95,5 +95,15 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
         }
+
+        public async Task AddProductReviewAsync(ReviewProduct reviewProduct)
+        {
+            if(reviewProduct.Rating < 1 || reviewProduct.Rating > 5)
+            {
+                throw new ArgumentException("Rating must be between 1 and 5.");
+            }
+            await _context.ProductReviews.AddAsync(reviewProduct);
+            await _context.SaveChangesAsync();
+        }
     }
 }
