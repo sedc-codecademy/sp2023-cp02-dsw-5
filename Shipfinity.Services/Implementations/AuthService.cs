@@ -65,25 +65,24 @@ namespace Shipfinity.Services.Implementations
 
         public async Task RegisterSeller(SellerRegisterDto dto)
         {
-            // Validate input
+
             if (string.IsNullOrEmpty(dto.Username) || string.IsNullOrEmpty(dto.Password) || string.IsNullOrEmpty(dto.Email))
             {
                 throw new UserRegisterException("Username, password, and email are required fields");
             }
 
-            // Check if username already exists
+           
             if (await _sellerRepository.GetByUsernameAsync(dto.Username.Trim()) != null)
             {
                 throw new UserRegisterException("Username is already taken");
             }
 
-            // Create new seller object
             Seller seller = dto.ToSeller();
             AuthHelper.HashPassword(dto.Password, out byte[] hash, out byte[] salt);
             seller.PasswordHash = hash;
             seller.PasswordSalt = salt;
 
-            // Save seller to database
+
             await _sellerRepository.InsertAsync(seller);
         }
         public async Task<SellerLoginResponseDto> LoginSeller(UserLoginDto dto)

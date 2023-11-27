@@ -17,10 +17,21 @@ namespace Shipfinity.Mappers
             {
                 Username = dto.Username.Trim(),
                 Email = dto.Email.Trim(),
-                Name = dto.FirstName.Trim() + " " + dto.LastName.Trim(),
-
-
+                Name = dto.Name.Trim(),
+                Address = dto.Address?.Trim(), 
+                PhoneNumber = dto.PhoneNumber?.Trim(), 
                 Role = Roles.Seller
+            };
+        }
+
+        public static SellerLoginResponseDto ToLoginResponse(this Seller seller, string token)
+        {
+            return new SellerLoginResponseDto
+            {
+                Id = seller.Id,
+                Username = seller.Username,
+                Email = seller.Email,
+                Token = token
             };
         }
     }

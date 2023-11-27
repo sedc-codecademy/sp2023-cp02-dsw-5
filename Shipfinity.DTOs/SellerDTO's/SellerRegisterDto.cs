@@ -26,11 +26,15 @@ namespace Shipfinity.DTOs.SellerDTO_s
         public string Email { get; set; }
 
         [Required]
-        [MaxLength(30)]
-        public string FirstName { get; set; }
+        [MaxLength(20)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Address { get; set; }
 
         [Required]
         [MaxLength(30)]
-        public string LastName { get; set; }
+        public string Name { get; set; }
     }
 }
