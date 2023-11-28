@@ -10,6 +10,6 @@ namespace Shipfinity.Services.Interfaces
 {
     public interface IMessageService
     {
-        Task<Message> SendMessage(MessageDto messageDto);
+        Task<Message> SendMessageAsync(MessageDto messageDto, string role);
     }
 }

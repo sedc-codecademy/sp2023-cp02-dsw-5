@@ -17,7 +17,7 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
         {
             _context = context;
         }
-        public async Task<Message> CreateMessage(Message message)
+        public async Task<Message> CreateMessageAsync(Message message)
         {
             _context.Messages.Add(message);
             await _context.SaveChangesAsync();

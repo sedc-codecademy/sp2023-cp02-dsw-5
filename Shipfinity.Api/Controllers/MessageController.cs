@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Shipfinity.DTOs.MessageDTOs;
 using Shipfinity.Services.Interfaces;
+using System.Security.Claims;
 
 namespace Shipfinity.Api.Controllers
 {
@@ -19,7 +20,14 @@ namespace Shipfinity.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> SendMessage(MessageDto messageDto)
         {
-            var message = await _messageService.SendMessage(messageDto);
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            var message = await _messageService.SendMessageAsync(messageDto, role);
             return Ok(message);
         }
     }

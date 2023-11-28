@@ -20,10 +20,21 @@ namespace Shipfinity.Services.Implementations
             _messageRepository = messageRepository;
         }
 
-        public async Task<Message> SendMessage(MessageDto messageDto)
+        public async Task<Message> SendMessageAsync(MessageDto messageDto, string role)
         {
+            if(messageDto == null)
+            {
+                throw new ArgumentNullException(nameof(messageDto));
+            }
+
+            if(string.IsNullOrEmpty(role))
+            {
+                throw new ArgumentNullException(nameof(role));
+            }
+
             var message = MessageMappers.MapToMessage(messageDto);
-            return await _messageRepository.CreateMessage(message);
+            message.Role = role;
+            return await _messageRepository.CreateMessageAsync(message);
         }
     }
 }
