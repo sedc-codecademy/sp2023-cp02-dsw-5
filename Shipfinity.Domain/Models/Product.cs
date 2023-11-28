@@ -26,5 +26,6 @@ namespace Shipfinity.Domain.Models
         [MaxLength(150)]
         public string? ImageUrl { get; set; }
         public List<ProductOrder> ProductOrders { get; set; } = new();
+        public List<ReviewProduct> ProductReviews { get; set; } = new();
     }
 }
