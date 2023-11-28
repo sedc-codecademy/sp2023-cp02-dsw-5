@@ -23,6 +23,7 @@ namespace Shipfinity.Helpers
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ISellerRepository, SellerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
         }
 
         public static void InjectServices(this IServiceCollection services)
@@ -30,6 +31,7 @@ namespace Shipfinity.Helpers
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IMessageService, MessageService>();
         }
     }
 }
