@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Shipfinity.DataAccess.Repositories.Interfaces;
 using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.CustomerDTOs;
+using Shipfinity.DTOs.SellerDTO_s;
 using Shipfinity.DTOs.UserDTOs;
 using Shipfinity.Mappers;
 using Shipfinity.Services.Helpers;
@@ -17,10 +18,12 @@ namespace Shipfinity.Services.Implementations
     public class AuthService : IAuthService
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly ISellerRepository _sellerRepository;
         private readonly IConfiguration _configuration;
-        public AuthService(ICustomerRepository customerRepository, IConfiguration configuration)
+        public AuthService(ICustomerRepository customerRepository,ISellerRepository sellerRepository, IConfiguration configuration)
         {
             _customerRepository = customerRepository;
+            _sellerRepository = sellerRepository;
             _configuration = configuration;
         }
 
@@ -58,6 +61,44 @@ namespace Shipfinity.Services.Implementations
             customer.PasswordSalt = salt;
 
             await _customerRepository.InsertAsync(customer);
+        }
+
+        public async Task RegisterSeller(SellerRegisterDto dto)
+        {
+
+            if (string.IsNullOrEmpty(dto.Username) || string.IsNullOrEmpty(dto.Password) || string.IsNullOrEmpty(dto.Email))
+            {
+                throw new UserRegisterException("Username, password, and email are required fields");
+            }
+
+           
+            if (await _sellerRepository.GetByUsernameAsync(dto.Username.Trim()) != null)
+            {
+                throw new UserRegisterException("Username is already taken");
+            }
+
+            Seller seller = dto.ToSeller();
+            AuthHelper.HashPassword(dto.Password, out byte[] hash, out byte[] salt);
+            seller.PasswordHash = hash;
+            seller.PasswordSalt = salt;
+
+
+            await _sellerRepository.InsertAsync(seller);
+        }
+        public async Task<SellerLoginResponseDto> LoginSeller(UserLoginDto dto)
+        {
+            Seller seller = await _sellerRepository.GetByUsernameAsync(dto.Username);
+            if (seller == null)
+            {
+                throw new BadCredentialsException();
+            }
+
+            if (!seller.VerifyPassword(dto.Password))
+            {
+                throw new BadCredentialsException();
+            }
+            string token = GenerateToken(seller);
+            return seller.ToLoginResponse(token);
         }
 
         private string GenerateToken(BaseUser user)
