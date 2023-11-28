@@ -6,5 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./message-notification.component.css'],
 })
 export class MessageNotificationComponent {
+  @Input() isError = false;
   @Input() message: string;
 }

@@ -4,7 +4,7 @@
             <h2 class="display-4">Products</h2>
         </div>
         <div>
-            <button class="btn btn-success"><i class="bi bi-plus"></i> Add</button>
+            <button class="btn btn-success" (click)="addBtnClick()"><i class="bi bi-plus"></i> Add</button>
         </div>
     </div>
     <table class="table table-striped">
@@ -22,10 +22,12 @@
                 <td>{{ product.categoryId }}</td>
                 <td>{{ product.price }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary me-2"><i class="bi bi-pencil-fill"></i></button>
+                    <button class="btn btn-sm btn-primary me-2" (click)="editBtnClick(product.id)"><i class="bi bi-pencil-fill"></i></button>
                     <button class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+<app-product-edit *ngIf="showEditDialog" [product]="productToEdit" (submit)="editSubmit($event)" (cancel)="editDialogCancel()"></app-product-edit>

@@ -11,6 +11,7 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.servi
 export class HeaderComponent implements OnInit {
   cartItems:number = 1;
   isLoggedIn = false;
+  user$ = this.auth.currentUser$;
   constructor(private shoppingCartService: ShoppingCartService, private router: Router, private auth: AuthService){}
 
   ngOnInit() {

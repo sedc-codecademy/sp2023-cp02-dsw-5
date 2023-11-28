@@ -9,12 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { OrderManageComponent } from './components/order-manage/order-manage.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MessageListComponent } from './components/message-list/message-list.component';
+import { MessageDetailsComponent } from './components/message-details/message-details.component';
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
   { path: '', component: AdminLayoutComponent, children: [
     { path: 'products', component: ProductListComponent },
-    { path: 'categories', component: CategoryListComponent },
+    { path: 'messages', component: MessageListComponent },
     { path: 'orders', component: OrderListComponent }
   ] }
 ]
@@ -27,13 +30,16 @@ const routes: Routes = [
     AdminLoginComponent,
     OrderListComponent,
     OrderManageComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    MessageListComponent,
+    MessageDetailsComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

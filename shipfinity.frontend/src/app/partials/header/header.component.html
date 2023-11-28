@@ -6,9 +6,9 @@
           <span><i class="bi bi-envelope-fill me-2"></i><a href="mailto:contact@shipfinity.com" class="nav-link d-inline">contact@shipfinity.com</a></span>
         </div>
         <div class="text-white text-end d-flex">
-          <a *ngIf="!isLoggedIn" class="nav-link me-3" routerLink="/login"><i class="bi bi-person-fill"></i> Log in</a>
-          <a *ngIf="!isLoggedIn" class="nav-link" routerLink="/admin/login"><i class="bi bi-shop"></i> Seller's portal</a>
-          <a *ngIf="isLoggedIn" class="nav-link me-3"><i class="bi bi-person-fill"></i> Log out</a>
+          <a *ngIf="!(user$ | async)" class="nav-link me-3" routerLink="/login"><i class="bi bi-person-fill"></i> Log in</a>
+          <a *ngIf="!(user$ | async)" class="nav-link" routerLink="/admin/login"><i class="bi bi-shop"></i> Seller's portal</a>
+          <a *ngIf="user$ | async" class="nav-link me-3"><i class="bi bi-person-fill"></i> Log out</a>
         </div>
       </div>
     </div>
