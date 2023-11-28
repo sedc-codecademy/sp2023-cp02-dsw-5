@@ -1,6 +1,8 @@
-﻿using Shipfinity.DataAccess.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Shipfinity.DataAccess.Context;
 using Shipfinity.DataAccess.Repositories.Interfaces;
 using Shipfinity.Domain.Models;
+using Shipfinity.Shared.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,41 +19,46 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
         {
             _context = context;
         }
-        public async Task<Message> CreateMessageAsync(Message message)
+ 
+        public async Task DeleteByIdAsync(int id)
         {
-            _context.Messages.Add(message);
+            Message message = await _context.Messages.FirstOrDefaultAsync(m=> m.Id == id);
+            if (message == null)
+            {
+                throw new MessageNotFoundException(id);
+            }
+            _context.Messages.Remove(message);
             await _context.SaveChangesAsync();
-            return message;
         }
 
-        public Task DeleteByIdAsync(int id)
+        public async Task<List<Message>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Messages.ToListAsync();
         }
 
-        public Task<List<Message>> GetAllAsync()
+        public async Task<Message> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public Task<Message> GetByIdAsync(int id)
+        public async Task<List<Message>> GetRangeAsync(int start, int count)
         {
-            throw new NotImplementedException();
+            return await _context.Messages
+                .Skip(start)
+                .Take(count)
+                .ToListAsync();
         }
 
-        public Task<List<Message>> GetRangeAsync(int start, int count)
+        public async Task InsertAsync(Message entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task InsertAsync(Message entity)
-        {
-            throw new NotImplementedException();
+            await _context.Messages.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public Task UpdateAsync(Message entity)
         {
-            throw new NotImplementedException();
+            _context.Messages.Update(entity);
+            return _context.SaveChangesAsync();
         }
     }
 }
