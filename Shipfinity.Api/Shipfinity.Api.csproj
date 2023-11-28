@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\**" />
-    <Content Remove="wwwroot\**" />
-    <EmbeddedResource Remove="wwwroot\**" />
-    <None Remove="wwwroot\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
       <PrivateAssets>all</PrivateAssets>
@@ -29,6 +22,11 @@
     <ProjectReference Include="..\Shipfinity.Helpers\Shipfinity.Helpers.csproj" />
     <ProjectReference Include="..\Shipfinity.Services\Shipfinity.Services.csproj" />
     <ProjectReference Include="..\Shipfinity.Shared\Shipfinity.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
