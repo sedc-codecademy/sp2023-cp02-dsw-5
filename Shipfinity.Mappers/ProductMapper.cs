@@ -14,7 +14,9 @@ namespace Shipfinity.Mappers
                 Description = product.Description,
                 Price = product.Price,
                 CategoryId = product.CategoryId,
-                ImageUrl = product.ImageUrl
+                ImageUrl = product.ImageUrl,
+                AverageRating = product.ProductReviews.Any() ? product.ProductReviews.Average(r => r.Rating) : 0
+
             };
         }
 
@@ -37,6 +39,17 @@ namespace Shipfinity.Mappers
             product.Price = productUpdateDto.Price;
             product.CategoryId = productUpdateDto.CategoryId;
             product.ImageUrl = productUpdateDto.ImageUrl;
+        }
+
+        public static ReviewProductReadDto MapToReadDto(ReviewProduct reviewProduct)
+        {
+            return new ReviewProductReadDto
+            {
+                Comment = reviewProduct.Comment,
+                Rating = reviewProduct.Rating,
+                ProductId = reviewProduct.ProductId,
+                CustomerId = reviewProduct.CustomerId
+            };
         }
     }
 }

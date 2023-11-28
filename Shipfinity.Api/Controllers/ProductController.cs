@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.ProductDTO_s;
+using Shipfinity.Mappers;
 using Shipfinity.Services.Interfaces;
 using Shipfinity.Shared.Exceptions;
 
@@ -228,6 +229,29 @@ namespace Shipfinity.Api.Controllers
             {
                 Log.Error(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpPost("{productId}/reviews")]
+        public async Task<IActionResult> AddProductReview(int productId, [FromBody] ReviewProductDto reviewProductDto)
+        {
+            if (productId <= 0 || !ModelState.IsValid)
+                return BadRequest("Invalid input");
+
+            try
+            {
+                var reviewProduct = await _productService.CreateReviewProductAsync(productId, reviewProductDto);
+                return CreatedAtAction(nameof(GetProductById), new { id = productId }, reviewProduct);
+            }
+            catch (ProductNotFoundException ex)
+            {
+                Log.Error(ex.Message);
+                return NotFound($"Product with id:{productId} not found.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, $"An error occurred while creating a review for product with id: {productId}", productId);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }

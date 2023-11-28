@@ -13,5 +13,6 @@ namespace Shipfinity.DataAccess.Repositories.Interfaces
         Task<List<Product>> GetRangeOrderedByPrice(int price, int start, int count);
         Task UpdateProductPhotoUrlAsync(int productId, string photoUrl);
         Task<List<Product>> SearchProductsAsync(string keyword);
+        Task AddProductReviewAsync(ReviewProduct reviewProduct);
     }
 }
