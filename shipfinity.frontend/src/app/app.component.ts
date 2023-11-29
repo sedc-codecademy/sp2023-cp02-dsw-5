@@ -14,6 +14,11 @@ export class AppComponent {
       this.notificationService.clearMessages();
     }, 5000);
   }));
+  errorNotification$ = this.notificationService.errorMessageAction$.pipe(tap(message => {
+    setTimeout(() =>{
+      this.notificationService.clearMessages();
+    }, 5000);
+  }));
 
   constructor(private notificationService: NotificationService, private shoppingCartService: ShoppingCartService){}
 

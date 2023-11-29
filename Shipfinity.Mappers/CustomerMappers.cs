@@ -27,6 +27,7 @@ namespace Shipfinity.Mappers
                 Email = customer.Email,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
+                Role = Roles.Customer,
                 Token = token
             };
         }
