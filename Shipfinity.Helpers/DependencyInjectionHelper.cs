@@ -24,12 +24,14 @@ namespace Shipfinity.Helpers
             services.AddScoped<ISellerRepository, SellerRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<INewsletterRepository, NewsletterRepository>();
         }
 
         public static void InjectServices(this IServiceCollection services)
         {
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<INewsletterService, NewsletterService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IOrderService, OrderService>();

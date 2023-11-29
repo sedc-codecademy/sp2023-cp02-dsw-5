@@ -13,6 +13,8 @@ namespace Shipfinity.DataAccess.Context
         public DbSet<ReviewProduct> ProductReviews { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<NewsletterSubscriber> NewsletterSubscribers { get; set; }
+
         public AppDbContext(DbContextOptions dbContextOptions) :
             base(dbContextOptions)
         { }
@@ -50,6 +52,11 @@ namespace Shipfinity.DataAccess.Context
                 .HasMany(p => p.ProductReviews)
                 .WithOne(rp => rp.Product)
                 .HasForeignKey(rp => rp.ProductId);
+           
+            modelBuilder.Entity<ReviewProduct>()
+                .HasOne(rp => rp.Customer)
+                .WithMany(c => c.ReviewProducts)
+                .HasForeignKey(rp => rp.CustomerId);
 
             modelBuilder.Entity<Address>()
                 .HasMany(a => a.Customers)
