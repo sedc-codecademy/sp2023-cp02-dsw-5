@@ -12,8 +12,8 @@ using Shipfinity.DataAccess.Context;
 namespace Shipfinity.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231129152417_added newslettersubsribers")]
-    partial class addednewslettersubsribers
+    [Migration("20231129201401_created newslettersunbscibers")]
+    partial class creatednewslettersunbscibers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace Shipfinity.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Shipfinity.Domain.Models.Category", b =>
@@ -125,6 +125,48 @@ namespace Shipfinity.DataAccess.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Shipfinity.Domain.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Shipfinity.Domain.Models.NewsletterSubscriber", b =>
@@ -404,7 +446,7 @@ namespace Shipfinity.DataAccess.Migrations
             modelBuilder.Entity("Shipfinity.Domain.Models.ReviewProduct", b =>
                 {
                     b.HasOne("Shipfinity.Domain.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("ReviewProducts")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -435,6 +477,8 @@ namespace Shipfinity.DataAccess.Migrations
             modelBuilder.Entity("Shipfinity.Domain.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
+
+                    b.Navigation("ReviewProducts");
                 });
 
             modelBuilder.Entity("Shipfinity.Domain.Models.Order", b =>

@@ -52,6 +52,11 @@ namespace Shipfinity.DataAccess.Context
                 .HasMany(p => p.ProductReviews)
                 .WithOne(rp => rp.Product)
                 .HasForeignKey(rp => rp.ProductId);
+           
+            modelBuilder.Entity<ReviewProduct>()
+                .HasOne(rp => rp.Customer)
+                .WithMany(c => c.ReviewProducts)
+                .HasForeignKey(rp => rp.CustomerId);
 
             modelBuilder.Entity<Address>()
                 .HasMany(a => a.Customers)

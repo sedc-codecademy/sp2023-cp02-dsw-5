@@ -166,6 +166,29 @@ namespace Shipfinity.DataAccess.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("Shipfinity.Domain.Models.NewsletterSubscriber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastEmailSentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("SubscriptionDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewsletterSubscribers");
+                });
+
             modelBuilder.Entity("Shipfinity.Domain.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -420,7 +443,7 @@ namespace Shipfinity.DataAccess.Migrations
             modelBuilder.Entity("Shipfinity.Domain.Models.ReviewProduct", b =>
                 {
                     b.HasOne("Shipfinity.Domain.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("ReviewProducts")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -451,6 +474,8 @@ namespace Shipfinity.DataAccess.Migrations
             modelBuilder.Entity("Shipfinity.Domain.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
+
+                    b.Navigation("ReviewProducts");
                 });
 
             modelBuilder.Entity("Shipfinity.Domain.Models.Order", b =>

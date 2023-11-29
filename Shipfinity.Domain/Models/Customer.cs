@@ -16,5 +16,6 @@ namespace Shipfinity.Domain.Models
         [MaxLength(50)]
         public string LastName { get; set; } = string.Empty;
         public List<Order> Orders { get; set; } = new();
+        public List<ReviewProduct> ReviewProducts { get; set; } = new();
     }
 }

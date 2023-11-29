@@ -6,18 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Shipfinity.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addednewslettersubsribers : Migration
+    public partial class creatednewslettersunbscibers : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "CustomerId",
-                table: "ProductReviews",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
             migrationBuilder.CreateTable(
                 name: "NewsletterSubscribers",
                 columns: table => new
@@ -32,38 +25,13 @@ namespace Shipfinity.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_NewsletterSubscribers", x => x.Id);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductReviews_CustomerId",
-                table: "ProductReviews",
-                column: "CustomerId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_ProductReviews_Customers_CustomerId",
-                table: "ProductReviews",
-                column: "CustomerId",
-                principalTable: "Customers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_ProductReviews_Customers_CustomerId",
-                table: "ProductReviews");
-
             migrationBuilder.DropTable(
                 name: "NewsletterSubscribers");
-
-            migrationBuilder.DropIndex(
-                name: "IX_ProductReviews_CustomerId",
-                table: "ProductReviews");
-
-            migrationBuilder.DropColumn(
-                name: "CustomerId",
-                table: "ProductReviews");
         }
     }
 }
