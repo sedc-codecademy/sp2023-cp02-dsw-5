@@ -11,6 +11,7 @@ namespace Shipfinity.DataAccess.Context
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<ReviewProduct> ProductReviews { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public AppDbContext(DbContextOptions dbContextOptions) :
             base(dbContextOptions)
         { }
