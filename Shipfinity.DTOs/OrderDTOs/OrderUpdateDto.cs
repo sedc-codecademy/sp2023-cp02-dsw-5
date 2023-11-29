@@ -1,4 +1,5 @@
 ﻿using Shipfinity.Domain.Enums;
+using Shipfinity.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,22 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shipfinity.Domain.Models
+namespace Shipfinity.DTOs.OrderDTOs
 {
-    public class Order : BaseEntity
+    public class OrderUpdateDto
     {
         [Required]
-        public Customer Customer { get; set; }
+        public int Id { get; set; }
         [Required]
         public int CustomerId { get; set; }
+
         [Required]
-        [MaxLength(100)]
-        public Address Address { get; set; }
+        public DateTime OrderDate { get; set; }
+
+        [Required]
+        [Range(0, 999999)]
+        public double TotalPrice { get; set; }
+
+        [Required]
+        public OrderStatus Status { get; set; }
         [Required]
         public int AddressId { get; set; }
-        public DateTime OrderDate { get; set; }
-        public OrderStatus Status { get; set; }
-        public List<ProductOrder> ProductOrders { get; set; } = new();
-        public double TotalPrice { get; set; }
     }
 }
