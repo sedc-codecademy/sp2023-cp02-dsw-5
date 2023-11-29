@@ -15,7 +15,6 @@ namespace Shipfinity.Domain.Models
         [Required]
         public int CustomerId { get; set; }
         [Required]
-        [MaxLength(100)]
         public Address Address { get; set; }
         [Required]
         public int AddressId { get; set; }
