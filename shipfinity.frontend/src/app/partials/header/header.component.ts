@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
 @Component({
@@ -7,15 +8,17 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.servi
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   cartItems:number = 1;
-
-  constructor(private shoppingCartService: ShoppingCartService, private router: Router){}
+  isLoggedIn = false;
+  user$ = this.auth.currentUser$;
+  constructor(private shoppingCartService: ShoppingCartService, private router: Router, private auth: AuthService){}
 
   ngOnInit() {
     this.shoppingCartService.getCart().subscribe(res => {
       this.cartItems = res.length;
     });
+    this.isLoggedIn = this.auth.isLoggedIn;
   }
 
   searchClickEvent(searchForm:any) {

@@ -31,6 +31,7 @@ namespace Shipfinity.Mappers
                 Id = seller.Id,
                 Username = seller.Username,
                 Email = seller.Email,
+                Role = Roles.Seller,
                 Token = token
             };
         }

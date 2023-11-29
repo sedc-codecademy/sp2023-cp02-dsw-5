@@ -52,7 +52,7 @@ namespace Shipfinity.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Shipfinity.Domain.Models.Category", b =>
@@ -124,7 +124,7 @@ namespace Shipfinity.DataAccess.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Shipfinity.Domain.Models.NewsletterSubscriber", b =>
+            modelBuilder.Entity("Shipfinity.Domain.Models.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,19 +132,38 @@ namespace Shipfinity.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastEmailSentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("SubscriptionDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("NewsletterSubscribers");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Shipfinity.Domain.Models.Order", b =>

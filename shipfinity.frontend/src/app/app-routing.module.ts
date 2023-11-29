@@ -5,14 +5,17 @@ import { ContactComponent } from './core/components/contact/contact.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { anonymousGuard } from './shared/guards/anonymous.guard';
+import { sellerGuard } from './shared/guards/seller.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'login', component: LoginComponent, canActivate: [anonymousGuard] },
+  { path: 'signup', component: RegisterComponent, canActivate: [anonymousGuard] },
+  { path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule), canActivateChild: [sellerGuard] },
   { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) },
   { path: 'product', loadChildren: () => import('./features/product/product.module').then(m => m.ProductModule) },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: RegisterComponent },
+  { path: '', component: HomeComponent },
 
   // Wildcard
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent, runGuardsAndResolvers: 'always' }

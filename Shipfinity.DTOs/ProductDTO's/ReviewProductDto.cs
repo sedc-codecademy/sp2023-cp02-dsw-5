@@ -13,6 +13,5 @@ namespace Shipfinity.DTOs.ProductDTO_s
         [Required]
         public int Rating { get; set; }
         public int CustomerId { get; set; }
-        //Added CustomerId
     }
 }

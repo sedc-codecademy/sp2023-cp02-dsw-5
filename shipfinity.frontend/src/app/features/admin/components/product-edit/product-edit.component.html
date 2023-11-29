@@ -1,0 +1,42 @@
+<app-flyout>
+    <div class="container-lg pt-3 px-md-5">
+        <h1 class="display-4">{{ product? 'Edit product': 'Add product' }}</h1>
+        <hr class="bs-hr">
+        <div>
+            <form [formGroup]="productForm">
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" class="form-control" formControlName="name" />
+                        </div>
+                    </div>
+                    <div class="col-lg">
+                        <label for="category" class="form-label">Category</label>
+                        <select id="category" class="form-select" aria-label="Category select" formControlName="categoryId">
+                            <option value="1">Smart Lights</option>
+                            <option value="2">Smart Plugs</option>
+                            <option value="3">Smart Speakers</option>
+                            <option value="4">Smart Thermostats</option>
+                            <option value="5">Wifi Extenders</option>
+                          </select>
+                    </div>
+                    <div class="col-lg">
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" id="price" class="form-control" formControlName="price" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" rows="5" formControlName="description"></textarea>
+                    </div>
+                </div>
+                <button class="btn btn-secondary me-3" type="button" (click)="cancel.emit()">Cancel</button>
+                <button class="btn btn-success" type="submit">{{ product? 'Save changes': 'Add new product' }}</button>
+            </form>
+        </div>
+    </div>
+</app-flyout>

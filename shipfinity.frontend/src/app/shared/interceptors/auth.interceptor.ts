@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -21,7 +21,13 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${this.auth.getToken()}`
         }
       });
-      return next.handle(newRequest);
+      return next.handle(newRequest).pipe(catchError(err => {
+        if(err.status === 401) {
+          this.auth.logout();
+          this.router.navigate(['/login']);
+        }
+        return of(err);
+      }));
     }
     this.router.navigate(['/login']);
     return next.handle(request);

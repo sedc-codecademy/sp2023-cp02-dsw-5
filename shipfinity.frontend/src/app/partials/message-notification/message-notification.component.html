@@ -1,4 +1,4 @@
-<div class="alert alert-success fade show notification-box" role="alert">
+<div class="alert fade show notification-box" [ngClass]="isError? 'alert-danger': 'alert-success'" role="alert">
     <i class="bi bi-check-circle-fill"></i>
     {{message}}
 </div>

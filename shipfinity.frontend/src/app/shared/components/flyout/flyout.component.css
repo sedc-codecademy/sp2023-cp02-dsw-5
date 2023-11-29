@@ -1,0 +1,22 @@
+.flyout-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.flyout-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 75vw;
+    height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+    .flyout-container {
+        width: 100vw;
+    }
+}

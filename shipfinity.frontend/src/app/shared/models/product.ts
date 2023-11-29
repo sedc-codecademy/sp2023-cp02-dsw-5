@@ -19,3 +19,11 @@ export default class Product {
         this.imageUrl = !imageUrl? undefined : imageUrl;
     }
 }
+
+export interface ProductEdit {
+    id?: number | null;
+    name: string;
+    description: string;
+    price: number;
+    categoryId: number;
+}

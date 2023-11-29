@@ -3,6 +3,7 @@
 <main>
     <div class="container">
         <app-message-notification *ngIf="successNotification$ | async as successNotification" [message] = "successNotification"></app-message-notification>
+        <app-message-notification *ngIf="errorNotification$ | async as successNotification" [message] = "successNotification" [isError]="true"></app-message-notification>
     </div>
     <router-outlet></router-outlet>
 </main>

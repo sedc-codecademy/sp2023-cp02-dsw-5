@@ -47,7 +47,7 @@ export class AuthService {
 
         this.saveUserInLocalStorage(user);
         this.currentUser$.next(user);
-        this.router.navigate(['home']);
+        this.router.navigate(['/']);
         this.notificationService.successMessage('Successfully logged in!');
       },
       error: (error) => {
@@ -64,6 +64,12 @@ export class AuthService {
     return this.http.get(
       `${environment.API_URL}/auth/check?username=${username}`
     );
+  }
+
+  public logout() {
+    this.deleteToken();
+    localStorage.removeItem('currentUser');
+    this.currentUser$.next(null);
   }
 
   saveUserInLocalStorage(user: User) {
