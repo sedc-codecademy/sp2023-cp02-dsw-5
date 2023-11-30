@@ -8,5 +8,6 @@ namespace Shipfinity.Services.Interfaces
 {
     public interface ISellerService
     {
+        Task ResetPasswordAsync(int sellerId, string oldPassword, string newPassword, string confirmNewPassword);
     }
 }

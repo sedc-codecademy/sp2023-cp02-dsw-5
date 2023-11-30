@@ -33,6 +33,7 @@ namespace Shipfinity.Helpers
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ISellerService, SellerService>();
         }
     }
 }
