@@ -63,8 +63,7 @@ namespace Shipfinity.Services.Implementations
 
         public async Task<List<ProductReadDto>> GetProductsOnSaleAsync()
         {
-
-            var products = (await _productRepository.GetAllAsync()).Where(p => p.DiscountPercenrage > 0).ToList();
+            var products = await _productRepository.GetProductsOnSaleAsync();
             return products.Select(ProductMapper.MapToReadDto).ToList();
         }
 

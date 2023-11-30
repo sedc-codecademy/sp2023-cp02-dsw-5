@@ -130,7 +130,7 @@ namespace Shipfinity.Api.Controllers
         }
 
         [HttpGet("OnSale")]
-        private async Task<IActionResult> GetProductsOnSale()
+        public async Task<IActionResult> GetProductsOnSale()
         {
             try
             {
