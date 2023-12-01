@@ -1,4 +1,5 @@
 ﻿using Shipfinity.DataAccess.Repositories.Interfaces;
+using Shipfinity.DTOs.SellerDTO_s;
 using Shipfinity.Services.Helpers;
 using Shipfinity.Services.Interfaces;
 using Shipfinity.Shared.Exceptions;
@@ -18,21 +19,23 @@ namespace Shipfinity.Services.Implementations
             _sellerRepository = sellerRepository;
         }
 
-        public async Task ResetPasswordAsync(int sellerId, string oldPassword, string newPassword, string confirmNewPassword)
+        public async Task ResetPasswordAsync(SellerPasswordResetDto passwordResetDto)
         {
-            if (newPassword != confirmNewPassword)
-                throw new Exception("New password and confirmation do not match.");
+            if (passwordResetDto.NewPassword != passwordResetDto.ConfirmNewPassword)
+                throw new BadRequestException("New password and confirmation do not match.");
 
-            var seller = await _sellerRepository.GetByIdAsync(sellerId);
+            var seller = await _sellerRepository.GetByIdAsync(passwordResetDto.SellerId);
             if (seller == null)
-                throw new SellerNotFoundException(sellerId);
+                throw new SellerNotFoundException(passwordResetDto.SellerId);
 
-            if (!seller.VerifyPassword(oldPassword))
-                throw new Exception("Old password is incorrect.");
+            if (!seller.VerifyPassword(passwordResetDto.OldPassword))
+                throw new BadRequestException("Old password is incorrect.");
 
-            AuthHelper.HashPassword(newPassword, out byte[] newHash, out byte[] newSalt);
+            AuthHelper.HashPassword(passwordResetDto.NewPassword, out byte[] newHash, out byte[] newSalt);
+
             seller.PasswordHash = newHash;
             seller.PasswordSalt = newSalt;
+
             await _sellerRepository.UpdateAsync(seller);
         }
     }
