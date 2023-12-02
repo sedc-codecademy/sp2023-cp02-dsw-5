@@ -3,5 +3,5 @@
 </div>
 
 <div class="container d-flex gap-3 flex-wrap">
-    <app-product-card *ngFor="let product of productList" [product]="product"></app-product-card>
+    <app-product-card *ngFor="let product of productList$ | async" [product]="product"></app-product-card>
 </div>

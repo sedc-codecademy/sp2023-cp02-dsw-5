@@ -29,9 +29,10 @@ namespace Shipfinity.Services.Implementations
             return ProductMapper.MapToReadDto(product);
         }
 
-        public async Task<ProductReadDto> CreateProductAsync(ProductCreateDto productCreateDto)
+        public async Task<ProductReadDto> CreateProductAsync(ProductCreateDto productCreateDto, int sellerId)
         {
             var newProduct = ProductMapper.MapToModel(productCreateDto);
+            newProduct.SellerId = sellerId;
             await _productRepository.InsertAsync(newProduct);
             return ProductMapper.MapToReadDto(newProduct);
         }
@@ -67,10 +68,13 @@ namespace Shipfinity.Services.Implementations
             return products.Select(ProductMapper.MapToReadDto).ToList();
         }
 
-        public async Task<List<ProductReadDto>> GetProductsInRangeAsync(int skip, int take)
+        public async Task<ProductPaginatedResponse> GetProductsInRangeAsync(int skip, int take)
         {
             var products = await _productRepository.GetRangeAsync(skip, take);
-            return products.Select(ProductMapper.MapToReadDto).ToList();
+            ProductPaginatedResponse response = new ProductPaginatedResponse();
+            response.Count = await _productRepository.GetCount();
+            response.Products = products.Select(ProductMapper.MapToReadDto).ToList();
+            return response;
         }
         public async Task UpdateProductPhotoUrl(int productId, string photoUrl)
         {
@@ -98,6 +102,15 @@ namespace Shipfinity.Services.Implementations
 
             await _productRepository.AddProductReviewAsync(newReview);
             return ProductMapper.MapToReadDto(newReview);
+        }
+
+        public async Task<ProductPaginatedResponse> GetProductsByCategoryPaginated(int categoryId, int skip, int take)
+        {
+            ProductPaginatedResponse response = new ProductPaginatedResponse();
+            response.Count = await _productRepository.GetCount(categoryId);
+            var products = await _productRepository.GetRangeByCategoryId(categoryId, skip, take);
+            response.Products = products.Select(ProductMapper.MapToReadDto).ToList();
+            return response;
         }
 
         public async Task<List<ProductReadDto>> GetProductsBySellerIdAsync(int sellerId)

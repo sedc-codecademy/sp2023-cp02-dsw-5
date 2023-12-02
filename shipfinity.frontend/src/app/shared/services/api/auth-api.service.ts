@@ -14,11 +14,13 @@ export class AuthApiService {
   loginUser(username: string, password: string) {
     return this.http.post(
       `${API_URL}/auth/customer/login`,
-      { username, password },
-      {
-        observe: 'response',
-      }
-    );
+      { username, password });
+  }
+
+  loginSeller(username: string, password: string) {
+    return this.http.post(
+      `${API_URL}/auth/seller/login`,
+      { username, password });
   }
 
   registerUser(reqBody: IRegisterFormModel) {

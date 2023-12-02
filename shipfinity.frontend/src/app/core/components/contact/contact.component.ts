@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SendMessageService } from '../../../shared/services/send-message.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,7 +9,7 @@ import { SendMessageService } from '../../../shared/services/send-message.servic
 })
 export class ContactComponent {
 
-  constructor(private messageService: SendMessageService){}
+  constructor(private messageService: SendMessageService, private notification: NotificationService){}
 
   submitContactForm(form:any){
     if(form.invalid){
@@ -26,9 +27,14 @@ export class ContactComponent {
                     lastName: lastNameInput, 
                     email: emailInput, 
                     subject: subjectInput, 
-                    message: messageInput})
-      .subscribe(res => {
-        console.log(res);
+                    content: messageInput})
+      .subscribe({
+        next: data => {
+          this.notification.successMessage("Message sent");
+        },
+        error: err => {
+          this.notification.errorMessage("Message failed");
+        }
       });
   }
 }

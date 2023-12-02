@@ -41,8 +41,7 @@ namespace Shipfinity.Api.Controllers
 
             try
             {
-                var role = User.FindFirst(ClaimTypes.Role)?.Value;
-                var message = await _messageService.SendMessageAsync(messageDto, role);
+                var message = await _messageService.SendMessageAsync(messageDto, "None");
                 return Ok(message);
             }
             catch (Exception ex)

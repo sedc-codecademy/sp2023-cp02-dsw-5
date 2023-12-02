@@ -12,13 +12,14 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MessageListComponent } from './components/message-list/message-list.component';
 import { MessageDetailsComponent } from './components/message-details/message-details.component';
+import { sellerGuard } from 'src/app/shared/guards/seller.guard';
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
   { path: '', component: AdminLayoutComponent, children: [
-    { path: 'products', component: ProductListComponent },
-    { path: 'messages', component: MessageListComponent },
-    { path: 'orders', component: OrderListComponent }
+    { path: 'products', component: ProductListComponent, canActivate: [sellerGuard] },
+    { path: 'messages', component: MessageListComponent, canActivate: [sellerGuard] },
+    { path: 'orders', component: OrderListComponent, canActivate: [sellerGuard] }
   ] }
 ]
 

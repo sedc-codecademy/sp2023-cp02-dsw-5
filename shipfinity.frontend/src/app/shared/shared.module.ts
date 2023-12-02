@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FlyoutComponent } from './components/flyout/flyout.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 
 @NgModule({
   declarations: [
-    FlyoutComponent
+    FlyoutComponent,
+    LoaderComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatDialogModule
   ],
   exports: [
-    FlyoutComponent
+    FlyoutComponent,
+    LoaderComponent,
+    MatDialogModule
   ]
 })
 export class SharedModule { }
