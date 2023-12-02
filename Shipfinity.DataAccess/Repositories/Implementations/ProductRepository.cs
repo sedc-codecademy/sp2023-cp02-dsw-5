@@ -106,6 +106,14 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Product>> GetProductsOnSaleAsync()
+        {
+            return await _context.Products
+                .Where(p => p.DiscountPercenrage > 0)
+                .Include(p => p.Category)
+                .ToListAsync();
+        }
+
         public async Task<int> GetCount(int categoryId = 0)
         {
             if(categoryId == 0)
