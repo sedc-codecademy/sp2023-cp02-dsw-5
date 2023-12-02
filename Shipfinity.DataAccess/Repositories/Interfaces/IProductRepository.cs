@@ -17,5 +17,6 @@ namespace Shipfinity.DataAccess.Repositories.Interfaces
         Task<List<Product>> SearchProductsAsync(string keyword);
         Task AddProductReviewAsync(ReviewProduct reviewProduct);
         Task<List<Product>> GetProductsOnSaleAsync();
+        Task<List<Product>> GetProductsBySellerIdAsync(int sellerId);
     }
 }

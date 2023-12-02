@@ -17,5 +17,6 @@ namespace Shipfinity.Services.Interfaces
         Task UpdateProductPhotoUrl(int productId, string photoUrl);
         Task<List<ProductReadDto>> SearchProductsByKeywordAsync(string keyword);
         Task<ReviewProductReadDto> CreateReviewProductAsync(int productId, ReviewProductDto reviewProductDto);
+        Task<List<ProductReadDto>> GetProductsBySellerIdAsync(int sellerId);
     }
 }

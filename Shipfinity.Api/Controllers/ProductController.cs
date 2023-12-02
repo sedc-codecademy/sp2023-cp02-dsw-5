@@ -260,5 +260,25 @@ namespace Shipfinity.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpGet("seller/{sellerId}")]
+        public async Task<IActionResult> GetProductsBySellerId(int sellerId)
+        {
+            if (sellerId <= 0 || !ModelState.IsValid)
+            {
+                return BadRequest("Invalid seller ID");
+            }
+
+            try
+            {
+                var products = await _productService.GetProductsBySellerIdAsync(sellerId);
+
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
