@@ -262,13 +262,10 @@ namespace Shipfinity.Api.Controllers
             {
                 return BadRequest("Invalid seller ID");
             }
+
             try
             {
                 var products = await _productService.GetProductsBySellerIdAsync(sellerId);
-                if (products == null || !products.Any())
-                {
-                    return NotFound($"No products found for seller with ID: {sellerId}");
-                }
 
                 return Ok(products);
             }
