@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using Shipfinity.Domain.Enums;
 using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.ProductDTO_s;
+using Shipfinity.Helpers;
 using Shipfinity.Mappers;
 using Shipfinity.Services.Interfaces;
 using Shipfinity.Shared.Exceptions;
+using System.Security.Claims;
+using Shipfinity.Api.Helpers;
 
 namespace Shipfinity.Api.Controllers
 {
@@ -26,6 +31,7 @@ namespace Shipfinity.Api.Controllers
 
         // HTTP GET to get all products
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllProducts()
         {
             try
@@ -41,6 +47,7 @@ namespace Shipfinity.Api.Controllers
 
         // HTTP GET to get a product by its ID
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetProductById(int id)
         {
             if (id <= 0)
@@ -59,14 +66,13 @@ namespace Shipfinity.Api.Controllers
 
         // HTTP POST to create a new product
         [HttpPost]
+        [CustomRoles(Roles.Seller, Roles.Admin)]
         public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDto productCreateDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             try
             {
-                var product = await _productService.CreateProductAsync(productCreateDto);
+                int userId = int.Parse(User.FindFirstValue("id"));
+                var product = await _productService.CreateProductAsync(productCreateDto, userId);
                 return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
             }
             catch (Exception ex)
@@ -77,6 +83,7 @@ namespace Shipfinity.Api.Controllers
 
         // HTTP PUT to update an existing product
         [HttpPut("{id}")]
+        [CustomRoles(Roles.Seller, Roles.Admin)]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDto productUpdateDto)
         {
             if (id <= 0 || !ModelState.IsValid)
@@ -95,6 +102,7 @@ namespace Shipfinity.Api.Controllers
 
         // HTTP DELETE to delete a product
         [HttpDelete("{id}")]
+        [Authorize(Roles = Roles.Seller)]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             if (id <= 0)
@@ -112,15 +120,12 @@ namespace Shipfinity.Api.Controllers
         }
 
         [HttpGet("ByCategory/{categoryId}")]
-        private async Task<IActionResult> GetProductsByCategory(int categoryId)
+        [AllowAnonymous]
+        public async Task<IActionResult> GetProductsByCategory(int categoryId, [FromQuery] int? skip, [FromQuery] int? take)
         {
             try
             {
                 var products = await _productService.GetProductsByCategoryAsync(categoryId);
-                if (products == null || !products.Any())
-                {
-                    return NotFound("No products found for the given category.");
-                }
                 return Ok(products);
             }
             catch (Exception ex)
@@ -130,6 +135,7 @@ namespace Shipfinity.Api.Controllers
         }
 
         [HttpGet("OnSale")]
+        [AllowAnonymous]
         private async Task<IActionResult> GetProductsOnSale()
         {
             try
@@ -147,16 +153,13 @@ namespace Shipfinity.Api.Controllers
             }
         }
 
-        [HttpGet("Range/{skip}/{take}")]
-        private async Task<IActionResult> GetProductsInRange(int skip, int take)
+        [HttpGet("Range")]
+        [AllowAnonymous]
+        private async Task<IActionResult> GetProductsInRange([FromQuery] int skip, [FromQuery] int take)
         {
             try
             {
                 var products = await _productService.GetProductsInRangeAsync(skip, take);
-                if (products == null || !products.Any())
-                {
-                    return NotFound("No products found in the given range.");
-                }
                 return Ok(products);
             }
             catch (Exception ex)
@@ -166,6 +169,7 @@ namespace Shipfinity.Api.Controllers
         }
 
         [HttpPost("{productId}/UploadPhoto")]
+        [CustomRoles(Roles.Seller, Roles.Admin)]
         public async Task<IActionResult> UploadPhoto(int productId, IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -207,6 +211,7 @@ namespace Shipfinity.Api.Controllers
         }
 
         [HttpGet("search/{keyword}")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<ProductReadDto>>> SearchProductsByKeyword(string keyword)
         {
             try
@@ -233,6 +238,7 @@ namespace Shipfinity.Api.Controllers
         }
 
         [HttpPost("{productId}/reviews")]
+        [Authorize]
         public async Task<IActionResult> AddProductReview(int productId, [FromBody] ReviewProductDto reviewProductDto)
         {
             if (productId <= 0 || !ModelState.IsValid)

@@ -23,7 +23,5 @@ namespace Shipfinity.DTOs.ProductDTO_s
 
         [Required]
         public int CategoryId { get; set; }
-
-        public string ImageUrl { get; set; }
     }
 }

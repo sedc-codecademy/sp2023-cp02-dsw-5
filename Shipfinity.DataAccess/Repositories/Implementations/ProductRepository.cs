@@ -105,5 +105,23 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             await _context.ProductReviews.AddAsync(reviewProduct);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<int> GetCount(int categoryId = 0)
+        {
+            if(categoryId == 0)
+            {
+                return await _context.Products.CountAsync();
+            }
+            return await _context.Products.CountAsync(x => x.CategoryId == categoryId);
+        }
+
+        public async Task<List<Product>> GetRangeByCategoryId(int categoryId, int start, int count)
+        {
+            return await _context.Products
+                .Where(x => x.CategoryId == categoryId)
+                .Skip(start)
+                .Take(count)
+                .ToListAsync();
+        }
     }
 }

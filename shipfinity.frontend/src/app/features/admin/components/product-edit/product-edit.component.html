@@ -3,7 +3,7 @@
         <h1 class="display-4">{{ product? 'Edit product': 'Add product' }}</h1>
         <hr class="bs-hr">
         <div>
-            <form [formGroup]="productForm">
+            <form [formGroup]="productForm" (submit)="submitForm()">
                 <div class="row">
                     <div class="col-lg">
                         <div class="mb-3">
@@ -14,11 +14,7 @@
                     <div class="col-lg">
                         <label for="category" class="form-label">Category</label>
                         <select id="category" class="form-select" aria-label="Category select" formControlName="categoryId">
-                            <option value="1">Smart Lights</option>
-                            <option value="2">Smart Plugs</option>
-                            <option value="3">Smart Speakers</option>
-                            <option value="4">Smart Thermostats</option>
-                            <option value="5">Wifi Extenders</option>
+                            <option *ngFor="let category of categories" [value]="category.id">{{ category.displayName }}</option>
                           </select>
                     </div>
                     <div class="col-lg">
@@ -32,6 +28,15 @@
                     <div class="col-lg mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control" id="description" rows="5" formControlName="description"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="image" [disabled]="!product" />
+                            <button class="btn btn-info" [disabled]="!product" type="button"><i class="bi bi-upload"></i> Upload image</button>
+                        </div>
                     </div>
                 </div>
                 <button class="btn btn-secondary me-3" type="button" (click)="cancel.emit()">Cancel</button>

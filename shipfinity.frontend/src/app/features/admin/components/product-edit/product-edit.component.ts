@@ -1,18 +1,24 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { CategoryModel } from 'src/app/shared/models/category';
 import Product, { ProductEdit } from 'src/app/shared/models/product';
+import { CategoryService } from 'src/app/shared/services/category.service';
 
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css']
 })
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit, OnDestroy {
   @Output() cancel = new EventEmitter<void>();
   @Output() submit = new EventEmitter<ProductEdit>();
   @Input() product: Product | null;
   productForm: FormGroup;
-
+  categories: CategoryModel[] = [];
+  private sub: Subscription;
+  
+  constructor(private categoryService: CategoryService){}
   ngOnInit(): void {
     this.productForm = new FormGroup({
       name: new FormControl(this.product?.name?? '', [Validators.required]),
@@ -20,6 +26,15 @@ export class ProductEditComponent implements OnInit {
       price: new FormControl(this.product?.price?? 0, [Validators.required]),
       description: new FormControl(this.product?.description?? '')
     });
+    this.sub = this.categoryService.categoryList$.subscribe(data => {
+      this.categories = [...data];
+      this.productForm.controls['categoryId'].setValue(this.product?.categoryId?? 1);
+    })
+    this.categoryService.getCategories();
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 
   submitForm() {

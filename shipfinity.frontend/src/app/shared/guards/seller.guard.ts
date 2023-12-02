@@ -4,7 +4,7 @@ import { AuthService } from '../services/auth.service';
 
 export const sellerGuard: CanActivateFn = (route, state) => {
   const auth = inject(AuthService);
-  if(auth.currentUser$.getValue()?.role == "SELLER"){
+  if(auth.currentUser$.getValue()?.role == "SELLER" || auth.currentUser$.getValue()?.role == "ADMINISTRATOR"){
     return true;
   }
   return false;

@@ -23,13 +23,17 @@ export class AuthInterceptor implements HttpInterceptor {
       });
       return next.handle(newRequest).pipe(catchError(err => {
         if(err.status === 401) {
+          if (this.auth.currentUser$.value?.role === "SELLER"){
+            this.auth.logout();
+            this.router.navigate(['/admin/login']);
+            return of(err);
+          }
           this.auth.logout();
           this.router.navigate(['/login']);
         }
         return of(err);
       }));
     }
-    this.router.navigate(['/login']);
     return next.handle(request);
   }
 }

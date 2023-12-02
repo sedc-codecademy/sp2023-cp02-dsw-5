@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import ILoginFormData from '../models/login-form-data';
 import { environment } from 'src/environments/environment';
 import IRegisterFormModel from '../models/register-form-data';
 import { BehaviorSubject } from 'rxjs';
@@ -32,7 +31,7 @@ export class AuthService {
   }
 
   public getToken() {
-    localStorage.getItem('Token');
+    return localStorage.getItem('Token');
   }
 
   public deleteToken() {
@@ -42,12 +41,29 @@ export class AuthService {
   public login(username: string, password: string) {
     this.authApiService.loginUser(username, password).subscribe({
       next: (res) => {
-        const token = res.headers.get('access-token');
-        const user = res.body as User;
+        const user = res as User;
+        this.setToken(user.token);
 
         this.saveUserInLocalStorage(user);
         this.currentUser$.next(user);
         this.router.navigate(['/']);
+        this.notificationService.successMessage('Successfully logged in!');
+      },
+      error: (error) => {
+        this.notificationService.errorMessage(error.error.message);
+      },
+    });
+  }
+
+  public loginSeller(username: string, password: string) {
+    this.authApiService.loginSeller(username, password).subscribe({
+      next: (res) => {
+        const user = res as User;
+        this.setToken(user.token);
+
+        this.saveUserInLocalStorage(user);
+        this.currentUser$.next(user);
+        this.router.navigate(['/admin/products']);
         this.notificationService.successMessage('Successfully logged in!');
       },
       error: (error) => {
