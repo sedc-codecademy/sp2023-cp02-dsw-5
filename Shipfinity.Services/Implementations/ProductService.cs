@@ -99,5 +99,11 @@ namespace Shipfinity.Services.Implementations
             await _productRepository.AddProductReviewAsync(newReview);
             return ProductMapper.MapToReadDto(newReview);
         }
+
+        public async Task<List<ProductReadDto>> GetProductsBySellerIdAsync(int sellerId)
+        {
+            var products = await _productRepository.GetProductsBySellerIdAsync(sellerId);
+            return products.Select(ProductMapper.MapToReadDto).ToList();
+        }
     }
 }
