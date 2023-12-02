@@ -13,7 +13,20 @@ export class ProductService {
   constructor(private http: HttpClient, public notifications: NotificationService) {}
 
   public GetProducts() {
-    this.http.get(`${environment.API_URL}/products`)
+    this.http.get(`${environment.API_URL}/product`)
+    .pipe(map(data => data as Product[]))
+    .subscribe({
+      next: data => {
+        this.productList$.next([...data]);
+      },
+      error: err => {
+        this.notifications.errorMessage(err.message);
+      }
+    });
+  }
+
+  public GetByCategory(id: number) {
+    this.http.get(`${environment.API_URL}/product/byCategory/${id}`)
     .pipe(map(data => data as Product[]))
     .subscribe({
       next: data => {
@@ -26,18 +39,20 @@ export class ProductService {
   }
 
   public AddNewProduct(product: ProductEdit) {
-    this.http.post(`${environment.API_URL}/products`, product)
+    delete product.id;
+    this.http.post(`${environment.API_URL}/product`, product)
     .subscribe({
       next: data => {
         this.notifications.successMessage("Product saved");
     },
       error: err => {
+        console.log(err);
         this.notifications.errorMessage("Error while saving");
     }});
   }
 
   public UpdateProduct(product: ProductEdit) {
-    this.http.put(`${environment.API_URL}/products/${product.id}`, product)
+    this.http.put(`${environment.API_URL}/product/${product.id}`, product)
     .subscribe({
       next: data => {
         this.notifications.successMessage("Product saved");

@@ -17,11 +17,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of products">
+            <tr *ngFor="let product of products$ | async">
                 <th scope="row">{{ product.name }}</th>
                 <td>{{ product.categoryId }}</td>
                 <td>{{ product.price }}</td>
-                <td>
+                <td [width]="'150px'">
                     <button class="btn btn-sm btn-primary me-2" (click)="editBtnClick(product.id)"><i class="bi bi-pencil-fill"></i></button>
                     <button class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
                 </td>

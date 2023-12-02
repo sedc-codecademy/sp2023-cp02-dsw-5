@@ -1,5 +1,5 @@
 <div class="container pt-5">
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
         <div class="card mx-lg-5">
             <div class="card-header">
                 <h2 class="display-5">Login as a Seller</h2>
@@ -7,16 +7,16 @@
             <div class="card-body">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" id="username" class="form-control" />
+                    <input type="text" id="username" class="form-control" formControlName="username" />
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="text" id="password" class="form-control" />
+                    <input type="password" id="password" class="form-control" formControlName="password" />
                 </div>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-success">Login</button>
+                    <button type="submit" class="btn btn-success">Login</button>
                 </div>
             </div>
         </div>

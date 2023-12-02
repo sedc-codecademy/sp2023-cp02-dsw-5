@@ -1,7 +1,8 @@
+<app-loader></app-loader>
 <app-header />
 <!-- id="main-body-bg" class="bg-image" for starts -->
 <main>
-    <div class="container">
+    <div>
         <app-message-notification *ngIf="successNotification$ | async as successNotification" [message] = "successNotification"></app-message-notification>
         <app-message-notification *ngIf="errorNotification$ | async as successNotification" [message] = "successNotification" [isError]="true"></app-message-notification>
     </div>

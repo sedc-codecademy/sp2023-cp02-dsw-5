@@ -44,7 +44,8 @@ namespace Shipfinity.Services.Implementations
             var existingCategory = await _categoryRepository.GetByIdAsync(updateCategoryDto.Id);
             if (existingCategory != null)
             {
-                existingCategory.Name = updateCategoryDto.Name;
+
+                existingCategory = updateCategoryDto.MapToCategory();
                 await _categoryRepository.UpdateAsync(existingCategory);
             }
             else

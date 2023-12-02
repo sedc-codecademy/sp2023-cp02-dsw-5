@@ -28,7 +28,9 @@ namespace Shipfinity.Mappers
                 Description = productCreateDto.Description,
                 Price = productCreateDto.Price,
                 CategoryId = productCreateDto.CategoryId,
-                ImageUrl = productCreateDto.ImageUrl
+                DiscountPercenrage = 0,
+                Rating = 0,
+                ImageUrl = null
             };
         }
 
@@ -38,7 +40,7 @@ namespace Shipfinity.Mappers
             product.Description = productUpdateDto.Description;
             product.Price = productUpdateDto.Price;
             product.CategoryId = productUpdateDto.CategoryId;
-            product.ImageUrl = productUpdateDto.ImageUrl;
+            product.DiscountPercenrage = productUpdateDto.DiscountPercentage;
         }
 
         public static ReviewProductReadDto MapToReadDto(ReviewProduct reviewProduct)

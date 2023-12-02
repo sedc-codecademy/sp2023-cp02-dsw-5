@@ -9,8 +9,10 @@ namespace Shipfinity.DataAccess.Repositories.Interfaces
 {
     public interface IProductRepository : IRepository<Product>
     {
+        Task<int> GetCount(int categoryId = 0);
         Task<List<Product>> GetAllByCategoryIdAsync(int categoryId);
         Task<List<Product>> GetRangeOrderedByPrice(int price, int start, int count);
+        Task<List<Product>> GetRangeByCategoryId(int categoryId, int start, int count);
         Task UpdateProductPhotoUrlAsync(int productId, string photoUrl);
         Task<List<Product>> SearchProductsAsync(string keyword);
         Task AddProductReviewAsync(ReviewProduct reviewProduct);
