@@ -101,6 +101,17 @@ namespace Shipfinity.Services.Implementations
             };
 
             await _productRepository.AddProductReviewAsync(newReview);
+
+            var productReviews = await _productRepository.GetProductReviewsByProductIdAsync(productId);
+
+            int totalRatings = productReviews.Count();
+            int sumOfRatings = productReviews.Sum(r => r.Rating);
+
+            double averageRating = totalRatings > 0 ? (double)sumOfRatings / totalRatings : 0;
+
+            product.Rating = (short)Math.Round(averageRating, MidpointRounding.AwayFromZero);
+            await _productRepository.UpdateAsync(product);
+
             return ProductMapper.MapToReadDto(newReview);
         }
 
