@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { SendMessageService } from 'src/app/shared/services/send-message.service';
 
 @Component({
@@ -9,8 +10,9 @@ import { SendMessageService } from 'src/app/shared/services/send-message.service
 })
 export class FooterComponent implements OnInit {
   newsletterForm: FormGroup;
+  categories$ = this.categoryService.categoryList$;
 
-  constructor(private message: SendMessageService){}
+  constructor(private message: SendMessageService, private categoryService: CategoryService){}
 
   ngOnInit(): void {
     this.newsletterForm = new FormGroup({

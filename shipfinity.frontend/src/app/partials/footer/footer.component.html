@@ -10,7 +10,7 @@
                 <li class="nav-item mb-2"><a routerLink="/contact" class="nav-link p-0 text-light">Contact</a></li>
                 <li class="nav-item mb-2"><a class="nav-link p-0 text-light">Categories</a>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="">Smart Lights</a></li>
+                        <li *ngFor="let category of categories$ | async" class="nav-item mb-2"><a class="nav-link text-light" routerLink="">{{category.displayName}}</a></li>
                     </ul>
                 </li>
               </ul>

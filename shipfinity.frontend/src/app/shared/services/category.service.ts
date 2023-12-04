@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { CategoryModel } from '../models/category';
+import { CategoryCreateModel, CategoryModel } from '../models/category';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -18,7 +18,7 @@ export class CategoryService {
       next: data => {
         this.categoryList$.next([...data]);
       }
-    })
+    });
   }
 
   getById(id: number) {
@@ -27,6 +27,18 @@ export class CategoryService {
       next: data => {
         this.currentCategory$.next(data);
       }
-    })
+    });
+  }
+
+  createCategory(cat: CategoryCreateModel){
+    return this.http.post(`${environment.API_URL}/category`, cat);
+  }
+
+  editCategory(cat: CategoryCreateModel){
+    return this.http.put(`${environment.API_URL}/category/${cat.id}`, cat);
+  }
+
+  deleteCategory(id: number){
+    return this.http.delete(`${environment.API_URL}/category/${id}`);
   }
 }

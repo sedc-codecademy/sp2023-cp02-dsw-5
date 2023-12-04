@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FlyoutComponent } from './components/flyout/flyout.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { WarningDialogComponent } from './components/warning-dialog/warning-dialog.component';
 
 
 
@@ -10,6 +11,7 @@ import { LoaderComponent } from './components/loader/loader.component';
   declarations: [
     FlyoutComponent,
     LoaderComponent,
+    WarningDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   exports: [
     FlyoutComponent,
     LoaderComponent,
-    MatDialogModule
+    MatDialogModule,
+    WarningDialogComponent
   ]
 })
 export class SharedModule { }

@@ -58,6 +58,18 @@ export class ProductService {
     });
   }
 
+  public deleteProduct(id: number){
+    this.http.delete(`${environment.API_URL}/product/${id}`)
+    .subscribe({
+      next: data => {
+        this.notifications.successMessage("Product deleted");
+      },
+      error: err => {
+        this.notifications.errorMessage("Error while deleting");
+      }
+    })
+  }
+
   public UpdateProduct(product: ProductEdit) {
     this.http
       .put(`${environment.API_URL}/product/${product.id}`, product)
