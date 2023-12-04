@@ -22,11 +22,11 @@ namespace Shipfinity.Services.Implementations
             return products.Select(ProductMapper.MapToReadDto).ToList();
         }
 
-        public async Task<ProductReadDto> GetProductByIdAsync(int id)
+        public async Task<ProductDetailsDto> GetProductByIdAsync(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
             if (product == null) throw new ProductNotFoundException(id);
-            return ProductMapper.MapToReadDto(product);
+            return ProductMapper.MapToDetailsDto(product);
         }
 
         public async Task<ProductReadDto> CreateProductAsync(ProductCreateDto productCreateDto, int sellerId)
