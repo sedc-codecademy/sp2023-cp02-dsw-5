@@ -1,0 +1,22 @@
+<form [formGroup]="editForm" (ngSubmit)="submit()">
+    <div class="card">
+        <div class="card-header" [ngClass]="[isCreate? 'card-header bg-success' : 'card-header bg-primary']">
+        </div>
+        <div class="card-body">
+            <div class="mb-2">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" id="name" formControlName="name">
+            </div>
+            <div class="mb-2">
+                <label for="displayName" class="form-label">Display Name</label>
+                <input type="text" class="form-control" name="displayName" id="displayName" formControlName="displayName">
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button>
+                <button class="btn" [ngClass]="[isCreate? 'btn btn-success': 'btn btn-primary']" type="submit">{{ isCreate? 'Add new' : 'Save changes' }}</button>
+            </div>
+        </div>
+    </div>
+</form>

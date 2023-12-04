@@ -1,16 +1,23 @@
 <div class="container pt-5">
-    <table class="table-striped">
+    <div class="d-flex justify-content-between">
+        <h2>Categories</h2>
+        <button class="btn btn-success" (click)="createNew()"><i class="bi bi-plus"></i> Add</button>
+    </div>
+    <table class="table table-striped">
         <thead>
-            <tr>Name</tr>
-            <tr>Display Name</tr>
-            <tr>Actions</tr>
+            <tr>
+                <th>Name</th>
+                <th>Display Name</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody>
             <tr *ngFor="let category of categories$ | async">
                 <td>{{ category.name }}</td>
                 <td>{{ category.displayName }}</td>
                 <td>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <button class="btn btn-sm btn-primary me-2" (click)="editCategory(category)"><i class="bi bi-pencil-fill"></i></button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteCategory(category)"><i class="bi bi-trash3-fill"></i></button>
                 </td>
             </tr>
         </tbody>

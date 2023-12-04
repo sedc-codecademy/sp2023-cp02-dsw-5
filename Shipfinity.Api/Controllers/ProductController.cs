@@ -102,7 +102,7 @@ namespace Shipfinity.Api.Controllers
 
         // HTTP DELETE to delete a product
         [HttpDelete("{id}")]
-        [Authorize(Roles = Roles.Seller)]
+        [CustomRoles(Roles.Admin)]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             if (id <= 0)
