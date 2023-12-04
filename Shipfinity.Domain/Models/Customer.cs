@@ -17,5 +17,6 @@ namespace Shipfinity.Domain.Models
         public string LastName { get; set; } = string.Empty;
         public List<Order> Orders { get; set; } = new();
         public List<ReviewProduct> ReviewProducts { get; set; } = new();
+        public List<PaymentInfo> PaymentInfos { get; set; } = new();    
     }
 }
