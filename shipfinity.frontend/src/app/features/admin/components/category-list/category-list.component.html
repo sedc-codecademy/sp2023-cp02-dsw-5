@@ -1,1 +1,18 @@
-<p>category-list works!</p>
+<div class="container pt-5">
+    <table class="table-striped">
+        <thead>
+            <tr>Name</tr>
+            <tr>Display Name</tr>
+            <tr>Actions</tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories$ | async">
+                <td>{{ category.name }}</td>
+                <td>{{ category.displayName }}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
