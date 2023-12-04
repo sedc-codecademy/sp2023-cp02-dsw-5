@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CategoryService {
   categoryList$ = new BehaviorSubject<CategoryModel[]>([]);
+  currentCategory$ = new BehaviorSubject<CategoryModel>({id:0,name:"", displayName:""});
   constructor(private http: HttpClient) { }
 
   getCategories() {
@@ -16,6 +17,15 @@ export class CategoryService {
     .subscribe({
       next: data => {
         this.categoryList$.next([...data]);
+      }
+    })
+  }
+
+  getById(id: number) {
+    this.http.get(`${environment.API_URL}/category/${id}`).pipe(map(data => data as CategoryModel))
+    .subscribe({
+      next: data => {
+        this.currentCategory$.next(data);
       }
     })
   }
