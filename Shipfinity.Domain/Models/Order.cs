@@ -22,5 +22,10 @@ namespace Shipfinity.Domain.Models
         public OrderStatus Status { get; set; }
         public List<ProductOrder> ProductOrders { get; set; } = new();
         public double TotalPrice { get; set; }
+        public string Email { get; set; }   
+        public PaymentInfo PaymentInfo { get; set; }
+        public int PaymentInfoId { get; set; }
+        public bool IsDeleted { get; set; } 
+
     }
 }

@@ -53,6 +53,21 @@ namespace Shipfinity.Mappers
                 CustomerId = reviewProduct.CustomerId
             };
         }
+
+        public static ProductDetailsDto MapToDetailsDto(Product product)
+        {
+            return new ProductDetailsDto
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                CategoryId = product.CategoryId,
+                ImageUrl = product.ImageUrl,
+                Rating = product.ProductReviews.Any() ? product.ProductReviews.Average(r => r.Rating) : 0
+
+            };
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using Shipfinity.Domain.Enums;
 using Shipfinity.Domain.Models;
+using Shipfinity.DTOs.PaymentInfoDTOs;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shipfinity.DTOs.OrderDTOs
@@ -20,5 +21,7 @@ namespace Shipfinity.DTOs.OrderDTOs
 
         [Required]
         public OrderStatus Status { get; set; }
+
+        public PaymentInfoDto PaymentInfo { get; set; } = new();   
     }
 }
