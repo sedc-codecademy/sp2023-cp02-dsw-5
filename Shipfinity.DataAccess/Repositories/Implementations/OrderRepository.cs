@@ -25,7 +25,8 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             {
                 throw new OrderNotFoundException(id);
             }
-            _context.Orders.Remove(order);
+            order.IsDeleted=true;
+            _context.Orders.Update(order);
             await _context.SaveChangesAsync();
         }
 
