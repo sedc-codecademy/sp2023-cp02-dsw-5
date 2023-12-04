@@ -6,7 +6,7 @@ namespace Shipfinity.Services.Interfaces
     public interface IProductService
     {
         Task<List<ProductReadDto>> GetAllProductsAsync();
-        Task<ProductReadDto> GetProductByIdAsync(int id);
+        Task<ProductDetailsDto> GetProductByIdAsync(int id);
         Task<ProductReadDto> CreateProductAsync(ProductCreateDto productCreateDto, int sellerId);
         Task UpdateProductAsync(int id, ProductUpdateDto productUpdateDto);
         Task DeleteProductAsync(int id);

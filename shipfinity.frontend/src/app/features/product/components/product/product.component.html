@@ -1,1 +1,14 @@
-<p>product works!</p>
+<div *ngIf="(productDetails$ | async) as product" class="container pt-5 d-flex justify-content-center">
+  <div class="card" style="width: 40rem;">
+    <img [src]="product.imageUrl" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h2 class="card-title text-center">{{product.name}}</h2>
+      <p class="card-text text-center">{{product.description}}</p>
+      <p class="card-text text-center">{{product.price}}</p>
+      <p class="card-text text-center">{{product.discountPercentage}}</p>
+      <p class="card-text text-center">{{product.rating}}</p>
+      <a [routerLink]="['/product', 'category', product.categoryId]" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+
+</div>
