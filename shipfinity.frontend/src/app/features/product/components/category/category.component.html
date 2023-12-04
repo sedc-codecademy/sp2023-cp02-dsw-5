@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 class="display-4">{{ categoryName.toString() }}</h2>
+    <h2 class="display-4">{{ (category$ | async)?.displayName }}</h2>
 </div>
 
 <div class="container d-flex gap-3 flex-wrap">
