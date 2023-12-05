@@ -34,8 +34,8 @@
                     <div class="col-lg mb-3">
                         <label for="image" class="form-label">Image</label>
                         <div class="input-group">
-                            <input type="file" class="form-control" id="image" [disabled]="!product" />
-                            <button class="btn btn-info" [disabled]="!product" type="button"><i class="bi bi-upload"></i> Upload image</button>
+                            <input type="file" class="form-control" id="image" (change)="onFileChange($event)" accept="image/png, image/jpeg" [disabled]="!product" />
+                            <button class="btn btn-info" [disabled]="!product" type="button" (click)="onFileSubmit()"><i class="bi bi-upload"></i> Upload image</button>
                         </div>
                     </div>
                 </div>
