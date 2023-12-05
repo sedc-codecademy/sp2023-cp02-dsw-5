@@ -12,7 +12,9 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.servi
 export class ProductCardComponent {
   @Input() product: Product = new Product();
 
-  constructor(private shoppingCartService: ShoppingCartService, private notificationService: NotificationService){}
+  constructor(private shoppingCartService: ShoppingCartService, private notificationService: NotificationService){
+    console.log(this.product);
+  }
 
   addToCartClick() {
     this.shoppingCartService.addItem(new ProductOrder(this.product, 1));

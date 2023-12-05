@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { CategoryModel } from 'src/app/shared/models/category';
 import Product, { ProductEdit } from 'src/app/shared/models/product';
 import { CategoryService } from 'src/app/shared/services/category.service';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -17,8 +18,9 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
   categories: CategoryModel[] = [];
   private sub: Subscription;
-  
-  constructor(private categoryService: CategoryService){}
+  imageFile: File;
+
+  constructor(private categoryService: CategoryService, private productService: ProductService){}
   ngOnInit(): void {
     this.productForm = new FormGroup({
       name: new FormControl(this.product?.name?? '', [Validators.required]),
@@ -61,5 +63,15 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       this.submit.emit(prod);
       this.cancel.emit();
     }
+  }
+
+  onFileChange(event: any) {
+    this.imageFile = event.target.files[0];
+  }
+
+  onFileSubmit() {
+    if (this.imageFile && this.product)
+      this.productService.uploadImage(this.product.id, this.imageFile)
+    this.cancel.emit();
   }
 }
