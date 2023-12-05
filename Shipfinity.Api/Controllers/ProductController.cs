@@ -196,7 +196,8 @@ namespace Shipfinity.Api.Controllers
                 }
 
                 // Update product's photo URL in the database
-                await _productService.UpdateProductPhotoUrl(productId, "/images/" + fileName);
+                string photoUrl = $"{Request.Scheme}://{Request.Host.Value}/images/{fileName}";
+                await _productService.UpdateProductPhotoUrl(productId, photoUrl);
 
                 return Ok("File uploaded successfully.");
             }

@@ -14,6 +14,6 @@ namespace Shipfinity.DTOs.ProductDTO_s
             public double Price { get; set; }
             public int CategoryId { get; set; }
             public string? ImageUrl { get; set; }
-            public double AverageRating { get; set; }
+            public double Rating { get; set; }
     }
 }

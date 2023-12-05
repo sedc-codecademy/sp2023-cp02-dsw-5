@@ -1,9 +1,10 @@
 <div class="card">
-    <img class="card-img-top product-img" src="/assets/img/product/no_img.png" alt="card image">
+    <img class="card-img-top product-img" [src]="[product.imageUrl?? '/assets/img/product/no_img.png']" alt="card image">
     <div class="card-body">
         <h4 class="card-title">{{ product.name }}</h4>
         <p class="card-text">${{ product.price.toFixed(2) }}</p>
         <div class="d-flex text-warning">
+            <span class="text-black">Rating </span>
             <i *ngIf="product.rating >= 1" class="bi bi-star-fill"></i>
             <i *ngIf="product.rating < 1" class="bi bi-star"></i>
             <i *ngIf="product.rating >= 2" class="bi bi-star-fill"></i>

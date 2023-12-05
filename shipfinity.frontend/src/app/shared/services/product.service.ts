@@ -96,4 +96,14 @@ export class ProductService {
         },
       });
   }
+
+  uploadImage(id: number, blob: File){
+    const data = new FormData();
+    data.append('file', blob, blob.name);
+    return this.http.post(`${environment.API_URL}/product/${id}/UploadPhoto`, data)
+    .subscribe({
+      next: _ => this.notifications.successMessage("Uploaded photo"),
+      error: err => this.notifications.errorMessage("Error while upload")
+    });
+  }
 }
