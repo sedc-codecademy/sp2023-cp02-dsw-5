@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shipfinity.DTOs.SellerDTO_s;
 using Shipfinity.Services.Interfaces;
 using Shipfinity.Shared.Exceptions;

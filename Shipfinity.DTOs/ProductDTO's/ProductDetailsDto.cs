@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shipfinity.DTOs.ProductDTO_s
+﻿namespace Shipfinity.DTOs.ProductDTO_s
 {
     public class ProductDetailsDto
     {

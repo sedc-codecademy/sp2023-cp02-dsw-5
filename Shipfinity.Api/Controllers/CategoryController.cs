@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Shipfinity.Domain.Enums;
 using Shipfinity.DTOs.CategoryDTOs;
 using Shipfinity.Services.Interfaces;
-using Shipfinity.Shared.Exceptions;
 
 namespace Shipfinity.Api.Controllers
 {

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shipfinity.DTOs.ProductDTO_s
+﻿namespace Shipfinity.DTOs.ProductDTO_s
 {
     public class ReviewProductReadDto
     {

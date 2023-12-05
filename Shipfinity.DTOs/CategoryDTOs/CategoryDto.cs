@@ -1,6 +1,4 @@
-﻿using Shipfinity.Domain.Models;
-
-namespace Shipfinity.DTOs.CategoryDTOs
+﻿namespace Shipfinity.DTOs.CategoryDTOs
 {
     public class CategoryDto
     {

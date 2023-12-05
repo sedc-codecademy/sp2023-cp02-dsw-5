@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Shipfinity.Domain.Enums;
-using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.ProductDTO_s;
-using Shipfinity.Helpers;
-using Shipfinity.Mappers;
 using Shipfinity.Services.Interfaces;
 using Shipfinity.Shared.Exceptions;
 using System.Security.Claims;

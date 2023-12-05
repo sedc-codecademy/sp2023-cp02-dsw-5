@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shipfinity.DataAccess.Context;
 using Shipfinity.DataAccess.Repositories.Implementations;
 using Shipfinity.DataAccess.Repositories.Interfaces;
-using Shipfinity.Domain.Models;
+using Shipfinity.Services.Helpers;
 using Shipfinity.Services.Implementations;
 using Shipfinity.Services.Interfaces;
 
@@ -36,6 +37,7 @@ namespace Shipfinity.Helpers
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ISellerService, SellerService>();
+            services.AddScoped<IEmailService, EmailService>();
         }
     }
 }
