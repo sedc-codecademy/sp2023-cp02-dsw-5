@@ -12,7 +12,6 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  @Input() product: Product = new Product();
   productDetails$ = this.productService.productDetails$;
 
   constructor(
@@ -30,13 +29,9 @@ export class ProductComponent implements OnInit {
   }
 
   addToCartClick() {
-    const product = this.productDetails$.value;
+    const product = this.productDetails$.value as Product;
     this.shoppingCartService.addItem(new ProductOrder(product, 1));
     this.notificationService.successMessage(`${product.name} added to cart`);
-    console.log(product.name);
-    console.log(product.description);
-    console.log(product.price);
-    console.log(product.discountPercentage);
-    console.log(product.rating);
+    console.log(product);
   }
 }

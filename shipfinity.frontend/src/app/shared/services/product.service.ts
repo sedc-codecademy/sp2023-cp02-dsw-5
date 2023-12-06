@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import Product, { ProductEdit } from '../models/product';
+import Product, { ProductDetails, ProductEdit } from '../models/product';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from './notification.service';
 
@@ -10,7 +10,7 @@ import { NotificationService } from './notification.service';
 })
 export class ProductService {
   public productList$ = new BehaviorSubject<Product[]>([]);
-  public productDetails$ = new BehaviorSubject<Product>(new Product());
+  public productDetails$ = new BehaviorSubject<ProductDetails | null>(null);
 
   constructor(
     private http: HttpClient,
@@ -58,16 +58,15 @@ export class ProductService {
     });
   }
 
-  public deleteProduct(id: number){
-    this.http.delete(`${environment.API_URL}/product/${id}`)
-    .subscribe({
-      next: data => {
-        this.notifications.successMessage("Product deleted");
+  public deleteProduct(id: number) {
+    this.http.delete(`${environment.API_URL}/product/${id}`).subscribe({
+      next: (data) => {
+        this.notifications.successMessage('Product deleted');
       },
-      error: err => {
-        this.notifications.errorMessage("Error while deleting");
-      }
-    })
+      error: (err) => {
+        this.notifications.errorMessage('Error while deleting');
+      },
+    });
   }
 
   public UpdateProduct(product: ProductEdit) {
@@ -86,7 +85,7 @@ export class ProductService {
   public GetByProductId(id: number) {
     this.http
       .get(`${environment.API_URL}/product/${id}`)
-      .pipe(map((data) => data as Product))
+      .pipe(map((data) => data as ProductDetails))
       .subscribe({
         next: (data) => {
           this.productDetails$.next(data);
@@ -97,13 +96,14 @@ export class ProductService {
       });
   }
 
-  uploadImage(id: number, blob: File){
+  uploadImage(id: number, blob: File) {
     const data = new FormData();
     data.append('file', blob, blob.name);
-    return this.http.post(`${environment.API_URL}/product/${id}/UploadPhoto`, data)
-    .subscribe({
-      next: _ => this.notifications.successMessage("Uploaded photo"),
-      error: err => this.notifications.errorMessage("Error while upload")
-    });
+    return this.http
+      .post(`${environment.API_URL}/product/${id}/UploadPhoto`, data)
+      .subscribe({
+        next: (_) => this.notifications.successMessage('Uploaded photo'),
+        error: (err) => this.notifications.errorMessage('Error while upload'),
+      });
   }
 }

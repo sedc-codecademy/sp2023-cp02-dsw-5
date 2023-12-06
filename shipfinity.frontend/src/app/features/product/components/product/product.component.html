@@ -1,6 +1,6 @@
-<div *ngIf="(productDetails$ | async) as product" class="container pt-5 d-flex justify-content-center">
+<div *ngIf="(productDetails$ | async) as product" class="container mt-3 mb-5 d-flex justify-content-center">
 
-  <div class="border card bg-light" style="width: 30rem; height: auto; border: none;">
+  <div class="border card" style="width: 30rem; height: auto; border: none;">
 
     <div class="card-body">
       <div class="card-img-top d-flex justify-content-center">
@@ -14,7 +14,7 @@
     <div class="card-body text-center pt-3 bg-white">
       <h2 class="card-title text-center">{{product.name}}</h2>
       <p class="card-text text-center">{{product.description}}</p>
-      <p class="card-text text-center">{{product.discountPercentage}}</p>
+      <!-- <p class="card-text text-center">{{product.discountPercentage}}</p> -->
       <h4 class="card-text"><strong>${{ product.price.toFixed(2) }}</strong></h4>
 
       <span class="text-black">Rating </span>
