@@ -2,8 +2,8 @@
 
 namespace Shipfinity.DataAccess.Repositories.Interfaces
 {
-    public interface INewsletterRepository 
+    public interface INewsletterRepository:IRepository<NewsletterSubscriber>
     {
-        Task AddSubscriberAsync(NewsletterSubscriber subscriber);
+
     }
 }

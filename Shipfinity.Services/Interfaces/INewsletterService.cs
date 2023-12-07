@@ -1,7 +1,10 @@
-﻿namespace Shipfinity.Services.Interfaces
+﻿using Shipfinity.Domain.Models;
+
+namespace Shipfinity.Services.Interfaces
 {
     public interface INewsletterService
     {
-        Task SubscribeToNewsletter(string email);
+        Task SubscribeToNewsletterAsync(string email);
+        Task<List<NewsletterSubscriber>> GetAllSubscribersAsync();
     }
 }

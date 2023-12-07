@@ -24,20 +24,20 @@ namespace Shipfinity.Services.Implementations
             {
                 throw new ArgumentException("Email, subject, and body cannot be null or empty.");
             }
+
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUsername").Value));
+            email.From.Add(MailboxAddress.Parse(_config["Email:Username"]));
             email.To.Add(MailboxAddress.Parse(request.To));
             email.Subject = request.Subject;
             email.Body = new TextPart(TextFormat.Html) { Text = request.Body };
 
             using var smtp = new SmtpClient();
+            // Bypass SSL certificate validation (Only for testing purposes)
             smtp.ServerCertificateValidationCallback = (s, c, h, e) => true;
-            smtp.Connect(_config.GetSection("EmailHost").Value, 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate(_config.GetSection("EmailUsername").Value, _config.GetSection("EmailPassword").Value);
-            smtp.Send(email);
-            smtp.Disconnect(true);
+            await smtp.ConnectAsync(_config["Email:Host"], 587, SecureSocketOptions.StartTls);
+            await smtp.AuthenticateAsync(_config["Email:Username"], _config["Email:Password"]);
+            await smtp.SendAsync(email);
+            await smtp.DisconnectAsync(true);
         }
     }
 }
-
-
