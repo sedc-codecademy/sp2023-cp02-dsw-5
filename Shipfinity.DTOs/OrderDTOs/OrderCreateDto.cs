@@ -1,5 +1,4 @@
 ﻿using Shipfinity.Domain.Enums;
-using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.PaymentInfoDTOs;
 using System.ComponentModel.DataAnnotations;
 

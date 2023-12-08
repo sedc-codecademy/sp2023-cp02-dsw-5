@@ -1,5 +1,4 @@
-﻿using Shipfinity.Domain.Models;
-using Shipfinity.DTOs.ProductDTO_s;
+﻿using Shipfinity.DTOs.ProductDTO_s;
 
 namespace Shipfinity.Services.Interfaces
 {

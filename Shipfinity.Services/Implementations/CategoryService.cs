@@ -1,5 +1,4 @@
 ﻿using Shipfinity.DataAccess.Repositories.Interfaces;
-using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.CategoryDTOs;
 using Shipfinity.Mappers;
 using Shipfinity.Services.Interfaces;

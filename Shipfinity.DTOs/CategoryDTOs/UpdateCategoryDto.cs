@@ -1,11 +1,4 @@
-﻿using Shipfinity.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shipfinity.DTOs.CategoryDTOs
+﻿namespace Shipfinity.DTOs.CategoryDTOs
 {
     public class UpdateCategoryDto
     {
