@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shipfinity.Api.Helpers;
+using Shipfinity.Domain.Enums;
 using Shipfinity.DTOs.EmailDTOs;
 using Shipfinity.DTOs.NewsletterDTOs;
 using Shipfinity.Services.Interfaces;
@@ -56,7 +58,7 @@ namespace Shipfinity.Api.Controllers
         }
 
         [HttpPost("send")]
-        [Authorize(Roles = "Admin")]
+        [CustomRoles(Roles.Admin)]
         public async Task<IActionResult> SendNewsletter([FromBody] SendNewsletterDto sendNewsletterDto)
         {
             if (sendNewsletterDto == null)
