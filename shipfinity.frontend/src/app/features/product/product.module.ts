@@ -7,14 +7,16 @@ import { SearchComponent } from './components/search/search.component';
 import { SaleComponent } from './components/sale/sale.component';
 import { RouterModule } from '@angular/router';
 import { productRoutes } from './product.routes';
-
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ProductComponent, CategoryComponent, ProductCardComponent, SearchComponent, SaleComponent ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(productRoutes)
-  ]
+  declarations: [
+    ProductComponent,
+    CategoryComponent,
+    ProductCardComponent,
+    SearchComponent,
+    SaleComponent,
+  ],
+  imports: [CommonModule, RouterModule.forChild(productRoutes), FormsModule],
 })
-export class ProductModule { }
+export class ProductModule {}

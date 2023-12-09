@@ -5,10 +5,11 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationService {
-  private successMessageSubject = new BehaviorSubject<string>("");
+  private successMessageSubject = new BehaviorSubject<string>('');
   successMessageAction$ = this.successMessageSubject.asObservable();
-  private errorMessageSubject = new BehaviorSubject<string>("");
-  errorMessageAction$ = this.successMessageSubject.asObservable();
+
+  private errorMessageSubject = new BehaviorSubject<string>('');
+  errorMessageAction$ = this.errorMessageSubject.asObservable();
 
   constructor() {}
 
