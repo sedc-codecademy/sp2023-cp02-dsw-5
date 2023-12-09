@@ -54,7 +54,6 @@ export class ProductService {
         this.notifications.successMessage('Product saved');
       },
       error: (err) => {
-        console.log(err);
         this.notifications.errorMessage('Error while saving');
       },
     });

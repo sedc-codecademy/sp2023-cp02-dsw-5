@@ -30,14 +30,12 @@ export class ProductComponent implements OnInit {
     const idFromRoute = Number(routeParams.get('id'));
 
     this.productService.GetByProductId(idFromRoute);
-    console.log(this.productDetails$);
   }
 
   addToCartClick() {
     const product = this.productDetails$.value as Product;
     this.shoppingCartService.addItem(new ProductOrder(product, 1));
     this.notificationService.successMessage(`${product.name} added to cart`);
-    console.log(product);
   }
 
   rateProduct(rating: number) {
