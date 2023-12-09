@@ -1,7 +1,7 @@
 import { ShoppingCartService } from './../../../../shared/services/shopping-cart.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import Product from 'src/app/shared/models/product';
+import Product, { ReviewProductDto } from 'src/app/shared/models/product';
 import ProductOrder from 'src/app/shared/models/product-order';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -14,6 +14,10 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class ProductComponent implements OnInit {
   productDetails$ = this.productService.productDetails$;
 
+  selectedRating: number = 0;
+  comment: string = '';
+  productId: number = 0;
+
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -21,6 +25,7 @@ export class ProductComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
   ngOnInit(): void {
+    // const comment: string = '';
     const routeParams = this.route.snapshot.paramMap;
     const idFromRoute = Number(routeParams.get('id'));
 
@@ -33,5 +38,27 @@ export class ProductComponent implements OnInit {
     this.shoppingCartService.addItem(new ProductOrder(product, 1));
     this.notificationService.successMessage(`${product.name} added to cart`);
     console.log(product);
+  }
+
+  rateProduct(rating: number) {
+    this.selectedRating = rating;
+  }
+
+  submitReview() {
+    const productId = this.productDetails$.value?.id || 0;
+
+    if (productId !== 0 && this.selectedRating !== 0) {
+      this.productService.submitReview(
+        productId,
+        this.comment,
+        this.selectedRating
+      );
+      console.log(productId, this.comment, this.selectedRating);
+      this.notificationService.successMessage('Review submitted successfully');
+    } else {
+      this.notificationService.errorMessage(
+        'Please select a rating and write a comment before submitting.'
+      );
+    }
   }
 }

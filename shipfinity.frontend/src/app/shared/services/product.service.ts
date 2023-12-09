@@ -1,9 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
-import Product, { ProductDetails, ProductEdit } from '../models/product';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import Product, {
+  ProductDetails,
+  ProductEdit,
+  ReviewProductDto,
+} from '../models/product';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from './notification.service';
+import { AuthService } from './auth.service';
+import { Token } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +20,8 @@ export class ProductService {
 
   constructor(
     private http: HttpClient,
-    public notifications: NotificationService
+    public notifications: NotificationService,
+    private authService: AuthService
   ) {}
 
   public GetProducts() {
@@ -105,5 +112,32 @@ export class ProductService {
         next: (_) => this.notifications.successMessage('Uploaded photo'),
         error: (err) => this.notifications.errorMessage('Error while upload'),
       });
+  }
+
+  public submitReview(productId: number, comment: string, rating: number) {
+    const reviewData = {
+      comment: comment,
+      rating: rating,
+      customerId: this.authService.currentUser$.value?.id,
+    };
+
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer' + token,
+    });
+
+    this.http
+      .post(`${environment.API_URL}/product/${productId}/reviews`, reviewData, {
+        headers: headers,
+      })
+      .subscribe(
+        (data) => {
+          this.notifications.successMessage('Review submitted successfully');
+        },
+        (err) => {
+          this.notifications.errorMessage('Failed to submit review');
+        }
+      );
   }
 }

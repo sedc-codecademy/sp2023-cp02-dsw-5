@@ -46,3 +46,8 @@ export interface ProductDetails {
   imageUrl?: string;
   rating: number;
 }
+
+export interface ReviewProductDto {
+  comment: string;
+  rating: number;
+}

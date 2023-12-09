@@ -19,10 +19,25 @@
 
       <span class="text-black">Rating </span>
       <div class="d-flex justify-content-center text-warning pb-2">
-        <ng-container *ngFor="let i of [1,2,3,4,5]">
-          <i *ngIf="product.rating >= i" class="bi bi-star-fill"></i>
-          <i *ngIf="product.rating < i" class="bi bi-star"></i>
-        </ng-container>
+        <div>
+          <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+            <i class="bi" [ngClass]="{
+                'bi-star-fill': i <= selectedRating,
+                'bi-star': i > selectedRating
+              }" (click)="rateProduct(i)"></i>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="form-floating">
+        <textarea [(ngModel)]="comment" class="form-control" placeholder="Add your review here..."
+          id="floatingTextarea"></textarea>
+        <label class="text-body-tertiary" for="floatingTextarea">Write your review...</label>
+      </div>
+
+      <div class="d-flex justify-content-center pt-3">
+        <button type="button" class="btn p-1 m-0 bg-cart btn-secondary col-3 mx-auto"
+          (click)="submitReview()">Submit</button>
       </div>
 
     </div>
@@ -30,10 +45,10 @@
     <hr class="m-0 p-0 border-secondary opacity-2">
 
     <div class="d-flex justify-content-around pb-3 pt-3">
-      <button type="button" class="btn bg-cart btn-success col-4 mx-auto" (click)="addToCartClick()"><i
+      <button type="button" class="btn p-1 m-0 bg-cart btn-success col-3 mx-auto" (click)="addToCartClick()"><i
           class="fa fa-cart-plus mr-2"></i> Add to
         cart</button>
-      <a [routerLink]="['/product', 'category', product.categoryId]" class="btn btn-secondary col-4 mx-auto">Back</a>
+      <a [routerLink]="['/product', 'category', product.categoryId]"
+        class="btn btn-secondary p-1 m-0 col-3 mx-auto">Back</a>
     </div>
   </div>
-</div>
