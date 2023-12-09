@@ -1,7 +1,7 @@
 import { ShoppingCartService } from './../../../../shared/services/shopping-cart.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import Product, { ReviewProductDto } from 'src/app/shared/models/product';
+import Product from 'src/app/shared/models/product';
 import ProductOrder from 'src/app/shared/models/product-order';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ProductService } from 'src/app/shared/services/product.service';

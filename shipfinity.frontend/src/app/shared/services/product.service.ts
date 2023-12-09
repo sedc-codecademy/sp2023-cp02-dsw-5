@@ -1,15 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
-import Product, {
-  ProductDetails,
-  ProductEdit,
-  ReviewProductDto,
-} from '../models/product';
+import { BehaviorSubject, map } from 'rxjs';
+import Product, { ProductDetails, ProductEdit } from '../models/product';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from './notification.service';
 import { AuthService } from './auth.service';
-import { Token } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
