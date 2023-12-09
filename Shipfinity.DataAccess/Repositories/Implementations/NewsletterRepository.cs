@@ -1,11 +1,8 @@
-﻿using Shipfinity.DataAccess.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Shipfinity.DataAccess.Context;
 using Shipfinity.DataAccess.Repositories.Interfaces;
 using Shipfinity.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Shipfinity.DataAccess.Repositories.Implementations
 {
@@ -18,11 +15,41 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddSubscriberAsync(NewsletterSubscriber subscriber)
+        public async Task<List<NewsletterSubscriber>> GetAllAsync()
         {
-            await _context.NewsletterSubscribers.AddAsync(subscriber);
+            return await _context.NewsletterSubscribers.ToListAsync();
+        }
+
+        public async Task<NewsletterSubscriber> GetByIdAsync(int id)
+        {
+            return await _context.NewsletterSubscribers.FindAsync(id);
+        }
+
+        public async Task InsertAsync(NewsletterSubscriber entity)
+        {
+            await _context.NewsletterSubscribers.AddAsync(entity);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(NewsletterSubscriber entity)
+        {
+            _context.NewsletterSubscribers.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            var subscriber = await _context.NewsletterSubscribers.FindAsync(id);
+            if (subscriber != null)
+            {
+                _context.NewsletterSubscribers.Remove(subscriber);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<List<NewsletterSubscriber>> GetRangeAsync(int start, int count)
+        {
+            return await _context.NewsletterSubscribers.Skip(start).Take(count).ToListAsync();
         }
     }
 }
-

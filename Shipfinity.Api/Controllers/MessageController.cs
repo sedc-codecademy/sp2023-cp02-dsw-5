@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shipfinity.DTOs.MessageDTOs;
 using Shipfinity.Services.Interfaces;
-using System.Security.Claims;
 
 namespace Shipfinity.Api.Controllers
 {

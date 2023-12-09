@@ -1,12 +1,7 @@
 ﻿using Shipfinity.DataAccess.Repositories.Interfaces;
 using Shipfinity.Domain.Models;
 using Shipfinity.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shipfinity.Services.Implementations
 {
@@ -19,7 +14,12 @@ namespace Shipfinity.Services.Implementations
             _newsletterRepository = newsletterRepository;
         }
 
-        public async Task SubscribeToNewsletter(string email)
+        public async Task<List<NewsletterSubscriber>> GetAllSubscribersAsync()
+        {
+            return await _newsletterRepository.GetAllAsync();
+        }
+
+        public async Task SubscribeToNewsletterAsync(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
             {
@@ -31,14 +31,13 @@ namespace Shipfinity.Services.Implementations
                 throw new FormatException("Invalid email format.");
             }
 
-
             var subscriber = new NewsletterSubscriber
             {
                 Email = email,
                 SubscriptionDate = DateTime.UtcNow
             };
 
-            await _newsletterRepository.AddSubscriberAsync(subscriber);
+            await _newsletterRepository.InsertAsync(subscriber);
         }
 
         private bool IsValidEmail(string email)
@@ -55,3 +54,4 @@ namespace Shipfinity.Services.Implementations
         }
     }
 }
+

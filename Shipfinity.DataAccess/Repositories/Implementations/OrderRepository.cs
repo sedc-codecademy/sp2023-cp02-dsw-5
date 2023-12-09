@@ -3,11 +3,6 @@ using Shipfinity.DataAccess.Context;
 using Shipfinity.DataAccess.Repositories.Interfaces;
 using Shipfinity.Domain.Models;
 using Shipfinity.Shared.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shipfinity.DataAccess.Repositories.Implementations
 {
