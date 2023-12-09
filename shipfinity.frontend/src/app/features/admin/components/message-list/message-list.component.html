@@ -1,1 +1,24 @@
-<p>message-list works!</p>
+<div class="container pt-3">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h2 class="display-4">Messages</h2>
+    </div>
+
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Sender</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let message of messages$ | async">
+        <td>{{ message.firstName + ' ' + message.lastName }}</td>
+        <td scope="row">{{ message.subject }}</td>
+        <td>{{ message.content }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
