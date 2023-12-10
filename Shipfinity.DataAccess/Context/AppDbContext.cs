@@ -72,14 +72,15 @@ namespace Shipfinity.DataAccess.Context
                 .HasForeignKey(o => o.PaymentInfoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
             modelBuilder.Entity<PaymentInfo>()
                 .HasOne(pi => pi.Customer)
                 .WithMany(c => c.PaymentInfos)
                 .HasForeignKey(pi => pi.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
+            modelBuilder.Entity<PaymentInfo>().HasIndex(p => p.CustomerId);
+            modelBuilder.Entity<PaymentInfo>().HasIndex(p => p.CardNumber);
+            modelBuilder.Entity<PaymentInfo>().HasIndex(p => p.ExpirationDate);
         }
     }
 }
