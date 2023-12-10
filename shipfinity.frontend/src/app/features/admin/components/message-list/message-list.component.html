@@ -9,14 +9,16 @@
     <thead>
       <tr>
         <th scope="col">Sender</th>
+        <th scope="col">Email</th>
         <th scope="col">Subject</th>
         <th scope="col">Message</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let message of messages$ | async">
-        <td>{{ message.firstName + ' ' + message.lastName }}</td>
-        <td scope="row">{{ message.subject }}</td>
+        <td scope="row">{{ message.firstName + ' ' + message.lastName }}</td>
+        <td scope="row">{{ message.email }}</td>
+        <td>{{ message.subject }}</td>
         <td>{{ message.content }}</td>
       </tr>
     </tbody>
