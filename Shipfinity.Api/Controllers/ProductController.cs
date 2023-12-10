@@ -244,7 +244,9 @@ namespace Shipfinity.Api.Controllers
             try
             {
                 var reviewProduct = await _productService.CreateReviewProductAsync(productId, reviewProductDto);
-                return CreatedAtAction(nameof(GetProductById), new { id = productId }, reviewProduct);
+                var updatedProduct = await _productService.GetProductByIdAsync(productId); 
+
+                return Ok(new { reviewProduct, updatedProduct });
             }
             catch (ProductNotFoundException ex)
             {

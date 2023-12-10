@@ -1,14 +1,54 @@
-<div *ngIf="(productDetails$ | async) as product" class="container pt-5 d-flex justify-content-center">
-  <div class="card" style="width: 40rem;">
-    <img [src]="product.imageUrl" class="card-img-top" alt="...">
+<div *ngIf="(productDetails$ | async) as product" class="container mt-3 mb-5 d-flex justify-content-center">
+
+  <div class="border card" style="width: 30rem; height: auto; border: none;">
+
     <div class="card-body">
+      <div class="card-img-top d-flex justify-content-center">
+        <img [src]="[product.imageUrl?? '/assets/img/product/no_img.png']" style="height: 20rem; width: auto;"
+          class="card-img img-fluid" alt="">
+      </div>
+    </div>
+
+    <hr class="m-0 p-0 border-secondary opacity-2">
+
+    <div class="card-body text-center pt-3 bg-white">
       <h2 class="card-title text-center">{{product.name}}</h2>
       <p class="card-text text-center">{{product.description}}</p>
-      <p class="card-text text-center">{{product.price}}</p>
-      <p class="card-text text-center">{{product.discountPercentage}}</p>
-      <p class="card-text text-center">{{product.rating}}</p>
-      <a [routerLink]="['/product', 'category', product.categoryId]" class="btn btn-primary">Back</a>
+      <!-- <p class="card-text text-center">{{product.discountPercentage}}</p> -->
+      <h4 class="card-text"><strong>${{ product.price.toFixed(2) }}</strong></h4>
+
+      <span class="text-black">Rating </span>
+      <div class="d-flex justify-content-center text-warning pb-2">
+        <div>
+          <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+            <i class="bi" [ngClass]="{
+                'bi-star-fill': i <= selectedRating,
+                'bi-star': i > selectedRating
+              }" (click)="rateProduct(i)"></i>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="form-floating">
+        <textarea [(ngModel)]="comment" class="form-control" placeholder="Add your review here..."
+          id="floatingTextarea"></textarea>
+        <label class="text-body-tertiary" for="floatingTextarea">Write your review...</label>
+      </div>
+
+      <div class="d-flex justify-content-center pt-3">
+        <button type="button" class="btn p-1 m-0 bg-cart btn-secondary col-3 mx-auto"
+          (click)="submitReview()">Submit</button>
+      </div>
+
+    </div>
+
+    <hr class="m-0 p-0 border-secondary opacity-2">
+
+    <div class="d-flex justify-content-around pb-3 pt-3">
+      <button type="button" class="btn p-1 m-0 bg-cart btn-success col-3 mx-auto" (click)="addToCartClick()"><i
+          class="fa fa-cart-plus mr-2"></i> Add to
+        cart</button>
+      <a [routerLink]="['/product', 'category', product.categoryId]"
+        class="btn btn-secondary p-1 m-0 col-3 mx-auto">Back</a>
     </div>
   </div>
-
-</div>
