@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { NgToastService } from 'ng-angular-popup';
 
 @Injectable({
   providedIn: 'root',
@@ -10,18 +11,15 @@ export class NotificationService {
   private errorMessageSubject = new BehaviorSubject<string>("");
   errorMessageAction$ = this.successMessageSubject.asObservable();
 
-  constructor() {}
+  constructor(private toast: NgToastService) {}
 
   successMessage(message: string) {
-    this.successMessageSubject.next(message);
+    console.log(message);
+    this.toast.success({detail: "Success", summary: message, duration: 3, sticky: true, position: 'topRight'});
   }
 
   errorMessage(message: string) {
-    this.errorMessageSubject.next(message);
-  }
-
-  clearMessages() {
-    this.successMessage('');
-    this.errorMessage('');
+    console.log(message);
+    this.toast.error({detail: "Error", summary: message, duration: 3, sticky: true, position: 'topRight'});
   }
 }

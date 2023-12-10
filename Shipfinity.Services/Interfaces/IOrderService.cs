@@ -6,7 +6,7 @@ namespace Shipfinity.Services.Interfaces
     {
         Task<List<OrderReadDto>> GetAllOrdersAsync();
         Task<OrderReadDto> GetOrderByIdAsync(int id);
-        Task<OrderReadDto> CreateOrderAsync(OrderCreateDto orderCreateDto);
+        Task<OrderReadDto> CreateOrderAsync(OrderCreateDto orderCreateDto, int customerId);
         Task UpdateOrderAsync(int id, OrderUpdateDto orderUpdateDto);
         Task DeleteOrderByIdAsync(int id);
         Task<List<OrderReadDto>> GetOrderByUserIdAsync(int userId);

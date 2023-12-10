@@ -1,11 +1,8 @@
-<app-loader></app-loader>
 <app-header />
 <!-- id="main-body-bg" class="bg-image" for starts -->
 <main>
-    <div>
-        <app-message-notification *ngIf="successNotification$ | async as successNotification" [message] = "successNotification"></app-message-notification>
-        <app-message-notification *ngIf="errorNotification$ | async as successNotification" [message] = "successNotification" [isError]="true"></app-message-notification>
-    </div>
     <router-outlet></router-outlet>
 </main>
 <app-footer />
+<app-loader></app-loader>
+<ng-toast></ng-toast>

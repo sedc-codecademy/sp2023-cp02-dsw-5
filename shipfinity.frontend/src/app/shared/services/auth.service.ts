@@ -7,6 +7,7 @@ import { User } from '../models/user';
 import { AuthApiService } from './api/auth-api.service';
 import { Router } from '@angular/router';
 import { NotificationService } from './notification.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class AuthService {
     this.getUserFromLocalStorage()
   );
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toast: NgToastService) {}
 
   get isLoggedIn() {
     return !!localStorage.getItem('Token');
@@ -50,7 +51,7 @@ export class AuthService {
         this.notificationService.successMessage('Successfully logged in!');
       },
       error: (error) => {
-        this.notificationService.errorMessage(error.error.message);
+        this.notificationService.errorMessage(error.message);
       },
     });
   }
@@ -67,7 +68,7 @@ export class AuthService {
         this.notificationService.successMessage('Successfully logged in!');
       },
       error: (error) => {
-        this.notificationService.errorMessage(error.error.message);
+        this.notificationService.errorMessage(error.message);
       },
     });
   }

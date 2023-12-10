@@ -2,6 +2,7 @@
 using Serilog;
 using Shipfinity.DTOs.OrderDTOs;
 using Shipfinity.Services.Interfaces;
+using System.Security.Claims;
 
 namespace Shipfinity.Api.Controllers
 {
@@ -10,10 +11,12 @@ namespace Shipfinity.Api.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IEmailService _emailService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, IEmailService emailService)
         {
             _orderService = orderService;
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -114,20 +117,22 @@ namespace Shipfinity.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<OrderReadDto>> CreateOrder(OrderCreateDto orderCreateDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             try
             {
-                var order = await _orderService.CreateOrderAsync(orderCreateDto);
-                return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, order);
+                int.TryParse(User.FindFirstValue("id"), out int customerId);
+                var order = await _orderService.CreateOrderAsync(orderCreateDto, customerId);
+                await _emailService.SendEmailAsync(new()
+                {
+                    To = orderCreateDto.Email,
+                    Subject = "Order confirmation",
+                    Body = $"<h1>Your order has beed confirmed</h1><h4>Order number: {order.Id}</h4>"
+                });
+                return StatusCode(StatusCodes.Status201Created);
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
