@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 export class ProductService {
   public productList$ = new BehaviorSubject<Product[]>([]);
   public productDetails$ = new BehaviorSubject<ProductDetails | null>(null);
+  public saleProducts$ = new BehaviorSubject<Product[]>([]);
 
   constructor(
     private http: HttpClient,
@@ -133,5 +134,19 @@ export class ProductService {
           this.notifications.errorMessage('Failed to submit review');
         }
       );
+  }
+
+  public getProductsOnSale() {
+    this.http
+      .get(`${environment.API_URL}/product/OnSale`)
+      .pipe(map((data) => data as Product[]))
+      .subscribe({
+        next: (data) => {
+          this.saleProducts$.next([...data]);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 }

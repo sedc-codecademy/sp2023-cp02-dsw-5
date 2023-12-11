@@ -109,7 +109,7 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
         public async Task<List<Product>> GetProductsOnSaleAsync()
         {
             return await _context.Products
-                .Where(p => p.DiscountPercenrage > 0)
+                .Where(p => p.DiscountPercentage > 0)
                 .Include(p => p.Category)
                 .ToListAsync();
         }

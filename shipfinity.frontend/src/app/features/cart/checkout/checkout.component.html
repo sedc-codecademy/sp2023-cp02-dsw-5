@@ -5,34 +5,48 @@
                 <div class="row">
                     <div class="col-50">
                         <h3>Billing Address</h3>
-                        <label for="fname"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                          </svg> Full Name</label>
-                        <input class="input-text" type="text" id="fname" name="fname" placeholder="John Doe" required formControlName="fullName">
-                        <label for="email"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
-                          </svg> Email</label>
-                        <input class="input-text" type="email" id="email" name="email" placeholder="JohnDoe@example.com" required formControlName="email">
+                        <label for="fname"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                            </svg> Full Name</label>
+                        <input class="input-text" type="text" id="fname" name="fname" placeholder="John Doe" required
+                            formControlName="fullName">
+                        <label for="email"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+                            </svg> Email</label>
+                        <input class="input-text" type="email" id="email" name="email" placeholder="JohnDoe@example.com"
+                            required formControlName="email">
                         <label for="address">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
-                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
-                              </svg> Address</label>
-                        <input class="input-text" type="text" id="address" name="address" placeholder="123 W.15th Street" required formControlName="addressLine">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-card-text" viewBox="0 0 16 16">
+                                <path
+                                    d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                                <path
+                                    d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
+                            </svg> Address</label>
+                        <input class="input-text" type="text" id="address" name="address"
+                            placeholder="123 W.15th Street" required formControlName="addressLine">
                         <label for="city">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-                                <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z"/>
-                              </svg> City</label>
-                        <input class="input-text" type="text" id="city" name="city" placeholder="New York" required formControlName="city">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-bank" viewBox="0 0 16 16">
+                                <path
+                                    d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
+                            </svg> City</label>
+                        <input class="input-text" type="text" id="city" name="city" placeholder="New York" required
+                            formControlName="city">
 
                         <div class="row">
                             <div class="col-50">
                                 <label for="state">Country</label>
-                                <input class="input-text" type="text" name="state" id="state" placeholder="NY" required formControlName="country">
+                                <input class="input-text" type="text" name="state" id="state" placeholder="NY" required
+                                    formControlName="country">
                             </div>
                             <div class="col-50">
                                 <label for="zip">Zip</label>
-                                <input class="input-text" type="text" id="zip" name="zip" placeholder="10000" required formControlName="zipCode">
+                                <input class="input-text" type="text" id="zip" name="zip" placeholder="10000" required
+                                    formControlName="zipCode">
                             </div>
                         </div>
                     </div>
@@ -43,16 +57,20 @@
                         <div class="icon-container">
                             <img src="/assets/img/checkout/visa-classic-svgrepo-com.svg" width="70px" alt="visa">
                             <img src="/assets/img/checkout/amex-svgrepo-com.svg" width="70px" alt="amex">
-                            <img src="/assets/img/checkout/mastercard-full-svgrepo-com.svg" width="70px" alt="master card">
+                            <img src="/assets/img/checkout/mastercard-full-svgrepo-com.svg" width="70px"
+                                alt="master card">
                         </div>
                         <label for="cardName">Name on Card</label>
-                        <input class="input-text" type="text" id="cardName" name="cardName" placeholder="John Doe" required formControlName="cardHolderName">
+                        <input class="input-text" type="text" id="cardName" name="cardName" placeholder="John Doe"
+                            required formControlName="cardHolderName">
                         <label for="creditCardNumber">Credit Card Number</label>
-                        <input class="input-text" type="text" id="creditCardNumber" name="creditCardNumber" placeholder="1111-2222-3333-4444" required formControlName="cardNumber">
+                        <input class="input-text" type="text" id="creditCardNumber" name="creditCardNumber"
+                            placeholder="1111-2222-3333-4444" required formControlName="cardNumber">
                         <div class="row">
                             <div class="col">
                                 <label for="expiryMonth">Expiry Month</label>
-                                <select name="expiryMonth" id="expiryMonth" class="form-select input-text" required formControlName="expiryMonth">
+                                <select name="expiryMonth" id="expiryMonth" class="form-select input-text" required
+                                    formControlName="expiryMonth">
                                     <option value="1">January</option>
                                     <option value="2">February</option>
                                     <option value="3">March</option>
@@ -69,52 +87,71 @@
                             </div>
                             <div class="col">
                                 <label for="expiryYear">Expiry Year</label>
-                                <input class="input-text" min="1977" max="9999" type="number" id="expiryYear" name="expiryYear" placeholder="2023" required formControlName="expiryYear">
+                                <input class="input-text" min="1977" max="9999" type="number" id="expiryYear"
+                                    name="expiryYear" placeholder="2023" required formControlName="expiryYear">
                             </div>
                             <div class="col">
                                 <label for="cvv">CVV</label>
-                                <input class="input-text" type="number" id="cvv" name="cvv" placeholder="123" required formControlName="cvv">
+                                <input class="input-text" type="number" id="cvv" name="cvv" placeholder="123" required
+                                    formControlName="cvv">
                             </div>
                         </div>
                     </div>
                 </div>
                 <label>
-                    <input type="checkbox" class="mb-3" checked="checked" name="shippingAddress"> Shipping address same as billing address
+                    <input type="checkbox" class="mb-3" checked="checked" name="shippingAddress"> Shipping address same
+                    as billing address
                 </label>
-                <button type="submit" class="btn btn-lg btn-primary me-2" data-bs-toggle="modal" data-bs-target="#checkoutModal">Order and pay</button>
-                <button type="button" class="btn btn-lg btn-secondary"> Continue with paypal <i class="bi bi-paypal"></i></button>
+                <button type="submit" class="btn btn-lg btn-primary me-2" data-bs-toggle="modal"
+                    data-bs-target="#checkoutModal">Order and pay</button>
+                <button type="button" class="btn btn-lg btn-secondary"> Continue with paypal <i
+                        class="bi bi-paypal"></i></button>
             </form>
         </div>
     </div>
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="checkoutModalLabel">Shipfinity</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkoutModalLabel">Shipfinity</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Order received successfully!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body">
-              Order received successfully!
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
     <div class="col-25">
         <div class="cart-container">
             <h4>Cart
                 <span class="price" style="color:black">
                     <i class="shopping-cart"></i>
-                    <b><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                      </svg> {{ cartItems.length }}</b>
+                    <b><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-cart-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg> {{ cartItems.length }}</b>
                 </span>
             </h4>
-            <p *ngFor="let item of cartItems"><a class="item">{{item.product.name}}</a> <span class="price">${{(item.product.price * item.quantity).toFixed(2)}}</span></p>
+            <p *ngFor="let item of cartItems">
+                <ng-container *ngIf="item.product.discountPercentage > 0; else elseBlock" class="namePrice">
+                    <a class="item">{{item.product.name}}</a> <span class="price">{{((item.product.price -
+                        (item.product.price * item.product.discountPercentage / 100))
+                        * item.quantity) | currency}}</span>
+                </ng-container>
+
+                <ng-template #elseBlock>
+                    <a class="item">{{item.product.name}}</a> <span class="price">${{(item.product.price *
+                        item.quantity).toFixed(2)}}</span>
+                </ng-template>
+            </p>
             <hr>
-            <p>Total <span class="price" style="color:black"><b>${{calculateTotal().toFixed(2)}}</b></span></p>
+            <p>Total <span class="price" style="color:black"><b>{{calculateTotal().toFixed(2) | currency}}</b></span>
+            </p>
         </div>
     </div>
 </div>
