@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using Shipfinity.DTOs.CustomerDTOs;
 using Shipfinity.DTOs.SellerDTO_s;
 using Shipfinity.DTOs.UserDTOs;
@@ -33,7 +34,8 @@ namespace Shipfinity.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -51,7 +53,8 @@ namespace Shipfinity.Api.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
         [HttpPost("seller/register")]
@@ -69,7 +72,8 @@ namespace Shipfinity.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
         [HttpPost("seller/login")]
@@ -86,7 +90,8 @@ namespace Shipfinity.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

@@ -34,6 +34,7 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
         {
             return await _context.Orders
                 .Include(o => o.Customer)
+                .Include(o => o.Address)
                 .Include(o => o.ProductOrders)
                 .ThenInclude(po => po.Product)
                 .FirstOrDefaultAsync(o => o.Id == id);
@@ -77,6 +78,18 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
                 .ThenInclude(po => po.Product)
                 .Where(o => o.ProductOrders.Any(po => po.ProductId == productId))
                 .ToListAsync();
+        }
+
+        public async Task<PaymentInfo> GetMatching(string CardNumber, string ExpirationDate)
+        {
+            return await _context.PaymentInfos.FirstOrDefaultAsync(x => x.CardNumber == CardNumber && x.ExpirationDate == ExpirationDate);
+        }
+
+        public async Task<int> CreateAsync(Order order)
+        {
+            await _context.Orders.AddAsync(order);
+            await _context.SaveChangesAsync();
+            return order.Id;
         }
     }
 }

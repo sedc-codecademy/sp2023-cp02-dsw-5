@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Shipfinity.Helpers;
 using System.Text;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,8 @@ builder.Services.AddAuthentication(options =>
 builder.Services.InjectDbContext(builder.Configuration.GetConnectionString("ShipfinityDbString"));
 builder.Services.InjectRepositories();
 builder.Services.InjectServices();
+
+builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.File("Logs/logs.txt"));
 
 var app = builder.Build();
 
