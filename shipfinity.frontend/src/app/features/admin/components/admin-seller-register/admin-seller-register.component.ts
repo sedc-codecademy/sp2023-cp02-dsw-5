@@ -15,8 +15,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class AdminSellerRegisterComponent implements OnInit {
   sellerRegisterForm: FormGroup;
-  registerSuccessful: ((value: any) => void) | undefined;
-  registerFailed: ((err: any) => void) | undefined;
+  usernameTaken: boolean = false;
 
   constructor(private authService: AuthService) {}
 
@@ -78,12 +77,13 @@ export class AdminSellerRegisterComponent implements OnInit {
       console.error('Form is not valid');
     }
   }
+
   private prepareSellerData(): IRegisterSeller {
     const formValues = this.sellerRegisterForm.value;
     return {
       username: formValues.username,
       password: formValues.password,
-      confirmPassword: formValues.confirmPassword, // Add confirmPassword property
+      confirmPassword: formValues.confirmPassword,
       email: formValues.email,
       phoneNumber: formValues.phoneNumber,
       address: formValues.address,
@@ -91,4 +91,15 @@ export class AdminSellerRegisterComponent implements OnInit {
       // Note: confirmPassword is used only for validation and not sent to backend
     };
   }
+
+  registerSuccessful = (data: any) => {
+    console.log('Seller registration successful', data);
+  };
+
+  registerFailed = (error: any) => {
+    if (error.error.message.includes('username')) {
+      this.usernameTaken = true;
+    }
+    console.error('Registration error', error);
+  };
 }

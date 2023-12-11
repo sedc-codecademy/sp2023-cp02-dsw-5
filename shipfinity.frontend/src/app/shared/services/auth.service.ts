@@ -23,6 +23,28 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  public registerSeller(requestData: IRegisterSeller): Observable<any> {
+    return this.http
+      .post(`${environment.API_URL}/seller/register`, requestData)
+      .pipe(
+        tap((res: any) => {
+          // Assuming the response includes user data and a token
+          this.setToken(res.token);
+          this.saveUserInLocalStorage(res as User);
+          this.currentUser$.next(res as User);
+          this.notificationService.successMessage(
+            'Seller registration successful!'
+          );
+        }),
+        catchError((error) => {
+          this.notificationService.errorMessage(
+            error.error.message || 'Seller registration failed'
+          );
+          return throwError(error);
+        })
+      );
+  }
+
   get isLoggedIn() {
     return !!localStorage.getItem('Token');
   }

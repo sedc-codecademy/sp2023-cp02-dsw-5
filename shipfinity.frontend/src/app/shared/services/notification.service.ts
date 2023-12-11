@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { NgToastService } from 'ng-angular-popup';
+import { Inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
+  successMessage(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
+  errorMessage(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
   private successMessageSubject = new BehaviorSubject<string>('');
   successMessageAction$ = this.successMessageSubject.asObservable();
 
-  private errorMessageSubject = new BehaviorSubject<string>('');
-  errorMessageAction$ = this.errorMessageSubject.asObservable();
+  // ...
 
-  constructor(private toast: NgToastService) {}
+  constructor(@Inject(NgToastService) private toast: NgToastService) {}
 
-  successMessage(message: string) {
-    console.log(message);
-    this.toast.success({detail: "Success", summary: message, duration: 3, sticky: true, position: 'topRight'});
-  }
-
-  errorMessage(message: string) {
-    console.log(message);
-    this.toast.error({detail: "Error", summary: message, duration: 3, sticky: true, position: 'topRight'});
-  }
+  // ...
 }
