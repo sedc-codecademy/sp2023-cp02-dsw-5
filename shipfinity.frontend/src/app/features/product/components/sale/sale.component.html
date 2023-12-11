@@ -1,18 +1,60 @@
+<!-- <div class="container mt-3 mb-3">
+    <h1 class="display-3">Our hottest deals</h1>
+    <hr class="hr hr-blurry">
+    <div class="sale-products">
+        <div *ngFor="let product of productsOnSale" class="sale-product p-4" (click)="onCardClick(product.id)">
+            <div class="image">
+                <img [src]="product.imageUrl" alt="{{product.name}} image">
+            </div>
+            <div class="namePrice">
+                <h3>{{ product.name }}</h3>
+
+                <ng-container class="price-container">
+                    <span><s class="text-secondary">{{ product.price | currency }}</s> &nbsp;{{
+                        (product.price -
+                        (product.price *
+                        product.discountPercentage / 100)) | currency}}</span>
+                </ng-container>
+
+            </div>
+            <p class="card-text text-center">{{ product.description.slice(0, 100) }}{{ product.description &&
+                product.description.length > 100 ? '...' : '' }}</p>
+            <div class="d-flex justify-content-center text-warning pb-3 pt-0">
+                <span class="text-black"></span>
+                <i *ngIf="product.rating >= 1" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 1" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 2" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 2" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 3" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 3" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 4" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 4" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 5" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 5" class="bi bi-star"></i>
+            </div>
+        </div>
+    </div>
+</div> -->
+
 <div class="container mt-3 mb-3">
     <h1 class="display-3">Our hottest deals</h1>
     <hr class="hr hr-blurry">
     <div class="sale-products">
         <div *ngFor="let product of productsOnSale" class="sale-product p-4" (click)="onCardClick(product.id)">
             <div class="image">
-                <img style="max-height: 250px; width: auto;" [src]="product.imageUrl" alt="{{product.name}} image">
+                <img [src]="product.imageUrl" alt="{{product.name}} image">
             </div>
-            <div class="namePrice">
+            <div class="namePrice text-center"> <!-- Center the name and price -->
                 <h3>{{ product.name }}</h3>
-                <span><s class="text-secondary">{{ product.price | currency }}</s> &nbsp;{{
-                    (product.price -
-                    (product.price *
-                    product.discountPercentage / 100)) | currency}}</span>
+                <ng-container class="price-container">
+                    <span><s class="text-secondary">{{ product.price | currency }}</s> &nbsp;{{
+                        (product.price -
+                        (product.price *
+                        product.discountPercentage / 100)) | currency}}</span>
+                </ng-container>
             </div>
+            <p class="card-text">{{ product.description.slice(0, 100) }}{{ product.description &&
+                product.description.length > 100 ? '...' : '' }}</p>
             <div class="d-flex justify-content-center text-warning pb-3 pt-0">
                 <span class="text-black"></span>
                 <i *ngIf="product.rating >= 1" class="bi bi-star-fill"></i>

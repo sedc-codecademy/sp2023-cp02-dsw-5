@@ -4,6 +4,7 @@
 
 s {
   font-size: 14px;
+  font-weight: 200;
 }
 
 .card-body {
@@ -13,4 +14,14 @@ s {
 
 .namePrice {
   font-size: 18px;
+  font-weight: 500;
+}
+
+.card-title {
+  font-size: 24px;
+}
+
+.card-text {
+  text-align: justify;
+  font-size: 16px;
 }

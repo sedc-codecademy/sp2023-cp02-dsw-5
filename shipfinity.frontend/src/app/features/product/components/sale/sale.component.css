@@ -10,8 +10,8 @@
 .sale-product {
   position: relative;
   background-color: var(--sectionBack);
-  width: 390px;
-  height: 490px;
+  width: 400px;
+  height: 500px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
@@ -35,28 +35,43 @@
 }
 
 .image img {
-  width: 240px;
+  max-width: 250px;
+  max-height: 250px;
 }
 
 .namePrice {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .namePrice h3 {
-  font-size: 26px;
+  font-size: 22px;
+  font-weight: 500;
   color: var(--textColor);
+  margin-bottom: 10px;
 }
 
 .namePrice span {
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 18px;
+  font-weight: 400;
   color: var(--starColor);
+}
+
+.namePrice s {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 200;
 }
 
 .sale-product p {
   font-size: 18px;
-  line-height: 25px;
+  line-height: 18px;
+  text-align: justify;
 }
 
 .fa-solid .fa-star {
@@ -64,23 +79,11 @@
   color: var(--starColor);
 }
 
-.buy {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+.sale-product p {
+  font-size: 14px;
+  text-align: justify;
 }
 
-.buy button {
-  padding: 10px 20px;
-  border-radius: 7px;
-  border: none;
-  background-color: var(--textColor);
-  color: var(--sectionBack);
-  font-size: 18px;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.buy button:hover {
-  transform: scale(1.1);
+.price-container {
+  display: flex;
 }
