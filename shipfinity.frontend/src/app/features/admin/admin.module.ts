@@ -18,18 +18,44 @@ import { AdminSellerRegisterComponent } from './components/admin-seller-register
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
-  { path: '', component: AdminLayoutComponent, children: [
-    { path: 'categories', component: CategoryListComponent, canActivate: [sellerGuard] },
-    { path: 'products', component: ProductListComponent, canActivate: [sellerGuard] },
-    { path: 'messages', component: MessageListComponent, canActivate: [sellerGuard] },
-    { path: 'orders', component: OrderListComponent, canActivate: [sellerGuard] }
-  ] }
-]
+  {
+    path: '',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: 'categories',
+        component: CategoryListComponent,
+        canActivate: [sellerGuard],
+      },
+      {
+        path: 'register',
+        component: AdminSellerRegisterComponent,
+        canActivate: [sellerGuard],
+      },
+      {
+        path: 'products',
+        component: ProductListComponent,
+        canActivate: [sellerGuard],
+      },
+      {
+        path: 'messages',
+        component: MessageListComponent,
+        canActivate: [sellerGuard],
+      },
+      {
+        path: 'orders',
+        component: OrderListComponent,
+        canActivate: [sellerGuard],
+      },
+    ],
+  },
+];
 
 @NgModule({
   declarations: [
     AdminLayoutComponent,
     ProductListComponent,
+    AdminSellerRegisterComponent,
     ProductEditComponent,
     AdminLoginComponent,
     OrderListComponent,
@@ -38,14 +64,14 @@ const routes: Routes = [
     MessageListComponent,
     MessageDetailsComponent,
     CategoryEditDialogComponent,
-    AdminSellerRegisterComponent
+    AdminSellerRegisterComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}
