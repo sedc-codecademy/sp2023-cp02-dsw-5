@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 export class ProductService {
   public productList$ = new BehaviorSubject<Product[]>([]);
   public productDetails$ = new BehaviorSubject<ProductDetails | null>(null);
+  public saleProducts$ = new BehaviorSubject<Product[]>([]);
 
   constructor(
     private http: HttpClient,
@@ -52,6 +53,7 @@ export class ProductService {
     this.http.post(`${environment.API_URL}/product`, product).subscribe({
       next: (data) => {
         this.notifications.successMessage('Product saved');
+        this.GetProducts();
       },
       error: (err) => {
         this.notifications.errorMessage('Error while saving');
@@ -63,6 +65,7 @@ export class ProductService {
     this.http.delete(`${environment.API_URL}/product/${id}`).subscribe({
       next: (data) => {
         this.notifications.successMessage('Product deleted');
+        this.GetProducts();
       },
       error: (err) => {
         this.notifications.errorMessage('Error while deleting');
@@ -76,6 +79,7 @@ export class ProductService {
       .subscribe({
         next: (data) => {
           this.notifications.successMessage('Product saved');
+          this.GetProducts();
         },
         error: (err) => {
           this.notifications.errorMessage('Error while saving');
@@ -133,5 +137,19 @@ export class ProductService {
           this.notifications.errorMessage('Failed to submit review');
         }
       );
+  }
+
+  public getProductsOnSale() {
+    this.http
+      .get(`${environment.API_URL}/product/OnSale`)
+      .pipe(map((data) => data as Product[]))
+      .subscribe({
+        next: (data) => {
+          this.saleProducts$.next([...data]);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 }

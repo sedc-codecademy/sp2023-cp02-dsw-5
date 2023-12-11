@@ -1,9 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
-/* @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 
-
-/* :root {
-    --font-logo: 'Righteous', cursive;
+.display-1{
+    font-family: 'Poiret One', cursive !important;
+    font-size: 48px !important;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+.display-2{
+    font-family: 'Poiret One', cursive !important;
+    font-size: 42px !important;
+}
+
+.display-3{
+    font-family: 'Poiret One', cursive !important;
+    font-size: 36px !important;
+}
+
+.display-4{
+    font-family: 'Poiret One', cursive !important;
+    font-size: 32px !important;
+}
+
+.display-5{
+    font-family: 'Poiret One', cursive !important;
+    font-size: 28px !important;
+}
+
+.display-6{
+    font-family: 'Poiret One', cursive !important;
+    font-size: 24px !important;
+}

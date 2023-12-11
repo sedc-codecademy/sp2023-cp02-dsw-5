@@ -1,5 +1,22 @@
 @media screen and (min-width: 768px) {
-    .product-img {
-        width: 250px;
-    }
+  .product-img {
+    width: 250px;
+  }
+
+  .price {
+    font-size: 18px;
+  }
+
+  .namePrice {
+    font-size: 18px;
+  }
+
+  s {
+    font-size: 14px;
+  }
+
+  .card-body {
+    min-width: 250px;
+    min-height: 120px;
+  }
 }

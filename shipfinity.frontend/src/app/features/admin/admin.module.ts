@@ -15,6 +15,7 @@ import { MessageDetailsComponent } from './components/message-details/message-de
 import { sellerGuard } from 'src/app/shared/guards/seller.guard';
 import { CategoryEditDialogComponent } from './components/category-edit-dialog/category-edit-dialog.component';
 import { AdminSellerRegisterComponent } from './components/admin-seller-register/admin-seller-register.component';
+import { adminGuard } from 'src/app/shared/guards/admin.guard';
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },

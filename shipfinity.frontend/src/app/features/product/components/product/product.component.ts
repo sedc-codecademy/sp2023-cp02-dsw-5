@@ -5,6 +5,7 @@ import Product from 'src/app/shared/models/product';
 import ProductOrder from 'src/app/shared/models/product-order';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product',
@@ -22,7 +23,8 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     private shoppingCartService: ShoppingCartService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private location: Location
   ) {}
   ngOnInit(): void {
     // const comment: string = '';
@@ -58,5 +60,9 @@ export class ProductComponent implements OnInit {
         'Please select a rating and write a comment before submitting.'
       );
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

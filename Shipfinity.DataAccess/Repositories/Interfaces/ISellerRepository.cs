@@ -6,5 +6,6 @@ namespace Shipfinity.DataAccess.Repositories.Interfaces
     {
         Task<Seller> GetByUsernameAsync(string username);
         Task<Seller> GetByEmailAsync(string email);
+        Task<int> CountAdminsAsync();
     }
 }

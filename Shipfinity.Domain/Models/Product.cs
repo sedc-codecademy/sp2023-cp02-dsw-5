@@ -15,7 +15,7 @@ namespace Shipfinity.Domain.Models
         [Range(0, 999999)]
         public double Price { get; set; }
         [Range(0, 100)]
-        public int DiscountPercenrage { get; set; }
+        public int DiscountPercentage { get; set; }
         [Range(0, 5)]
         public short Rating { get; set; }
         [MaxLength(150)]
