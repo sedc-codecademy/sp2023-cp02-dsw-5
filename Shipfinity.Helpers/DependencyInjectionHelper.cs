@@ -30,6 +30,7 @@ namespace Shipfinity.Helpers
 
         public static void InjectServices(this IServiceCollection services)
         {
+            services.AddScoped<IStringEncoder, StringEncoder>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<INewsletterService, NewsletterService>();

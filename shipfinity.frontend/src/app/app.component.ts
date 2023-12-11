@@ -9,18 +9,7 @@ import { ShoppingCartService } from './shared/services/shopping-cart.service';
 })
 export class AppComponent {
   title = 'shipfinity.frontend';
-  successNotification$ = this.notificationService.successMessageAction$.pipe(tap(message => {
-    setTimeout(() =>{
-      this.notificationService.clearMessages();
-    }, 5000);
-  }));
-  errorNotification$ = this.notificationService.errorMessageAction$.pipe(tap(message => {
-    setTimeout(() =>{
-      this.notificationService.clearMessages();
-    }, 5000);
-  }));
-
-  constructor(private notificationService: NotificationService, private shoppingCartService: ShoppingCartService){}
+  constructor(private shoppingCartService: ShoppingCartService){}
 
   ngOnInit(){
     let cart = localStorage.getItem("shopping-cart");

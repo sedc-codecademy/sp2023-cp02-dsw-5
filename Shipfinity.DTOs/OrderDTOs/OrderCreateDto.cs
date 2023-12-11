@@ -1,4 +1,5 @@
 ﻿using Shipfinity.Domain.Enums;
+using Shipfinity.DTOs.AddressDTOs;
 using Shipfinity.DTOs.PaymentInfoDTOs;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,19 +8,12 @@ namespace Shipfinity.DTOs.OrderDTOs
     public class OrderCreateDto
     {
         [Required]
-        public int CustomerId { get; set; }
-        [Required]
-        public int AddressId { get; set; }
+        [EmailAddress]
+        [MaxLength(50)]
+        public string Email { get; set; }
+        public AddressInputDto Address { get; set; }
 
-        [Required]
-        public DateTime OrderDate { get; set; }
-
-        [Required]
-        [Range(0, 999999)]
-        public double TotalPrice { get; set; }
-
-        [Required]
-        public OrderStatus Status { get; set; }
+        public OrderProductDto[] OrderDetails { get; set; }
 
         public PaymentInfoDto PaymentInfo { get; set; } = new();   
     }

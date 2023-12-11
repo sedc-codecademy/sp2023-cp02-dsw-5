@@ -1,6 +1,9 @@
 ﻿using Shipfinity.DataAccess.Repositories.Interfaces;
+using Shipfinity.Domain.Enums;
+using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.OrderDTOs;
 using Shipfinity.Mappers;
+using Shipfinity.Services.Helpers;
 using Shipfinity.Services.Interfaces;
 using Shipfinity.Shared.Exceptions;
 
@@ -9,16 +12,77 @@ namespace Shipfinity.Services.Implementations
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
-        public OrderService(IOrderRepository orderRepository)
+        private readonly IStringEncoder _stringEncoder;
+        public OrderService(IOrderRepository orderRepository, IStringEncoder stringEncoder)
         {
             _orderRepository = orderRepository;
+            _stringEncoder = stringEncoder;
         }
 
-        public async Task<OrderReadDto> CreateOrderAsync(OrderCreateDto orderCreateDto)
+        public async Task<OrderReadDto> CreateOrderAsync(OrderCreateDto orderCreateDto, int customerId)
         {
-            var newOrder = OrderMappers.MapToOrder(orderCreateDto);
-            await _orderRepository.InsertAsync(newOrder);
-            return OrderMappers.MapToReadDto(newOrder);
+            var newOrder = new Order();
+            newOrder.Customer = null;
+            if (customerId != 0)
+            {
+                newOrder.CustomerId = customerId;
+            }
+            else
+            {
+                newOrder.CustomerId = null;
+            }
+            newOrder.Email = orderCreateDto.Email;
+            newOrder.Status = OrderStatus.Pending;
+
+            var today = DateTime.Now;
+            DateTime cardExpireTime = new DateTime(orderCreateDto.PaymentInfo.ExpiryYear, orderCreateDto.PaymentInfo.ExpiryMonth, today.Day);
+            if (today.Year > cardExpireTime.Year) throw new PaymentException("Card expired");
+            if (today.Year == cardExpireTime.Year && today.Month > cardExpireTime.Month) throw new PaymentException("Card expired");
+
+            PaymentInfo payment = new PaymentInfo
+            {
+                CardHolderName = _stringEncoder.Encode(orderCreateDto.PaymentInfo.CardHolderName),
+                CardNumber = _stringEncoder.Encode(orderCreateDto.PaymentInfo.CardNumber),
+                ExpirationDate = _stringEncoder.Encode(cardExpireTime.ToString())
+            };
+
+            var existingInfo = await _orderRepository.GetMatching(payment.CardNumber, payment.ExpirationDate);
+            if (existingInfo != null)
+            {
+                newOrder.PaymentInfoId = existingInfo.Id;
+            }
+            else
+            {
+                newOrder.PaymentInfo = payment;
+                newOrder.PaymentInfo.CustomerId = null;
+                newOrder.PaymentInfo.Customer = null;
+            }
+
+            newOrder.OrderDate = DateTime.Now;
+            newOrder.ProductOrders = new List<ProductOrder>();
+            newOrder.ProductOrders.AddRange(orderCreateDto.OrderDetails.Select(x => new ProductOrder { Order = newOrder, ProductId = x.ProductId, Quantity = x.Quantity }));
+
+            if (orderCreateDto.Address.Id.HasValue && orderCreateDto.Address.Id.Value > 0)
+            {
+                newOrder.AddressId = orderCreateDto.Address.Id.Value;
+            }
+            else
+            {
+                newOrder.Address = new Address
+                {
+                    AddressLine = orderCreateDto.Address.AddressLine,
+                    City = orderCreateDto.Address.City,
+                    Country = orderCreateDto.Address.Country,
+                    ZipCode = orderCreateDto.Address.ZipCode
+                };
+            }
+            
+            int orderId = await _orderRepository.CreateAsync(newOrder);
+            Order insertedOrder = await _orderRepository.GetByIdAsync(orderId);
+            insertedOrder.TotalPrice = insertedOrder.ProductOrders.Sum(p => p.Product.Price * p.Quantity);
+            await _orderRepository.UpdateAsync(insertedOrder);
+            await ProcessPayment(insertedOrder);
+            return OrderMappers.MapToReadDto(insertedOrder);
         }
 
         public async Task DeleteOrderByIdAsync(int id)
@@ -58,7 +122,7 @@ namespace Shipfinity.Services.Implementations
         {
             var orders = await _orderRepository.GetAllByUserIdAsync(userId);
 
-            if(!orders.Any()) throw new OrderNotFoundException(userId);
+            if (!orders.Any()) throw new OrderNotFoundException(userId);
 
             return orders.Select(OrderMappers.MapToReadDto).ToList();
         }
@@ -71,6 +135,15 @@ namespace Shipfinity.Services.Implementations
 
             OrderMappers.ApplyUpdateFromDto(existingOrder, orderUpdateDto);
             await _orderRepository.UpdateAsync(existingOrder);
+        }
+
+        private async Task<bool> ProcessPayment(Order order)
+        {
+            // Process payment
+            Thread.Sleep(2000);
+            order.Status = OrderStatus.Recived;
+            await _orderRepository.UpdateAsync(order);
+            return true;
         }
     }
 }

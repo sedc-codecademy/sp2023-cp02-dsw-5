@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shipfinity.DataAccess.Context;
 
@@ -11,9 +12,11 @@ using Shipfinity.DataAccess.Context;
 namespace Shipfinity.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231210194527_added-indexses")]
+    partial class addedindexses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,7 +208,7 @@ namespace Shipfinity.DataAccess.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -288,7 +291,7 @@ namespace Shipfinity.DataAccess.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("DiscountPercentage")
+                    b.Property<int>("DiscountPercenrage")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -444,7 +447,9 @@ namespace Shipfinity.DataAccess.Migrations
 
                     b.HasOne("Shipfinity.Domain.Models.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Shipfinity.Domain.Models.PaymentInfo", "PaymentInfo")
                         .WithMany("Orders")

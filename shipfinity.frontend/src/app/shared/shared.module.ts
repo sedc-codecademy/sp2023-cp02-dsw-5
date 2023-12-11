@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FlyoutComponent } from './components/flyout/flyout.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { WarningDialogComponent } from './components/warning-dialog/warning-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,12 +16,14 @@ import { WarningDialogComponent } from './components/warning-dialog/warning-dial
   ],
   imports: [
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   exports: [
     FlyoutComponent,
     LoaderComponent,
     MatDialogModule,
+    ReactiveFormsModule,
     WarningDialogComponent
   ]
 })

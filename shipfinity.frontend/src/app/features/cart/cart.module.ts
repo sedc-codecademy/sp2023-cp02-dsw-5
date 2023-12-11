@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { cartRoutes } from './cart.routes';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -11,6 +12,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
   declarations: [CartComponent, CheckoutComponent],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(cartRoutes)
   ]
 })
