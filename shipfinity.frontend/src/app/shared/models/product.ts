@@ -14,7 +14,7 @@ export default class Product {
     description?: string,
     price?: number,
     categoryId?: number,
-    discount?: number,
+    discountPercentage?: number,
     rating?: number,
     imageUrl?: string
   ) {
@@ -23,7 +23,7 @@ export default class Product {
     this.description = !description ? 'no description' : description;
     this.price = !price ? 0 : price;
     this.categoryId = !categoryId ? 0 : categoryId;
-    this.discountPercentage = !discount ? 0 : discount;
+    this.discountPercentage = !discountPercentage ? 0 : discountPercentage;
     this.rating = !rating ? 0 : rating;
     this.imageUrl = !imageUrl ? undefined : imageUrl;
   }
@@ -45,6 +45,7 @@ export interface ProductDetails {
   categoryId: number;
   imageUrl?: string;
   rating: number;
+  discountPercentage: number;
 }
 
 export interface ReviewProductDto {

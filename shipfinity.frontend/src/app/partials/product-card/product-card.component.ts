@@ -7,17 +7,20 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.servi
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.css']
+  styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent {
   @Input() product: Product = new Product();
 
-  constructor(private shoppingCartService: ShoppingCartService, private notificationService: NotificationService){
-    console.log(this.product);
-  }
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private notificationService: NotificationService
+  ) {}
 
   addToCartClick() {
     this.shoppingCartService.addItem(new ProductOrder(this.product, 1));
-    this.notificationService.successMessage(`${this.product.name} added to cart`);
+    this.notificationService.successMessage(
+      `${this.product.name} added to cart`
+    );
   }
 }
