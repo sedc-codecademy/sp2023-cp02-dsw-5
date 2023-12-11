@@ -10,3 +10,7 @@ s {
   min-width: 250px;
   min-height: 120px;
 }
+
+.namePrice {
+  font-size: 18px;
+}

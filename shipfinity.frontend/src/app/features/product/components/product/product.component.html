@@ -14,14 +14,22 @@
     <div class="card-body text-center pt-3 bg-white">
       <h2 class="card-title text-center">{{product.name}}</h2>
       <p class="card-text text-center">{{product.description}}</p>
-      <div *ngIf="product.discountPercentage > 0" class="namePrice">
-        <span class="price"><s class="text-secondary">{{ product.price | currency }}</s> &nbsp;{{
-          (product.price -
-          (product.price *
-          product.discountPercentage / 100)) | currency}}</span>
+      <div class="namePrice">
+
+        <ng-container *ngIf="product.discountPercentage > 0; else elseBlock" class="namePrice">
+          <span class="price"><s class="text-secondary">{{ product.price | currency }}</s> &nbsp;{{
+            (product.price -
+            (product.price *
+            product.discountPercentage / 100)) | currency}}</span>
+        </ng-container>
+
+        <ng-template #elseBlock>
+          {{ product.price | currency }}
+        </ng-template>
+
       </div>
 
-      <div class="d-flex justify-content-center text-warning pb-2">
+      <div class="d-flex justify-content-center text-warning pb-3 pt-3">
         <div>
           <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
             <i class="bi" [ngClass]="{

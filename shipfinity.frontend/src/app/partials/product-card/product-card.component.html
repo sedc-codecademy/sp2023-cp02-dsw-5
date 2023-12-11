@@ -1,16 +1,24 @@
-<div class="card">
+<div class="card mb-3">
     <div class="card-body m-0 p-0 d-flex justify-content-center">
         <img class="bg-white w-auto" style="height: 250px;"
             [src]="[product.imageUrl?? '/assets/img/product/no_img.png']" alt="card image">
     </div>
     <div class="card-body">
         <h3 class="card-title">{{ product.name }}</h3>
-        <div *ngIf="product.discountPercentage > 0" class="namePrice">
-            <span class="price"><s class="text-secondary">{{ product.price | currency }}</s> &nbsp;{{
-                (product.price -
-                (product.price *
-                product.discountPercentage / 100)) | currency}}</span>
+
+        <div class="namePrice">
+            <ng-container *ngIf="product.discountPercentage > 0; else elseBlock" class="namePrice">
+                <span class="price"><s class="text-secondary">{{ product.price | currency }}</s> &nbsp;{{
+                    (product.price -
+                    (product.price *
+                    product.discountPercentage / 100)) | currency}}</span>
+            </ng-container>
+
+            <ng-template #elseBlock>
+                {{ (product.price) | currency }}
+            </ng-template>
         </div>
+
         <div class="d-flex text-warning">
             <span class="text-black">Rating &nbsp; </span>
             <i *ngIf="product.rating >= 1" class="bi bi-star-fill"></i>
