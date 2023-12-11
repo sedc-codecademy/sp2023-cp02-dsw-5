@@ -143,7 +143,6 @@ export class ProductService {
       .subscribe({
         next: (data) => {
           this.saleProducts$.next([...data]);
-          console.log(data);
         },
         error: (err) => {
           console.error(err);

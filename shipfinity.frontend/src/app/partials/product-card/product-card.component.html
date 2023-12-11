@@ -5,7 +5,12 @@
     </div>
     <div class="card-body">
         <h3 class="card-title">{{ product.name }}</h3>
-        <h4 class="card-text">${{ product.price.toFixed(2) }}</h4>
+        <div *ngIf="product.discountPercentage > 0" class="namePrice">
+            <span class="price"><s class="text-secondary">{{ product.price | currency }}</s> &nbsp;{{
+                (product.price -
+                (product.price *
+                product.discountPercentage / 100)) | currency}}</span>
+        </div>
         <div class="d-flex text-warning">
             <span class="text-black">Rating &nbsp; </span>
             <i *ngIf="product.rating >= 1" class="bi bi-star-fill"></i>

@@ -29,14 +29,31 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of shoppingCartItems">
-                        <td><img src="/assets/img/product/no_img.png" class="img-fluid" width="60px" alt="product Image"></td>
-                        <td class="align-middle"><h5>{{ item.product.name }}</h5></td>
-                        <td class="align-middle">${{ item.product.price.toFixed(2) }}</td>
+                        <td><img src="/assets/img/product/no_img.png" class="img-fluid" width="60px"
+                                alt="product Image"></td>
+                        <td class="align-middle">
+                            <h5>{{ item.product.name }}</h5>
+                        </td>
+
+                        <td class="align-middle">
+                            <ng-container *ngIf="item.product.discountPercentage > 0; else elseBlock" class="namePrice">
+                                {{ ((item.product.price - (item.product.price * item.product.discountPercentage / 100))
+                                * item.quantity) | currency }}
+                            </ng-container>
+
+                            <ng-template #elseBlock>
+                                {{ (item.product.price * item.quantity) | currency }}
+                            </ng-template>
+                        </td>
+
+
                         <td class="align-middle">
                             <div class="d-flex gap-2 justify-content-end">
                                 <h6>Quantity: </h6>
-                                <input type="number" min="1" max="99" [value]="item.quantity" class="form-control w-50" (change)="changeQuantity($event, item)" />
-                                <button type="button" (click)="removeItem(item)" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
+                                <input type="number" min="1" max="99" [value]="item.quantity" class="form-control w-50"
+                                    (change)="changeQuantity($event, item)" />
+                                <button type="button" (click)="removeItem(item)" class="btn btn-sm btn-danger"><i
+                                        class="bi bi-trash-fill"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -46,7 +63,7 @@
                 <hr>
                 <div class="d-flex justify-content-around">
                     <h4>Total: $<span>{{ totalPrice.toFixed(2) }}</span></h4>
-                    <a routerLink="/cart/checkout" class="btn btn-lg btn-success">Proceed to checkout</a>    
+                    <a routerLink="/cart/checkout" class="btn btn-lg btn-success">Proceed to checkout</a>
                 </div>
             </div>
         </div>

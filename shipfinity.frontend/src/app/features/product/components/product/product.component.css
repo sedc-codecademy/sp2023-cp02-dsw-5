@@ -1,0 +1,12 @@
+.price {
+  font-size: 18px;
+}
+
+s {
+  font-size: 14px;
+}
+
+.card-body {
+  min-width: 250px;
+  min-height: 120px;
+}

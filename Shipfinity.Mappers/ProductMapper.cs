@@ -65,10 +65,10 @@ namespace Shipfinity.Mappers
                 Price = product.Price,
                 CategoryId = product.CategoryId,
                 ImageUrl = product.ImageUrl,
-                Rating = product.Rating
+                Rating = product.Rating,
+                DiscountPercentage = product.DiscountPercentage
 
             };
         }
     }
 }
-

@@ -14,8 +14,12 @@
     <div class="card-body text-center pt-3 bg-white">
       <h2 class="card-title text-center">{{product.name}}</h2>
       <p class="card-text text-center">{{product.description}}</p>
-      <!-- <p class="card-text text-center">{{product.discountPercentage}}</p> -->
-      <h4 class="card-text"><strong>${{ product.price.toFixed(2) }}</strong></h4>
+      <div *ngIf="product.discountPercentage > 0" class="namePrice">
+        <span class="price"><s class="text-secondary">{{ product.price | currency }}</s> &nbsp;{{
+          (product.price -
+          (product.price *
+          product.discountPercentage / 100)) | currency}}</span>
+      </div>
 
       <div class="d-flex justify-content-center text-warning pb-2">
         <div>
