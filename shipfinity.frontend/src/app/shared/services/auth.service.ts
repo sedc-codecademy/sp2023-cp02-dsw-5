@@ -95,9 +95,9 @@ export class AuthService {
     });
   }
 
-  public register(requestData: IRegisterFormModel): void {
-    this.authApiService.registerUser(requestData).subscribe({
-      next: (res) => {
+  public register(requestData: IRegisterFormModel): Observable<any> {
+    return this.authApiService.registerUser(requestData).pipe(
+      tap((res) => {
         const user = res as User;
         this.setToken(user.token);
         this.saveUserInLocalStorage(user);
@@ -105,13 +105,14 @@ export class AuthService {
 
         this.notificationService.successMessage('Registration successful!');
         this.router.navigate(['/dashboard']);
-      },
-      error: (error) => {
+      }),
+      catchError((error) => {
         this.notificationService.errorMessage(
           error.error.message || 'Registration failed'
         );
-      },
-    });
+        return throwError(error);
+      })
+    );
   }
   public checkUsername(username: string) {
     return this.http.get(

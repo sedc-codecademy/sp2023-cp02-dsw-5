@@ -50,6 +50,20 @@ export class RegisterComponent {
       .checkUsername(this.registerForm.value.username!)
       .subscribe({ next: this.usernameInvalid, error: this.usernameInvalid });
   }
+  usernameIsValid = (data: any) => {
+    this.usernameTaken = false;
+    const formData: IRegisterFormModel = {
+      username: this.registerForm.value.username!,
+      firstName: this.registerForm.value.firstName!,
+      lastName: this.registerForm.value.lastName!,
+      email: this.registerForm.value.email!,
+      password: this.registerForm.value.password!,
+      confirmPassword: this.registerForm.value.passwordRepeated!,
+    };
+    return this.auth
+      .register(formData)
+      .subscribe({ next: this.registerSuccessful, error: this.registerFailed });
+  };
   usernameInvalid = (error: any) => {
     this.usernameTaken = true;
     console.error(error);
