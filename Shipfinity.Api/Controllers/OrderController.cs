@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using Shipfinity.Api.Helpers;
+using Shipfinity.Domain.Enums;
 using Shipfinity.DTOs.OrderDTOs;
 using Shipfinity.Services.Interfaces;
+using Shipfinity.Shared.Exceptions;
 using System.Security.Claims;
 
 namespace Shipfinity.Api.Controllers
@@ -40,7 +44,8 @@ namespace Shipfinity.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetOrderById(int id)
+        [Authorize]
+        public async Task<ActionResult<OrderDetailsDto>> GetOrderById(int id)
         {
             if (id <= 0)
             {
@@ -49,7 +54,7 @@ namespace Shipfinity.Api.Controllers
 
             try
             {
-                var order = await _orderService.GetOrderByIdAsync(id);
+                var order = await _orderService.GetOrderDetailsAsync(id);
 
                 if (order == null)
                 {
@@ -60,20 +65,34 @@ namespace Shipfinity.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
-        [HttpGet("user/{userId}")]
-        public async Task<ActionResult<List<OrderReadDto>>> GetOrdersByUserId(int userId)
+        [HttpGet("seller")]
+        [CustomRoles(Roles.Admin, Roles.Seller)]
+        public async Task<ActionResult<List<OrderSellerListDto>>> GetBySeller()
         {
-            if (userId <= 0)
-            {
-                return BadRequest("Invalid user Id");
-            }
-
             try
             {
+                if (!int.TryParse(User.FindFirstValue("id"), out int userId)) return BadRequest();
+                return Ok(await _orderService.GetBySellerIdAsync(userId));
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet("user")]
+        [Authorize]
+        public async Task<ActionResult<List<OrderReadDto>>> GetOrdersByUserId()
+        {
+            try
+            {
+                if (!int.TryParse(User.FindFirstValue("id"), out int userId)) return BadRequest();
                 var orders = await _orderService.GetOrderByUserIdAsync(userId);
 
                 if (orders == null || !orders.Any())
@@ -90,6 +109,7 @@ namespace Shipfinity.Api.Controllers
         }
 
         [HttpGet("product/{productId}")]
+        [CustomRoles(Roles.Admin)]
         public async Task<ActionResult<List<OrderReadDto>>> GetOrdersByProductId(int productId)
         {
             if (productId <= 0)
@@ -171,6 +191,33 @@ namespace Shipfinity.Api.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPost("ship")]
+        [CustomRoles(Roles.Seller, Roles.Admin)]
+        public async Task<IActionResult> ShipOrder(OrderShipDto dto)
+        {
+            try
+            {
+                int.TryParse(User.FindFirstValue("id"), out int customerId);
+                var orderEmail = await _orderService.ShipOrderAsync(dto.OrderId);
+                await _emailService.SendEmailAsync(new()
+                {
+                    To = orderEmail,
+                    Subject = "Order status update",
+                    Body = $"<h1>Your order has beed shipped</h1>"
+                });
+                return NoContent();
+            }
+            catch (OrderNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

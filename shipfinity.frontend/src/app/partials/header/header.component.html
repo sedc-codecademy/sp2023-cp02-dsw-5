@@ -7,7 +7,7 @@
         </div>
         <div class="text-white text-end d-flex">
           <a *ngIf="!(user$ | async)" class="nav-link me-3" routerLink="/login"><i class="bi bi-person-fill"></i> Log in</a>
-          <a class="nav-link" [routerLink]="!(user$ | async)?'/admin/login': '/admin/products'"><i class="bi bi-shop"></i> Seller's portal</a>
+          <a class="nav-link me-3" [routerLink]="!(user$ | async)?'/admin/login': '/admin/products'"><i class="bi bi-shop"></i> Seller's portal</a>
           <a *ngIf="user$ | async" class="nav-link me-3" (click)="logout($event)" href="/"><i class="bi bi-person-fill"></i> Log out</a>
         </div>
       </div>
@@ -39,7 +39,7 @@
               </li>
             </ul>
             <form class="d-flex">
-              <a id="shopping-cart-btn" class="btn btn-outline-success me-3" routerLink="/cart"><i class="bi bi-cart"></i><span *ngIf="cartItems > 0" class="cart-badge">{{cartItems.toString()}}</span></a>
+              <a id="shopping-cart-btn" *ngIf="(user$ | async)?.role != 'ADMINISTRATOR' || (user$ | async)?.role != 'SELLER'" class="btn btn-outline-success me-3" routerLink="/cart"><i class="bi bi-cart"></i><span *ngIf="cartItems > 0" class="cart-badge">{{cartItems.toString()}}</span></a>
               <form #sendSearch="ngForm" (ngSubmit)="searchClickEvent(sendSearch)" class="d-flex" id="searchForm" >
                 <input id="searchInput" class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search" ngModel />
                 <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
