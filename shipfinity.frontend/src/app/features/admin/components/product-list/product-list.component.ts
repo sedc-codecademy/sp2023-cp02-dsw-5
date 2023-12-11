@@ -33,11 +33,9 @@ export class ProductListComponent implements OnInit {
   editSubmit(productEdit: ProductEdit) {
     if(productEdit.id){
       this.productService.UpdateProduct(productEdit);
-      this.productService.GetProducts();
     }
     else {
       this.productService.AddNewProduct(productEdit);
-      this.productService.GetProducts();
     }
   }
 
@@ -50,7 +48,6 @@ export class ProductListComponent implements OnInit {
     ref.afterClosed().subscribe(response => {
       if(!response) return;
       this.productService.deleteProduct(product.id);
-      this.productService.GetProducts();
     })
   }
 }

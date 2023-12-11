@@ -53,6 +53,7 @@ export class ProductService {
     this.http.post(`${environment.API_URL}/product`, product).subscribe({
       next: (data) => {
         this.notifications.successMessage('Product saved');
+        this.GetProducts();
       },
       error: (err) => {
         this.notifications.errorMessage('Error while saving');
@@ -64,6 +65,7 @@ export class ProductService {
     this.http.delete(`${environment.API_URL}/product/${id}`).subscribe({
       next: (data) => {
         this.notifications.successMessage('Product deleted');
+        this.GetProducts();
       },
       error: (err) => {
         this.notifications.errorMessage('Error while deleting');
@@ -77,6 +79,7 @@ export class ProductService {
       .subscribe({
         next: (data) => {
           this.notifications.successMessage('Product saved');
+          this.GetProducts();
         },
         error: (err) => {
           this.notifications.errorMessage('Error while saving');

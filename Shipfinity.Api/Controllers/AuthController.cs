@@ -57,6 +57,7 @@ namespace Shipfinity.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
         [HttpPost("seller/register")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterSeller(SellerRegisterDto dto)
@@ -76,6 +77,7 @@ namespace Shipfinity.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
         [HttpPost("seller/login")]
         [AllowAnonymous]
         public async Task<ActionResult<SellerLoginResponseDto>> LoginSeller(UserLoginDto dto)
@@ -87,6 +89,23 @@ namespace Shipfinity.Api.Controllers
             catch (BadCredentialsException ex)
             {
                 return BadRequest("Bad credentials");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost("init")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Init(SellerRegisterDto dto)
+        {
+            try
+            {
+                if (await _authService.InitialAdmin(dto))
+                    return StatusCode(StatusCodes.Status201Created, "Admin initialized");
+                return BadRequest("Admin already exists");
             }
             catch (Exception ex)
             {

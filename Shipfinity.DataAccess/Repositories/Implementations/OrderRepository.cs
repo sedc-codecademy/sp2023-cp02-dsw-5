@@ -91,5 +91,16 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
             await _context.SaveChangesAsync();
             return order.Id;
         }
+
+        public async Task<List<Order>> GetAllBySellerAsync(int sellerId)
+        {
+            return await _context.Orders
+                .Include(o => o.Address)
+                .Include(o => o.Customer)
+                .Include(o => o.ProductOrders)
+                .ThenInclude(po => po.Product)
+                .Where(o => o.ProductOrders.Any(p => p.Product.SellerId == sellerId))
+                .ToListAsync();
+        }
     }
 }

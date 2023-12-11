@@ -14,13 +14,14 @@ import { MessageListComponent } from './components/message-list/message-list.com
 import { MessageDetailsComponent } from './components/message-details/message-details.component';
 import { sellerGuard } from 'src/app/shared/guards/seller.guard';
 import { CategoryEditDialogComponent } from './components/category-edit-dialog/category-edit-dialog.component';
+import { adminGuard } from 'src/app/shared/guards/admin.guard';
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
   { path: '', component: AdminLayoutComponent, children: [
-    { path: 'categories', component: CategoryListComponent, canActivate: [sellerGuard] },
+    { path: 'categories', component: CategoryListComponent, canActivate: [adminGuard] },
     { path: 'products', component: ProductListComponent, canActivate: [sellerGuard] },
-    { path: 'messages', component: MessageListComponent, canActivate: [sellerGuard] },
+    { path: 'messages', component: MessageListComponent, canActivate: [adminGuard] },
     { path: 'orders', component: OrderListComponent, canActivate: [sellerGuard] }
   ] }
 ]
