@@ -14,7 +14,6 @@ import { MessageListComponent } from './components/message-list/message-list.com
 import { MessageDetailsComponent } from './components/message-details/message-details.component';
 import { sellerGuard } from 'src/app/shared/guards/seller.guard';
 import { CategoryEditDialogComponent } from './components/category-edit-dialog/category-edit-dialog.component';
-import { AdminSellerRegisterComponent } from './components/admin-seller-register/admin-seller-register.component';
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
@@ -37,8 +36,7 @@ const routes: Routes = [
     CategoryListComponent,
     MessageListComponent,
     MessageDetailsComponent,
-    CategoryEditDialogComponent,
-    AdminSellerRegisterComponent
+    CategoryEditDialogComponent
   ],
   imports: [
     CommonModule,
