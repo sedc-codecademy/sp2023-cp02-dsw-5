@@ -7,7 +7,7 @@
         </div>
         <div class="text-white text-end d-flex">
           <a *ngIf="!(user$ | async)" class="nav-link me-3" routerLink="/login"><i class="bi bi-person-fill"></i> Log in</a>
-          <a *ngIf="!(user$ | async)" class="nav-link" routerLink="/admin/login"><i class="bi bi-shop"></i> Seller's portal</a>
+          <a class="nav-link" [routerLink]="!(user$ | async)?'/admin/login': '/admin/products'"><i class="bi bi-shop"></i> Seller's portal</a>
           <a *ngIf="user$ | async" class="nav-link me-3" (click)="logout($event)" href="/"><i class="bi bi-person-fill"></i> Log out</a>
         </div>
       </div>

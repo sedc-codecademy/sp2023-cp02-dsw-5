@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shipfinity.DataAccess.Context;
 using Shipfinity.DataAccess.Repositories.Interfaces;
+using Shipfinity.Domain.Enums;
 using Shipfinity.Domain.Models;
 using Shipfinity.Shared.Exceptions;
 
@@ -13,6 +14,12 @@ namespace Shipfinity.DataAccess.Repositories.Implementations
         {
             _context = context;
         }
+
+        public async Task<int> CountAdminsAsync()
+        {
+            return  await _context.Sellers.CountAsync(x => x.Role == Roles.Admin);
+        }
+
         public async Task DeleteByIdAsync(int id)
         {
             Seller seller = await _context.Sellers.FirstOrDefaultAsync(s => s.Id == id);

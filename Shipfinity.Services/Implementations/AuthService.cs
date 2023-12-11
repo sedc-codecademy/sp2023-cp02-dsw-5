@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Shipfinity.DataAccess.Repositories.Interfaces;
+using Shipfinity.Domain.Enums;
 using Shipfinity.Domain.Models;
 using Shipfinity.DTOs.CustomerDTOs;
 using Shipfinity.DTOs.SellerDTO_s;
@@ -99,6 +100,32 @@ namespace Shipfinity.Services.Implementations
             }
             string token = GenerateToken(seller);
             return seller.ToLoginResponse(token);
+        }
+
+        public async Task<bool> InitialAdmin(SellerRegisterDto dto)
+        {
+            int adminsCount = await _sellerRepository.CountAdminsAsync();
+            if (adminsCount > 0) return false;
+
+            if (string.IsNullOrEmpty(dto.Username) || string.IsNullOrEmpty(dto.Password) || string.IsNullOrEmpty(dto.Email))
+            {
+                throw new UserRegisterException("Username, password, and email are required fields");
+            }
+
+
+            if (await _sellerRepository.GetByUsernameAsync(dto.Username.Trim()) != null)
+            {
+                throw new UserRegisterException("Username is already taken");
+            }
+
+            Seller seller = dto.ToSeller();
+            AuthHelper.HashPassword(dto.Password, out byte[] hash, out byte[] salt);
+            seller.PasswordHash = hash;
+            seller.PasswordSalt = salt;
+            seller.Role = Roles.Admin;
+
+            await _sellerRepository.InsertAsync(seller);
+            return true;
         }
 
         private string GenerateToken(BaseUser user)
