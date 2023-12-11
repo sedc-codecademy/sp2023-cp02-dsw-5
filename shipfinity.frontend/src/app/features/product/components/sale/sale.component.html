@@ -1,67 +1,28 @@
-<div class="container mt-5">
+<div class="container mt-3 mb-3">
     <h1 class="display-3">Our hottest deals</h1>
     <hr class="hr hr-blurry">
     <div class="sale-products">
-        <div class="sale-product">
+        <div *ngFor="let product of productsOnSale" class="sale-product" (click)="onCardClick(product.id)">
             <div class="image">
-               <img src="https://m.media-amazon.com/images/I/71YDobkreZL._AC_SX679_.jpg" alt="no work"> 
+                <img style="max-height: 250px; width: auto;" [src]="product.imageUrl" alt="{{product.name}} image">
             </div>
             <div class="namePrice">
-                <h3>Smart Light Bulb</h3>
-                <span><s>$19.99</s> $14.99</span>
+                <h3>{{ product.name }}</h3>
+                <span><s>{{ product.price | currency }}</s> &nbsp;<strong>{{ (product.price - (product.price *
+                        product.discountPercentage / 100)) | currency}}</strong></span>
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni.</p>
-            <div class="stars">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-            </div>
-            <div class="buy">
-                <button>Buy Now</button>
-            </div>
-        </div>
-
-        <div class="sale-product">
-            <div class="image">
-               <img src="https://m.media-amazon.com/images/I/61F09kEGfaL._AC_SX569_.jpg" alt="no work"> 
-            </div>
-            <div class="namePrice">
-                <h3>Smart LED Strip</h3>
-                <span><s>$39.99</s> $29.99</span>
-            </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni.</p>
-            <div class="stars">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-            </div>
-            <div class="buy">
-                <button>Buy Now</button>
-            </div>
-        </div>
-
-        <div class="sale-product">
-            <div class="image">
-               <img src="https://m.media-amazon.com/images/I/61rKiSSmDqL._AC_UX679_.jpg" alt="no work"> 
-            </div>
-            <div class="namePrice">
-                <h3>Smart Router</h3>
-                <span><s>$99.99</s> $84.99</span>
-            </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni.</p>
-            <div class="stars">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-            </div>
-            <div class="buy">
-                <button>Buy Now</button>
+            <div class="d-flex justify-content-center text-warning">
+                <span class="text-black">Rating &nbsp; </span>
+                <i *ngIf="product.rating >= 1" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 1" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 2" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 2" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 3" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 3" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 4" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 4" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 5" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 5" class="bi bi-star"></i>
             </div>
         </div>
     </div>

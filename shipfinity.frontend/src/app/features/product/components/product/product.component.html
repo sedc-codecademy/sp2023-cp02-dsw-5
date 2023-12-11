@@ -17,7 +17,6 @@
       <!-- <p class="card-text text-center">{{product.discountPercentage}}</p> -->
       <h4 class="card-text"><strong>${{ product.price.toFixed(2) }}</strong></h4>
 
-      <span class="text-black">Rating </span>
       <div class="d-flex justify-content-center text-warning pb-2">
         <div>
           <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
@@ -48,7 +47,6 @@
       <button type="button" class="btn p-1 m-0 bg-cart btn-success col-3 mx-auto" (click)="addToCartClick()"><i
           class="fa fa-cart-plus mr-2"></i> Add to
         cart</button>
-      <a [routerLink]="['/product', 'category', product.categoryId]"
-        class="btn btn-secondary p-1 m-0 col-3 mx-auto">Back</a>
+      <a (click)="goBack()" class="btn btn-secondary p-1 m-0 col-3 mx-auto">Back</a>
     </div>
   </div>
