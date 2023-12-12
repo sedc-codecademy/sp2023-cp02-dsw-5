@@ -1,4 +1,5 @@
 img {
+  margin-top: 10px;
   height: 250px;
 }
 
@@ -28,7 +29,7 @@ s {
 }
 
 .container {
-  height: 432px;
+  height: 450px;
   width: 276px;
 }
 
