@@ -8,7 +8,7 @@ import Product from '../models/product';
   providedIn: 'root',
 })
 export class SearchService {
-  private apiUrl = `${environment.API_URL}/products/search`;
+  private apiUrl = `${environment.API_URL}/product/search`;
 
   constructor(private http: HttpClient) {}
 
