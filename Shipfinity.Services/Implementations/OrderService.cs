@@ -79,7 +79,7 @@ namespace Shipfinity.Services.Implementations
             
             int orderId = await _orderRepository.CreateAsync(newOrder);
             Order insertedOrder = await _orderRepository.GetByIdAsync(orderId);
-            insertedOrder.TotalPrice = insertedOrder.ProductOrders.Sum(p => p.Product.Price * p.Quantity);
+            insertedOrder.TotalPrice = insertedOrder.ProductOrders.Sum(p => p.Product.DiscountPercentage <= 0? p.Product.Price * p.Quantity : (p.Product.Price * p.Product.DiscountPercentage / 100) * p.Quantity);
             await _orderRepository.UpdateAsync(insertedOrder);
             await ProcessPayment(insertedOrder);
             return OrderMappers.MapToReadDto(insertedOrder);
@@ -98,6 +98,12 @@ namespace Shipfinity.Services.Implementations
         {
             var orders = await _orderRepository.GetAllAsync();
             return orders.Select(OrderMappers.MapToReadDto).ToList();
+        }
+
+        public async Task<List<OrderSellerListDto>> GetBySellerIdAsync(int sellerId)
+        {
+            var orders = await _orderRepository.GetAllBySellerAsync(sellerId);
+            return orders.Select(x => x.ToSellerOrderList()).ToList();
         }
 
         public async Task<OrderReadDto> GetOrderByIdAsync(int id)
@@ -125,6 +131,23 @@ namespace Shipfinity.Services.Implementations
             if (!orders.Any()) throw new OrderNotFoundException(userId);
 
             return orders.Select(OrderMappers.MapToReadDto).ToList();
+        }
+
+        public async Task<OrderDetailsDto> GetOrderDetailsAsync(int orderId)
+        {
+            Order order = await _orderRepository.GetByIdAsync(orderId);
+            if (order == null) throw new OrderNotFoundException(orderId);
+            return order.ToOrderDetails();
+        }
+
+        public async Task<string> ShipOrderAsync(int orderId)
+        {
+            Order order = await _orderRepository.GetByIdAsync(orderId);
+            if(order == null) throw new OrderNotFoundException(orderId);
+
+            order.Status = OrderStatus.Shipped;
+            await _orderRepository.UpdateAsync(order);
+            return order.Email;
         }
 
         public async Task UpdateOrderAsync(int id, OrderUpdateDto orderUpdateDto)

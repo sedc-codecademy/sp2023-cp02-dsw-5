@@ -1,1 +1,36 @@
-<p>order-manage works!</p>
+<div *ngIf="orderDetails$ | async as orderDetails" class="card">
+    <div class="card-header bg-success"></div>
+    <div class="card-body">
+        <h1 class="display-2">Order shipping</h1>
+        <p class="card-text">Shipping order number: {{ order.id }}</p>
+        <p class="card-text">To address: {{ orderDetails.address.addressLine }}</p>
+        <p class="card-text">City: {{ orderDetails.address.city }} / {{ orderDetails.address.zipCode }}</p>
+        <p class="card-text">Country: {{ orderDetails.address.country }}</p>
+        <div class="pt-2">
+            <h1 class="display-4">Products</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of orderDetails.products">
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.discountPercentage }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="card-text">Total: {{ order.totalPrice }}</p>
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+            <button class="btn btn-success" (click)="ship()">Ship now</button>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@ namespace Shipfinity.Services.Interfaces
     {
         Task RegisterCustomer(CustomerRegisterDto dto);
         Task RegisterSeller(SellerRegisterDto dto);
+        Task<bool> InitialAdmin(SellerRegisterDto dto);
         Task<CustomerLoginResponseDto> LoginCustomer(UserLoginDto dto);
         Task<SellerLoginResponseDto> LoginSeller(UserLoginDto dto);
     }

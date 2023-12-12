@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-layout.component.css']
 })
 export class AdminLayoutComponent {
-
+  readonly adminString = "ADMINISTRATOR";
+  currentUser$ = this.auth.currentUser$;
+  constructor(private auth: AuthService){}
 }
