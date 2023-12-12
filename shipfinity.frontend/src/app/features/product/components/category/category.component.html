@@ -2,6 +2,6 @@
     <h2 class="display-4">{{ (category$ | async)?.displayName }}</h2>
 </div>
 
-<div class="container d-flex gap-3 flex-wrap cards-container">
+<div class="container d-flex gap-3 flex-wrap cards-container justify-content-center">
     <app-product-card *ngFor="let product of productList$ | async" [product]="product"></app-product-card>
 </div>
