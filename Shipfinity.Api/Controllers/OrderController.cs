@@ -156,6 +156,21 @@ namespace Shipfinity.Api.Controllers
             }
         }
 
+        [HttpPost("delivered")]
+        public async Task<IActionResult> DeliverOrder(OrderShipDto dto)
+        {
+            try
+            {
+                await _orderService.DeliverOrder(dto.OrderId);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateOrder(int id, OrderUpdateDto orderUpdateDto)
         {

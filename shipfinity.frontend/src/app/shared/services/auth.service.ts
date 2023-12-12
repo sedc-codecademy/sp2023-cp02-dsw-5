@@ -25,7 +25,7 @@ export class AuthService {
 
   public registerSeller(requestData: IRegisterSeller): Observable<any> {
     return this.http
-      .post(`${environment.API_URL}/seller/register`, requestData)
+      .post(`${environment.API_URL}/auth/seller/register`, requestData)
       .pipe(
         tap((res: any) => {
           // Assuming the response includes user data and a token
@@ -104,7 +104,7 @@ export class AuthService {
         this.currentUser$.next(user);
 
         this.notificationService.successMessage('Registration successful!');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       }),
       catchError((error) => {
         this.notificationService.errorMessage(

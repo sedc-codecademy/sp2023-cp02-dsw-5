@@ -14,5 +14,6 @@ namespace Shipfinity.Services.Interfaces
         Task<List<OrderReadDto>> GetOrderByProductIdAsync(int productId);
         Task<string> ShipOrderAsync(int orderId);
         Task<OrderDetailsDto> GetOrderDetailsAsync(int orderId);
+        Task<string> DeliverOrder(int orderId);
     }
 }

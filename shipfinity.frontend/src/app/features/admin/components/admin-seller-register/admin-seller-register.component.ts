@@ -15,8 +15,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class AdminSellerRegisterComponent implements OnInit {
   sellerRegisterForm: FormGroup;
-  registerSuccessful: ((value: any) => void) | undefined;
-  registerFailed: ((err: any) => void) | undefined;
   usernameTaken: boolean = false;
 
   constructor(private authService: AuthService) {}

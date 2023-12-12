@@ -26,7 +26,7 @@ namespace Shipfinity.Api.Controllers
             try
             {
                 await _authService.RegisterCustomer(dto);
-                return StatusCode(StatusCodes.Status201Created, "User created");
+                return StatusCode(StatusCodes.Status201Created);
             }
             catch(UserRegisterException ex)
             {

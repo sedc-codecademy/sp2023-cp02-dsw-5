@@ -94,6 +94,16 @@ namespace Shipfinity.Services.Implementations
             await _orderRepository.DeleteByIdAsync(id);
         }
 
+        public async Task<string> DeliverOrder(int orderId)
+        {
+            var order = await _orderRepository.GetByIdAsync(orderId);
+            if (order == null) throw new OrderNotFoundException(orderId);
+
+            order.Status = OrderStatus.Delivered;
+            await _orderRepository.UpdateAsync(order);
+            return order.Email;
+        }
+
         public async Task<List<OrderReadDto>> GetAllOrdersAsync()
         {
             var orders = await _orderRepository.GetAllAsync();

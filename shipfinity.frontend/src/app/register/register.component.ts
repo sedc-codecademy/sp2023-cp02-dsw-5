@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { passwordConfirmValidator } from '../shared/validators/password-confirm.validator';
 import { AuthService } from '../shared/services/auth.service';
 import IRegisterFormModel from '../shared/models/register-form-data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -40,15 +41,13 @@ export class RegisterComponent {
   );
   usernameTaken: boolean = false;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   onRegisterSubmit() {
-    if (!this.registerForm.valid) {
-      return;
-    }
-    this.auth
-      .checkUsername(this.registerForm.value.username!)
-      .subscribe({ next: this.usernameInvalid, error: this.usernameInvalid });
+    // this.auth
+    //   .checkUsername(this.registerForm.value.username!)
+    //   .subscribe({ next: this.usernameIsValid, error: this.usernameInvalid });
+    this.usernameIsValid(null);
   }
   usernameIsValid = (data: any) => {
     this.usernameTaken = false;
@@ -72,6 +71,7 @@ export class RegisterComponent {
   registerSuccessful = (data: any) => {
     // Notify they've been registered or login
     console.log('Registration successful', data);
+    this.router.navigate(['/login']);
   };
 
   registerFailed = (error: any) => {
