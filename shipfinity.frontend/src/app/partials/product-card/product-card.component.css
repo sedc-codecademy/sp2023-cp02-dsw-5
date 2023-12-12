@@ -1,22 +1,39 @@
-@media screen and (min-width: 768px) {
-  .product-img {
-    width: 250px;
-  }
+img {
+  height: 250px;
+  border-radius: 5px 5px 0 0;
+}
 
-  .price {
-    font-size: 18px;
-  }
+.card-body h3 {
+  font-weight: 500;
+  margin-bottom: 15px;
+}
 
-  .namePrice {
-    font-size: 18px;
-  }
+.namePrice {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
 
-  s {
-    font-size: 14px;
-  }
+.price {
+  font-size: 16px;
+  font-weight: 400;
+}
 
-  .card-body {
-    min-width: 250px;
-    min-height: 120px;
-  }
+s {
+  font-size: 14px;
+}
+
+.rating-container {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  height: 450px;
+  width: 250px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-around;
 }

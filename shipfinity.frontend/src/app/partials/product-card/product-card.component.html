@@ -1,9 +1,8 @@
-<div class="card mb-3">
+<div class="card mb-3 container">
     <div class="card-body m-0 p-0 d-flex justify-content-center">
-        <img class="bg-white w-auto" style="height: 250px;"
-            [src]="[product.imageUrl?? '/assets/img/product/no_img.png']" alt="card image">
+        <img class="bg-white w-auto" [src]="[product.imageUrl?? '/assets/img/product/no_img.png']" alt="card image">
     </div>
-    <div class="card-body">
+    <div class="card-body text-center">
         <h3 class="card-title">{{ product.name }}</h3>
 
         <div class="namePrice">
@@ -19,22 +18,25 @@
             </ng-template>
         </div>
 
-        <div class="d-flex text-warning">
-            <span class="text-black">Rating &nbsp; </span>
-            <i *ngIf="product.rating >= 1" class="bi bi-star-fill"></i>
-            <i *ngIf="product.rating < 1" class="bi bi-star"></i>
-            <i *ngIf="product.rating >= 2" class="bi bi-star-fill"></i>
-            <i *ngIf="product.rating < 2" class="bi bi-star"></i>
-            <i *ngIf="product.rating >= 3" class="bi bi-star-fill"></i>
-            <i *ngIf="product.rating < 3" class="bi bi-star"></i>
-            <i *ngIf="product.rating >= 4" class="bi bi-star-fill"></i>
-            <i *ngIf="product.rating < 4" class="bi bi-star"></i>
-            <i *ngIf="product.rating >= 5" class="bi bi-star-fill"></i>
-            <i *ngIf="product.rating < 5" class="bi bi-star"></i>
+        <div class="rating-container">
+            <div class="d-flex text-warning">
+                <span class="text-black">Rating &nbsp; </span>
+                <i *ngIf="product.rating >= 1" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 1" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 2" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 2" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 3" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 3" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 4" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 4" class="bi bi-star"></i>
+                <i *ngIf="product.rating >= 5" class="bi bi-star-fill"></i>
+                <i *ngIf="product.rating < 5" class="bi bi-star"></i>
+            </div>
         </div>
+
     </div>
     <div class="card-footer">
-        <a [routerLink]="['/product', product.id]" class="btn btn-sm btn-secondary me-3">Read more</a>
+        <a [routerLink]="['/product', product.id]" class="btn btn-sm btn-secondary">Read more</a>
         <button type="button" class="btn btn-sm btn-success" (click)="addToCartClick()"><i
                 class="fa fa-cart-plus me-2"></i> Add to cart</button>
     </div>

@@ -15,6 +15,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class AdminSellerRegisterComponent implements OnInit {
   sellerRegisterForm: FormGroup;
+  registerSuccessful: ((value: any) => void) | undefined;
+  registerFailed: ((err: any) => void) | undefined;
   usernameTaken: boolean = false;
 
   constructor(private authService: AuthService) {}
@@ -69,10 +71,15 @@ export class AdminSellerRegisterComponent implements OnInit {
   onSubmit(): void {
     if (this.sellerRegisterForm.valid) {
       const sellerData = this.prepareSellerData();
-      this.authService.registerSeller(sellerData).subscribe({
-        next: this.registerSuccessful,
-        error: this.registerFailed,
-      });
+      if (this.authService.registerSeller) {
+        // Check if registerSeller method exists
+        this.authService.registerSeller(sellerData).subscribe({
+          next: this.registerSuccessful,
+          error: this.registerFailed,
+        });
+      } else {
+        console.error('registerSeller method is not defined in AuthService');
+      }
     } else {
       console.error('Form is not valid');
     }
