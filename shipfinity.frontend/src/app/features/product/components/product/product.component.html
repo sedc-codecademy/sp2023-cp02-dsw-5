@@ -13,7 +13,7 @@
 
     <div class="card-body text-center pt-3 bg-white">
       <h2 class="card-title text-center">{{product.name}}</h2>
-      <p class="card-text text-center">{{product.description}}</p>
+      <p class="card-text">{{product.description}}</p>
       <div class="namePrice">
 
         <ng-container *ngIf="product.discountPercentage > 0; else elseBlock" class="namePrice">
