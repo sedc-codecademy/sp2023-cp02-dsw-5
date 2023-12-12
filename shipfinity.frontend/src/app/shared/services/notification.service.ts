@@ -16,11 +16,23 @@ export class NotificationService {
 
   successMessage(message: string) {
     console.log(message);
-    this.toast.success({detail: "Success", summary: message, duration: 3, sticky: true, position: 'topRight'});
+    this.toast.success({
+      detail: 'Success',
+      summary: message,
+      duration: 3,
+      sticky: true,
+      position: 'topRight',
+    });
   }
 
   errorMessage(message: string) {
     console.log(message);
-    this.toast.error({detail: "Error", summary: message, duration: 3, sticky: true, position: 'topRight'});
+    this.toast.error({
+      detail: 'Error',
+      summary: message,
+      duration: 3,
+      sticky: true,
+      position: 'topRight',
+    });
   }
 }
